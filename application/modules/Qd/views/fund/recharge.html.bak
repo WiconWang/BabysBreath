@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>绑定手机</title>
+    <!-- Bootstrap -->
+    <link href="http://agent.doudeqipai.com/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://agent.doudeqipai.com/static/css/style.css" rel="stylesheet">
+    <link href="http://agent.doudeqipai.com/static/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+        <style type="text/css">
+body,main::before{
+    background: url(http://agent.doudeqipai.com/static/image/green.jpg) 0 / cover fixed;
+}
+main {
+    position: relative;
+    background: hsla(0,0%,100%,.3);
+    overflow: hidden;
+}
+/*main::before{
+    content: '';
+    position: absolute;
+    filter: blur(30px);
+    margin: -30px;
+}*/
+.s{
+    /*position: absolute;
+    top:15%;
+    border-radius:20px;
+    margin: auto;
+    display: block;
+    width: 250px;
+    left:50%;
+    margin-left:-125px;*/
+    position: absolute;
+    top:15%;
+    border-radius:20px;
+    /*margin: auto;*/
+    /*display: block;*/
+    /*left:50%;
+    width: 250px;
+    margin-left:-125px;*/
+    left: 50%;
+    width: 40%;
+    margin-left: -20%;
+}
+.ins{
+    width: 87%;
+    height: 12%;
+    border-radius: 30px;
+}
+.in{
+    width: 87%;
+    height: 12%;
+}
+.is{
+    border-radius: 50px;
+}
+.border-left-width{
+    border: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+}
+.col-center-block {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.inl{
+    width: 87%;
+}
+.inh{
+    background: #FFF;
+}
+.pad{
+    padding: 0px;
+}
+.bth-img{
+    background:url(http://agent.doudeqipai.com/static/image/true.png);
+    margin: auto;
+}
+.theLink{
+display:block;
+width:63%;
+height:40px;
+margin:0 auto;
+background:url(http://agent.doudeqipai.com/static/image/true.png) no-repeat;
+background-size:100% 100%;
+margin-bottom: 10px;
+}
+
+.theLink:hover{ display:block;
+width:63%;
+height:40px;
+margin:0 auto;
+background:url(http://agent.doudeqipai.com/static/image/true.png) no-repeat;
+background-size:100% 100%;
+margin-bottom: 10px;
+}
+.f-b{
+position: absolute;
+color: transparent;
+-webkit-text-stroke: 1px #874900;
+font-size:35px;
+font-weight: bold;
+color:#E7D7AC;
+}
+/* CSS部分 */
+#a { position:absolute; top:0; right:0; z-index:4;width:30px;height:30px;}
+.m-b-t{
+    margin-bottom: 5px;
+}
+.m-b-t2{
+    margin-bottom: 10px;
+}
+.b-color-green{
+    color: #6BAB16;
+}
+.bb{
+    margin-top: -20px;
+    position:fixed!important;
+    z-index:3;
+    left: 50%;
+    width: 980px;
+    margin-left: -490px;
+}
+.dss{
+    disabled:disabled;
+}
+</style>
+</head>
+<body>
+
+        <main class="row s" style="padding: 10px">
+
+        <form class="form-signin" id="loginform">
+            <h2 class="form-signin-heading">用户充值 测试</h2>
+            用户openid : <input type="text" id="openid" class="form-control" placeholder="用户openid" value="" required autofocus>
+           充值金额 : <input type="text" id="price" class="form-control" placeholder="用户price" value="300" required autofocus>
+            <button  id="submitform" class="btn btn-lg btn-primary btn-block" type="button">确定</button>
+        </form>
+
+
+
+</main>
+<script src="http://agent.doudeqipai.com/static/js/jquery-2.1.1.min.js"></script>
+<script src="http://agent.doudeqipai.com/static/js/bootstrap.min.js"></script>
+
+<!-- Jquery Validate -->
+<script src="http://agent.doudeqipai.com/static/js/plugins/validate/jquery.validate.min.js"></script>
+
+<script src="http://agent.doudeqipai.com/static/js/plugins/validate/messages_zh.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#submitform").click(function(){
+                alert('这里需要跳转到支付逻辑，然后返回到接收接口，这里先不测，直接认为充值成功');
+                $.ajax({
+                    url: "/user/fund/recharge" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{price:$('#price').val(),openid:$('#openid').val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            console.log(json);
+                            if (json.status) {
+                                alert('请求成功');
+                                str = JSON.stringify(json);
+                                alert(str);
+                            }else{
+                                alert(json.msg);
+                            }
+
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

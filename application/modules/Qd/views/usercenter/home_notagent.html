@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>个人中心</title>
+    <!-- Bootstrap -->
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/css/rangeslider.css">
+    <style type="text/css">
+        /* * 底部导航菜单 */
+        .nav-bar-top {
+            position: fixed;
+            z-index: 10;
+            right: 0;
+            left: 0;
+            height: 44px;
+            padding-right: 10px;
+            padding-left: 10px;
+            border-bottom: 0;
+            background-color: #FFFFFF;
+            /*-webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);*/
+            /*box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);*/
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        .nav-bar {
+            position: fixed;
+            z-index: 10;
+            right: 0;
+            left: 0;
+            height: 44px;
+            padding-right: 10px;
+            padding-left: 10px;
+            border-bottom: 0;
+            background-color: #FFFFFF;
+            -webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);
+            box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        .nav-bar-tab {
+            bottom: 0;
+            display: table;
+            width: 100%;
+            height: 60px;
+            padding: 0;
+            table-layout: fixed;
+            border-top: 0;
+            border-bottom: 0;
+            -webkit-touch-callout: none;
+        }
+        .nav-bar-tab .nav-tab-item {
+            display: table-cell;
+            overflow: hidden;
+            width: 1%;
+            height: 3.2rem;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: #929292;
+            text-decoration: none;
+        }
+        .nav-bar-tab .nav-tab-item.nav-active { color: #E84219;}
+        .nav-bar .nav-icon {
+            font-size: 24px;
+            position: relative;
+            z-index: 20;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .nav-bar-tab .nav-tab-item .nav-icon {
+            /*top: 3px;*/
+            width: 24px;
+            height: 24px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .nav-bar-tab .nav-tab-item .nav-icon~.nav-tab-label {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1rem;
+        }
+        .nav-icon .nav-badge {
+            font-size: .65rem;
+            line-height: 1rem;
+            position: absolute;
+            top: -2px;
+            left: 100%;
+            margin-left: -10px;
+            color: #fff;
+            background-color: red;
+            border-radius: 1rem;
+            min-width: .6rem;
+            height: 1rem;
+            text-align: center;
+            padding: 0 .2rem;
+        }
+        .user_money{color: #FFFFFF;}
+        .user_money>b{
+            font-weight: normal;
+            margin-bottom: .4rem;
+            display: inherit;
+            position: relative;
+            line-height: 1.2rem;
+            padding-left: .5rem;
+        }
+        .body-bg{
+            background-color:#EDEDEC;
+        }
+        .body-bg1{
+            background-color:#FFFFFF;
+        }
+        .body-h{
+            min-height:667px;
+        }
+        .h-color{
+            color:#4F4C4B;
+        }
+        .container-p-d{
+            padding: 0px;
+        }
+        .container-m-g{
+            margin: 0px;
+        }
+        .p-d-t{
+            padding-top:2rem;
+        }
+        .p-d-t-4{
+            padding-top:4rem;
+        }
+        .p-d-m{
+            padding-bottom: 0rem;
+        }
+        .p-d-l-r{
+            padding-left:1rem;
+            padding-right:1rem;
+        }
+        .p-d1{
+            padding:2rem;
+        }
+        .p-d1{
+            padding:3rem;
+        }
+        .orange1{
+            color: #ED6C00;
+            font-size: 1.6rem;
+        }
+        .orange2{
+            color: #ED6C00;
+            font-size: 1.5rem;
+        }
+        .jb_keleyi_comd{
+            height: 100%;
+            width:100%;
+            /*margin:0px auto;*/
+            background-image: -moz-linear-gradient(top, #00FF00, #FF0000); /*火狐*/
+            background: -o-linear-gradient(top, #00FF00 0%,red 100%);/*Opera*/
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(2,#FFF)); /*Chrome*/
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FF00', endColorstr='#FF0000', GradientType='0'); /*IE*/
+        }
+        @media (max-width:320px) {
+            .f-t-s{
+                font-size:1rem;
+            }
+        }
+        @media (min-width:426px) {
+            .pd-t{
+                padding-top: 20px;
+            }
+        }
+        @media (max-width: 380px) {
+            .f-sm-s{
+                font-size: 1rem;
+            }
+            .f-h{
+                font: "微软雅黑";
+                font-size: 1.4rem;
+                color:#4F4C4B;
+                font-weight: bold;
+            }
+            .f-h1{
+                font: "微软雅黑";
+                font-size: 1.2rem;
+                color:#4F4C4B;
+                font-weight: bold;
+            }
+            .f-h2 {
+                font-size:1.2rem;
+                color: #ED6C00;
+            }
+        }
+        .f-h{
+            font: "微软雅黑";
+            font-size: 1.4rem;
+            color:#4F4C4B;
+            font-weight: bold;
+        }
+        .f-h1{
+            font: "微软雅黑";
+            font-size: 1.2rem;
+            color:#4F4C4B;
+            font-weight: bold;
+        }
+        .f-h2 {
+            font-size:1.2rem;
+            color: #ED6C00;
+        }
+        .f-h3{
+            color: red;
+        }
+        .fa-1x{
+            font-size:2rem;
+        }
+        .f-x-small{
+            font-size:x-small;
+        }
+        .f-w-b{
+            font-weight:bold;
+        }
+        .hui{
+            color: #cbcccc;
+        }
+        .org{
+            color: #F1554E;
+        }
+        .org1{
+            color: #ED6C00;
+        }
+        .utom{
+            height:2.5rem;
+        }
+        .bh{
+            height:7rem;
+        }
+        .line-h{
+            line-height: 7rem;
+        }
+        .p-t-s{
+            position:fixed; top:0; left:0; width:100%; background:#FCC;
+        }
+
+        .cn{margin-top:9rem;}
+        .cn2{margin-top:1.5rem;}
+        .b-g-p{
+            background-image: url(<{$smarty.const.STATIC_PATH}>/image/小banner.png);
+        }
+        /*100宽度*/
+        .wid{width:100%;}
+        .wid-50{width:40%;}
+        .wid-74{width:74%;}
+        .div-c{ position:absolute; top:74px;width:100%; height:100%;z-index:1;background:rgba(0, 0, 0, 0.5);}
+        /*按钮*/
+        .b-color{
+            background-color:#f5603f;
+            border: #f5603f;
+        }
+        .b-w-h{
+            width: 136px;
+            height: 50px;
+            border-radius:10px;
+        }
+        .b-h{
+            width: 100%;
+            height: 4rem;
+            font-size:2rem;
+            /*border-radius:10px;*/
+        }
+        .b-top{
+            margin-top: 1rem;
+        }
+        .b-top-3{
+            margin-top: 3rem;
+        }
+        .padding-top-big{
+            padding-top:60%;
+        }
+        .f-l-r{
+            float:right;
+        }
+        .inp{
+            border-radius: 50px;
+        }
+        .l-h-51{
+            line-height: 51px;
+        }
+        .b-r{
+            border-radius:30px;
+        }
+        .b-r-5{
+            border-radius:5px;
+        }
+        .b-w-7{
+            width:7.5rem;
+        }
+        .w-7{
+            width:6.5rem;
+        }
+        .b-p-d-5-40{
+            padding: 5px 40px;
+        }
+        .list {
+            /*position: absolute;*/
+            overflow: hidden;
+        }
+
+        .viewport-flip {
+            -webkit-perspective:100px;
+            perspective: 1000px;
+            position: absolute;
+        }
+        .flip {
+            -webkit-backface-visibility:hidden;
+            -webkit-transform:translateX(0);
+            backface-visibility:hidden;
+            transform:translateX(0);
+        }
+        .flip.out {
+            -webkit-transform: rotateY(-90deg) scale(.9);
+            -webkit-animation-name: flipouttoleft;
+            -webkit-animation-duration: 175ms;
+            transform: rotateY(-90deg) scale(.9);
+            animation-name: flipouttoleft;
+            animation-duration: 175ms;
+            display: none;
+        }
+        .flip.in {
+            -webkit-animation-name: flipintoright;
+            -webkit-animation-duration: 225ms;
+            animation-name: flipintoright;
+            animation-duration: 225ms;
+        }
+
+        @-webkit-keyframes flipouttoleft {
+            from { -webkit-transform: rotateY(0); }
+            to { -webkit-transform: rotateY(-90deg) scale(.9); }
+        }
+        @keyframes flipouttoleft {
+            from { transform: rotateY(0); }
+            to { transform: rotateY(-90deg) scale(.9); }
+        }
+        @-webkit-keyframes flipintoright {
+            from { -webkit-transform: rotateY(90deg) scale(.9); }
+            to { -webkit-transform: rotateY(0); }
+        }
+        @keyframes flipintoright {
+            from { transform: rotateY(90deg) scale(.9); }
+            to { transform: rotateY(0); }
+        }
+        .col-r{
+            padding-right: 10px; padding-bottom: 0px; margin-bottom: 0px;
+        }
+        .col-l{
+            padding-left: 10px; padding-bottom: 0px; margin-bottom: 0px;
+        }
+        .org-color{
+            color: #F5603F;
+        }
+        .bgc{
+            background-color:#F5603F;
+        }
+        .tdh{
+            line-height: 38px;
+        }
+        .x{
+            border-left:none;
+            border-right:none;
+            border-top:none;
+            border-bottom:1px solid #cbcccc;
+        }
+        .table tr td {border: none !important;}
+
+        /* 尝试过程2： */
+        .table tr td {border: 0 !important;}
+
+        /* 以上都未果，没用什么变化。 */
+
+        /* 另一种尝试通过，把边框变成透明的。 */
+        .no-border {
+          border: 1px solid transparent !important;
+      }
+
+      .no-part-border {
+          border-right: 1px solid transparent !important;
+      }
+
+
+
+
+
+      .viewport-flip {
+        -webkit-perspective:100px;
+        perspective: 1000px;
+        position: absolute;
+    }
+    .flip {
+        -webkit-backface-visibility:hidden;
+        -webkit-transform:translateX(0);
+        backface-visibility:hidden;
+        transform:translateX(0);
+    }
+    .flip.out {
+        -webkit-transform: rotateY(-90deg) scale(.9);
+        -webkit-animation-name: flipouttoleft;
+        -webkit-animation-duration: 175ms;
+        transform: rotateY(-90deg) scale(.9);
+        animation-name: flipouttoleft;
+        animation-duration: 175ms;
+        display: none;
+    }
+    .flip.in {
+        -webkit-animation-name: flipintoright;
+        -webkit-animation-duration: 225ms;
+        animation-name: flipintoright;
+        animation-duration: 225ms;
+    }
+
+    @-webkit-keyframes flipouttoleft {
+        from { -webkit-transform: rotateY(0); }
+        to { -webkit-transform: rotateY(-90deg) scale(.9); }
+    }
+    @keyframes flipouttoleft {
+        from { transform: rotateY(0); }
+        to { transform: rotateY(-90deg) scale(.9); }
+    }
+    @-webkit-keyframes flipintoright {
+        from { -webkit-transform: rotateY(90deg) scale(.9); }
+        to { -webkit-transform: rotateY(0); }
+    }
+    @keyframes flipintoright {
+        from { transform: rotateY(90deg) scale(.9); }
+        to { transform: rotateY(0); }
+    }
+	input{
+	-webkit-appearance: none;
+	}
+	.ht{
+	height:100%;
+	}
+</style>
+</head>
+<body class="body-bg">
+
+    <form action="" style="width:100%;">
+        <div class="row" style="padding: 0px;margin: 0px;">
+			<div class="b-g-p" style="background-size:100% 100%;width:100%;height:150px;">
+				<div style="width:100%;height:80px;padding-top: 40px;">
+				<div class="pull-left" style="width:20%;height:70px;">
+					<img id="uploadpics" src="<{$info['headimgurl']}>" class="img-circle img-responsive pull-right" style="width:60px;height:60px;"><input type="file" id="id_photos" name="id_photos" value="上传" style="display: none;" />
+				</div>
+				<div class="pull-left" style="width:45%;height:70px;">
+ 					<a onClick="mem()" style="text-decoration:none;color:#FFF;margin-left: 15px;font-size:15px;">
+                        <div style="overflow:hidden;text-overflow:ellipsis;margin-left: 15px;width:115px;"><nobr style=" font-size: 2rem"><{$info['nickname']}></nobr></div>
+                    </a>
+				</div>
+				<div class="pull-right" style="width:35%;height:70px;line-height: 70px;text-align:center;">
+                    <b style="color:#FFF;font-size:35px;">VIP<{$gamelevel['level']}></b>
+ 				</div>
+				</div>
+			</div>
+        </div>
+    </form>
+	<ul class="list-group">
+	<a class="list-group-item"style="border-radius:0px;" href="http://agent.doudeqipai.com/user/fund/MoneyStream" style="text-decoration:none;color:black">我的账单</a>
+    </ul>
+    <div class="row" style="padding: 0px;margin: 0px;">
+        <div  style=" float: left;background: #fff; width: 46%; height: 200px; margin: 2%;">
+            <div style=" font-weight: bold; font-size: 16px; margin: 15px;  ">我的邀请码:</div>
+            <div style=" font-weight: bold; font-size: 36px;text-align: center;height: 70px; line-height: 70px; color: #f5603f"><{$info['myvcode']}></div>
+            <div style="height: 30px; text-align: center"><a class="btn btn-default b-color" style="color: #fff; width: 80%; margin-top: 20px;"   href="http://www.doudeqipai.com/share/index.php?key=<{$info['myvcode']}>">点击分享</a></div>
+        </div>
+        <div  style="float: right;background: #fff;  width: 46%; height: 200px; margin: 2%;">
+            <img src="http://agent.doudeqipai.com/default/index/QrcodeByOpenid?openid=<{$info['openid']}>" style="width: 100%">
+        </div>
+    </div>
+    <!--确认弹出框end-->
+    <!--确认弹出框start-->
+    <div class="modal fade ht" id="mem">
+        <div class="modal-dialog ht">
+            <div class="modal-content message_align">
+                <div class="modal-header" style="border: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center f-w-b">修改昵称</h4>
+                </div>
+                <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="f-w-b">昵称:</td>
+                        <td><input type="text" name="username" value="<{$info['nickname']}>" placeholder="" style="border:1px solid #cbcccc;border-radius: 30px;"/></td>
+                    </tr>
+                </table>
+                <div class="modal-footer" style="border: 0px;padding-bottom: 30px;margin: auto;">
+                    <div class="form-group text-center">
+                        <input type="hidden" id="url"/>
+                        <a class="submitform btn btn-default b-color fa-1x" style="width:40%;border-radius: 10px;" >确认</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--确认弹出框end-->
+    <!--确认弹出框start-->
+    <div class="modal fade ht" id="pwd">
+        <div class="modal-dialog ht">
+            <div class="modal-content message_align">
+                <div class="modal-header" style="border: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center f-w-b">修改游戏密码</h4>
+                </div>
+				<ul class="list-group" style="text-align:center">
+				<li class="list-group-item"style="border:0px;">旧&nbsp;&nbsp;密&nbsp;&nbsp;码:<input type="password" name="oldpassword" value="" placeholder="" style="border:1px solid #cbcccc;border-radius: 30px;"/></li>
+				<li class="list-group-item"style="border:0px;">新&nbsp;&nbsp;密&nbsp;&nbsp;码:<input type="password" name="newpassword" value="" placeholder="" style="border:1px solid #cbcccc;border-radius: 30px;"/></li>
+				<li class="list-group-item"style="border:0px;">确认密码:<input type="password" name="okpassword" value="" placeholder="" style="border:1px solid #cbcccc;border-radius: 30px;"/></li>
+				</ul>
+                <div class="modal-footer" style="border: 0px;padding-bottom: 30px;margin: auto;">
+                    <div class="form-group text-center">
+                        <input type="hidden" id="url"/>
+                        <a  class="submitform btn btn-default b-color fa-1x" style="width:40%;border-radius: 10px;">确认</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--确认弹出框end-->
+    <!--确认弹出框start-->
+    <div class="modal fade ht" id="phone">
+        <div class="modal-dialog ht">
+            <div class="modal-content message_align">
+                <div class="modal-header" style="border: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center f-w-b">修改手机号</h4>
+                </div>
+				<ul class="list-group" style="border:0px;">
+				<li class="list-group-item" style="border:0px;">旧手机验证码:<input type="text" name="nvf" value="" placeholder="" style="width:47%;border:1px solid #cbcccc;border-radius: 30px;"/>&nbsp;<a class="tosendmsg btn btn-default" style="border-radius:30px;font-size:10px;" href="javascript:void(0);"  id="phonesendmsg" data-enable='1'>获取验证码</a></li>
+				<li class="list-group-item" style="border:0px;">新&nbsp;&nbsp;手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;号:<input type="text" name="newphone" value="" placeholder="" style="width:72%;border:1px solid #cbcccc;border-radius: 30px;"/></li>
+				<li class="list-group-item"style="border:0px;">新手机验证码:<input type="text" name="vf" value="" placeholder="" style="width:47%;border:1px solid #cbcccc;border-radius: 30px;"/>&nbsp;<a class="tosendmsg btn btn-default" style="border-radius:30px;font-size:10px;" href="javascript:void(0);"  id="newphonesendmsg" data-enable='1'>获取验证码</a></li>
+				<li class="list-group-item" style="border:0px;">密&nbsp;&nbsp;手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;码:<input type="text" name="password" value="" placeholder="" style="width:72%;border:1px solid #cbcccc;border-radius: 30px;"/></li>
+				</ul>
+                <div class="modal-footer" style="border: 0px;padding-bottom: 30px;margin: auto;">
+                    <div class="form-group text-center">
+                        <input type="hidden" id="url"/>
+                        <a  class="submitform btn btn-default b-color fa-1x" style="width:40%;border-radius: 10px;">确认</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹窗-->
+    <!--确认弹出框start-->
+    <div class="modal fade" id="alipay">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header" style="border: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center f-w-b">修改支付宝号</h4>
+                </div>
+                <table align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="f-w-b" width="65px">新支付宝:</td>
+                        <td><input type="text" name="newalicode" value="<{$info['alipay']}>" placeholder="" style="width:100%;border:1px solid #cbcccc;border-radius: 30px;"/></td>
+                    </tr>
+                    <tr>
+                        <td class="f-w-b">验&nbsp;证&nbsp;码:</td>
+                        <td><input type="text" name="vf" value="" placeholder="" style="width:49%;border:1px solid #cbcccc;border-radius: 30px;"/>&nbsp;<a class="tosendmsg btn btn-default" style="border-radius:30px;font-size:10px;" href="javascript:void(0);"   id="alipaysendmsg" data-enable='1'>获取验证码</a></td>
+
+                    </tr>
+                    <tr>
+                        <td class="f-w-b">密码:</td>
+                        <td><input type="text" name="password" value="" placeholder="" style="width:100%;border:1px solid #cbcccc;border-radius: 30px;"/></td>
+                    </tr>
+                </table>
+                <div class="modal-footer" style="border: 0px;padding-bottom: 30px;margin: auto;">
+                    <div class="form-group text-center">
+                        <input type="hidden" id="url"/>
+                        <a class="submitform btn btn-default b-color fa-1x" style="width:40%;border-radius: 10px;" >确认</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--确认弹出框end-->
+
+    <!--确认弹出框start-->
+    <div class="modal fade" id="weixin">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header" style="border: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center f-w-b">修改微信</h4>
+                </div>
+                <table align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="f-w-b">新微信号:</td>
+                        <td><input type="text" name="weixin" value="<{$info['wechat']}>" placeholder="" style="width:100%;border:1px solid #cbcccc;border-radius: 30px;"/></td>
+                        <!--<td></td>-->
+                    </tr>
+                    <tr>
+                        <td class="f-w-b">验&nbsp;证&nbsp;码:</td>
+                        <td><input type="text" name="vf" value="" placeholder="" style="width:49%;border:1px solid #cbcccc;border-radius: 30px;"/>&nbsp;<a class="tosendmsg btn btn-default" style="border-radius:30px;font-size:10px;" href="javascript:void(0);"  id="weixinsendmsg" data-enable='1'>获取验证码</a></td>
+
+                    </tr>
+                    <tr>
+                        <td class="f-w-b" width="65px">密码:</td>
+                        <td><input type="text" name="password" value="" placeholder="" style="width:100%;border:1px solid #cbcccc;border-radius: 30px;"/></td>
+                        <!--<td></td>-->
+                    </tr>
+                </table>
+                <div class="modal-footer" style="border: 0px;padding-bottom: 30px;margin: auto;">
+                    <div class="form-group text-center">
+                        <input type="hidden" id="url"/>
+                        <a  class="submitform btn btn-default b-color fa-1x" style="width:40%;border-radius: 10px;">确认</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--确认弹出框end-->
+    <!--确认弹出框start-->
+    <div class="modal fade" id="bank">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header" style="border: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center f-w-b">修改银行卡</h4>
+                </div>
+                <table align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="f-w-b" width="65px">旧银行卡:</td>
+                        <td><input type="text" name="oldbank" value="" placeholder="" style="width:100%;border:1px solid #cbcccc;border-radius: 30px;"/></td>
+                        <!--<td></td>-->
+                    </tr>
+                    <tr>
+                        <td class="f-w-b">新银行卡:</td>
+                        <td><input type="text" name="newbank" value="" placeholder="" style="width:100%;border:1px solid #cbcccc;border-radius: 30px;"/></td>
+                        <!--<td></td>-->
+                    </tr>
+                </table>
+                <div class="modal-footer" style="border: 0px;padding-bottom: 30px;margin: auto;">
+                    <div class="form-group text-center">
+                        <input type="hidden" id="url"/>
+                        <a  class="submitform btn btn-default b-color fa-1x" style="width:40%;border-radius: 10px;" data-dismiss="modal">确认</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--确认弹出框end-->
+    <!--弹窗-->
+    <div class="row" style="padding: 0px;margin: 0px;">
+        <div class="col-lg-12" style="margin-left: 10px; margin-right: 10px;">
+            <!--<a class="btn btn-default pull-right" href="/user/userCenter/question" style="width:48%;background-color:#ED6C00;bborder-radius: 10px;border:0px;">常见问题</a>-->
+            <a class="btn btn-default  pull-right" href="javascript:void(0);" onclick="if(confirm('确定退出系统吗？')) {window.location.href='/user/index/signout';}" style="width:48%;order-radius: 10px;border:0px;">退出登录</a>
+        </div>
+    </div>
+    <!--确认弹出框end-->
+    <!--<span class="nav-badge">1</span>-->
+    <{assign var="module" value="my"}>
+    <{include file='inc/footer.html'}>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/star-rating.js" type="text/javascript"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/rangeslider.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/ajaxfileupload.js?t=1" type="text/javascript"></script>
+    <script>
+        jQuery(document).ready(function () {
+
+            $(".rating-kv").rating();
+
+        });
+    </script>
+    <script>
+        function img(url) {
+            $('#img').modal();
+        }
+        function mem(url){
+            $('#mem').modal();
+        }
+        function pwd(){
+            $('#pwd').modal();
+        }
+        function phone(){
+            $('#phone').modal();
+        }
+        function alipay(url){
+            $('#alipay').modal();
+        }
+        function weixin(){
+            $('#weixin').modal();
+        }
+        function bank(){
+            $('#bank').modal();
+        }
+        function urlSubmit(){
+            alert("删除成功");
+        }
+        // destroy
+    </script>
+
+    <script>
+
+
+
+
+        var wait=60;
+        function count_time(o) {
+            if (wait == 0) {
+                $('#'+o).attr('data-enable',1);
+                $('#'+o).html("获取验证码");
+                wait = 60;
+            } else {
+                $('#'+o).attr('data-enable',0);
+                $('#'+o).html("重新发送(" + wait + ")");
+                wait--;
+                setTimeout(function() {
+                    count_time(o)
+                },
+                1000)
+            }
+        }
+
+
+        $(document).ready(function(){
+            $('#uploadpics').click(function(){
+                $("#id_photos").trigger("click");
+            });
+
+
+            //照片异步上传
+        $('#id_photos').change(function(){ //此处用了change事件，当选择好图片打开，关闭窗口时触发此事件
+            $.ajaxFileUpload({
+                url:'/user/userCenter/userAvater',   //处理图片的脚本路径
+                type: 'post',       //提交的方式
+                secureuri :false,   //是否启用安全提交
+                fileElementId :'id_photos',     //file控件ID
+                dataType : 'json',  //服务器返回的数据类型
+                success : function (data, status){
+                	//提交成功后自动执行的处理函数
+                	if(data = 1){
+                		window.location.href="/user/userCenter/index";
+                	}
+                }
+            })
+        });
+
+
+
+
+            //发送短信
+            $(".tosendmsg").click(function(){
+                if ($(this).attr('data-enable') == 0) { return false;}
+                var obj = $(this);
+                var mobile = "<{$info['mobile']}>";
+                if ($(this).attr('id') == 'newphonesendmsg') {
+                    if ($("#phone input[name='newphone']").val() == '') {
+                        alert('新手机号未填写');
+                        return false;
+                    }
+                    mobile = $("#phone input[name='newphone']").val();
+                }
+
+                $.ajax({
+                    url: "/user/index/GetMobileCode" ,
+                    type: "get",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{mobile:mobile},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                count_time($(obj).attr('id'));
+                                alert('短信发送成功');
+                                console.log(json);
+                            }else{
+                                alert(json.message);
+                            }
+
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+
+
+
+            // 密码
+            $("#pwd .submitform").click(function(){
+                if ($("#pwd input[name='oldpassword']").val() == '') {alert('旧密码未填写');$("#pwd input[name='oldpassword']").focus();return false;}
+                if ($("#pwd input[name='newpassword']").val() == '') {alert('新密码未填写');$("#pwd input[name='newpassword']").focus();return false;}
+                if ($("#pwd input[name='okpassword']").val() != $("#pwd input[name='newpassword']").val()) {alert('两次密码不一致');$("#pwd input[name='okpassword']").focus();return false;}
+                $.ajax({
+                    url: "/user/index/chagepasswithold" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{old_password:$("#pwd input[name='oldpassword']").val(),password:$("#pwd input[name='newpassword']").val(),},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                alert('修改成功，请重新登录');
+                                window.location.href="/user/index/signout";
+                                // $('#pwd').modal('hide');
+                            }else{
+                                alert(json.message);
+                            }
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+            // 用户名
+            $("#mem .submitform").click(function(){
+                if ($("#mem input[name='username']").val() == '') {alert('资料未填写');$("#mem input[name='username']").focus();return false;}
+                $.ajax({
+                    url: "/user/index/EditInfos" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{nickname:$("#mem input[name='username']").val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                alert('修改成功');
+                                window.location.reload();
+                                // $('#mem').modal('hide');
+                            }else{
+                                alert(json.message);
+                            }
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+
+            // 用户名
+            $("#alipay .submitform").click(function(){
+                if ($("#alipay input[name='newalicode']").val() == '') {alert('支付宝资料未填写');$("#alipay input[name='newalicode']").focus();return false;}
+                if ($("#alipay input[name='password']").val() == '') {alert('密码未填写');$("#alipay input[name='password']").focus();return false;}
+                if ($("#alipay input[name='vf']").val() == '') {alert('验证码未填写');$("#alipay input[name='vf']").focus();return false;}
+                $.ajax({
+                    url: "/user/index/EditInfos" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{mobile:"<{$info['mobile']}>",alipay:$("#alipay input[name='newalicode']").val(),password:$("#alipay input[name='password']").val(),vcode:$("#alipay input[name='vf']").val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                alert('修改成功');
+                                window.location.reload();
+                                // $('#alipay').modal('hide');
+                            }else{
+                                alert(json.message);
+                            }
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+
+            // 用户名
+            $("#weixin .submitform").click(function(){
+                if ($("#weixin input[name='weixin']").val() == '') {alert('微信号未填写');$("#weixin input[name='weixin']").focus();return false;}
+                if ($("#weixin input[name='password']").val() == '') {alert('密码未填写');$("#weixin input[name='password']").focus();return false;}
+                if ($("#weixin input[name='vf']").val() == '') {alert('验证码未填写');$("#weixin input[name='vf']").focus();return false;}
+                $.ajax({
+                    url: "/user/index/EditInfos" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{mobile:"<{$info['mobile']}>",wechat:$("#weixin input[name='weixin']").val(),password:$("#weixin input[name='password']").val(),vcode:$("#weixin input[name='vf']").val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                alert('修改成功');
+                                window.location.reload();
+                                // $('#weixin').modal('hide');
+                            }else{
+                                alert(json.message);
+                            }
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+
+
+            // 手机号
+            $("#phone .submitform").click(function(){
+                if ($("#phone input[name='nvf']").val() == '') {alert('预留手机的验证码未填写');$("#phone input[name='nvf']").focus();return false;}
+                if ($("#phone input[name='password']").val() == '') {alert('密码未填写');$("#phone input[name='password']").focus();return false;}
+                if ($("#phone input[name='newphone']").val() == '') {alert('新手机号未填写');$("#phone input[name='newphone']").focus();return false;}
+                if ($("#phone input[name='vf']").val() == '') {alert('新手机号验证码未填写');$("#phone input[name='vf']").focus();return false;}
+                $.ajax({
+                    url: "/user/index/EditMobile" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{mobile:"<{$info['mobile']}>",old_vcode:$("#phone input[name='nvf']").val(),password:$("#phone input[name='password']").val(),vcode:$("#phone input[name='vf']").val(),newphone:$("#phone input[name='newphone']").val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                alert('修改成功，请重新登录');
+                                window.location.href="/user/index/signout";
+                                // $('#phone').modal('hide');
+                            }else{
+                                alert(json.message);
+                            }
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+
+        });
+
+    </script>
+</body>
+</html>

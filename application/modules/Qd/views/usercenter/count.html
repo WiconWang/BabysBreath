@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>统计</title>
+    <!-- Bootstrap -->
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="<{$smarty.const.STATIC_PATH}>/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/css/mui.min.css">
+    <link href="<{$smarty.const.STATIC_PATH}>/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <style type="text/css">
+                            /*
+ * 底部导航菜单
+ */
+ .nav-bar-top {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    /*-webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);*/
+    /*box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);*/
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.nav-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);
+    box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.nav-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.nav-bar-tab .nav-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 3.2rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+    text-decoration: none;
+}
+.nav-bar-tab .nav-tab-item.nav-active { color: #E84219;}
+.nav-bar .nav-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.nav-bar-tab .nav-tab-item .nav-icon {
+    /*top: 3px;*/
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.nav-bar-tab .nav-tab-item .nav-icon~.nav-tab-label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+}
+.nav-icon .nav-badge {
+    font-size: .65rem;
+    line-height: 1rem;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    color: #fff;
+    background-color: red;
+    border-radius: 1rem;
+    min-width: .6rem;
+    height: 1rem;
+    text-align: center;
+    padding: 0 .2rem;
+}
+.user_money{color: #FFFFFF;}
+.user_money>b{
+    font-weight: normal;
+    margin-bottom: .4rem;
+    display: inherit;
+    position: relative;
+    line-height: 1.2rem;
+    padding-left: .5rem;
+}
+.body-bg{
+    background-color:#EDEDEC;
+}
+.body-bg1{
+    background-color:#FFFFFF;
+}
+.body-h{
+    min-height:667px;
+}
+.h-color{
+    color:#4F4C4B;
+}
+.container-p-d{
+    padding: 0px;
+}
+.container-m-g{
+    margin: 0px;
+}
+.p-d-t{
+    padding-top:2rem;
+}
+.p-d-t-4{
+    padding-top:4rem;
+}
+.p-d-m{
+    padding-bottom: 0rem;
+}
+.p-d-l-r{
+    padding-left:1rem;
+    padding-right:1rem;
+}
+.p-d1{
+    padding:2rem;
+}
+.p-d1{
+    padding:3rem;
+}
+.orange1{
+    color: #ED6C00;
+    font-size: 1.6rem;
+}
+.orange2{
+    color: #ED6C00;
+    font-size: 1.5rem;
+}
+.jb_keleyi_comd{
+    height: 100%;
+    width:100%;
+    /*margin:0px auto;*/
+    background-image: -moz-linear-gradient(top, #00FF00, #FF0000); /*火狐*/
+    background: -o-linear-gradient(top, #00FF00 0%,red 100%);/*Opera*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(2,#FFF)); /*Chrome*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FF00', endColorstr='#FF0000', GradientType='0'); /*IE*/
+}
+.pd-t{
+    padding-top: 30px;
+}
+@media (min-width:364px) {
+    .pd-t{
+        padding-top: 35px;
+    }
+}
+@media (max-width: 380px) {
+/*.pd-t{
+    padding-top: 20px;
+}*/
+.f-sm-s{
+    font-size: 1rem;
+}
+.f-h{
+    font: "微软雅黑";
+    font-size: 1.4rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h1{
+    font: "微软雅黑";
+    font-size: 1.2rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h2 {
+    font-size:1.2rem;
+    color: #ED6C00;
+}
+}
+.f-h{
+    font: "微软雅黑";
+    font-size: 1.4rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h1{
+    font: "微软雅黑";
+    font-size: 1.2rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h2 {
+    font-size:1.2rem;
+    color: #ED6C00;
+}
+.f-h3{
+    color: red;
+}
+.fa-1x{
+    font-size:2rem;
+}
+.f-x-small{
+    font-size:x-small;
+}
+.f-w-b{
+    font-weight:bold;
+}
+.hui{
+    color: #cbcccc;
+}
+.org{
+    color: #F1554E;
+}
+.utom{
+    height:2.5rem;
+}
+.bh{
+    height:7rem;
+}
+.line-h{
+    line-height: 7rem;
+}
+.p-t-s{
+    position:fixed; top:0; left:0; width:100%; background:#FCC;
+}
+
+.cn{margin-top:9rem;}
+.cn2{margin-top:1.5rem;}
+.b-g-p{
+    background-image: url(<{$smarty.const.STATIC_PATH}>/image/小banner.png);
+}
+/*100宽度*/
+.wid{width:100%;}
+.wid-50{width:40%;}
+.wid-74{width:74%;}
+.div-c{ position:absolute; top:74px;width:100%; height:100%;z-index:1;background:rgba(0, 0, 0, 0.5);}
+/*按钮*/
+.b-color{
+    background-color:#f5603f;
+    border: #f5603f;
+}
+.b-w-h{
+    width: 136px;
+    height: 50px;
+    border-radius:10px;
+}
+.b-h{
+    width: 100%;
+    height: 4rem;
+    font-size:2rem;
+    /*border-radius:10px;*/
+}
+/*按钮外边距*/
+.b-top{
+ margin-top: 1rem;
+}
+.b-top-3{
+ margin-top: 3rem;
+}
+.padding-top-big{
+    padding-top:60%;
+}
+.f-l-r{
+    float:right;
+}
+.inp{
+    border-radius: 50px;
+}
+.l-h-51{
+    line-height: 51px;
+}
+.b-r{
+    border-radius:30px;
+}
+.b-r-5{
+    border-radius:5px;
+}
+.b-w-7{
+    width:7.5rem;
+}
+.w-7{
+    width:6.5rem;
+}
+.b-p-d-5-40{
+    padding: 5px 40px;
+}
+.list {
+    /*position: absolute;*/
+    overflow: hidden;
+}
+ul li{
+    /*width:2rem;*/
+    height: 30%;
+}
+.viewport-flip {
+    -webkit-perspective:100px;
+    perspective: 1000px;
+    position: absolute;
+}
+.flip {
+    -webkit-backface-visibility:hidden;
+    -webkit-transform:translateX(0);
+    backface-visibility:hidden;
+    transform:translateX(0);
+}
+.flip.out {
+    -webkit-transform: rotateY(-90deg) scale(.9);
+    -webkit-animation-name: flipouttoleft;
+    -webkit-animation-duration: 175ms;
+    transform: rotateY(-90deg) scale(.9);
+    animation-name: flipouttoleft;
+    animation-duration: 175ms;
+    display: none;
+}
+.flip.in {
+    -webkit-animation-name: flipintoright;
+    -webkit-animation-duration: 225ms;
+    animation-name: flipintoright;
+    animation-duration: 225ms;
+}
+
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateY(0); }
+    to { -webkit-transform: rotateY(-90deg) scale(.9); }
+}
+@keyframes flipouttoleft {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(-90deg) scale(.9); }
+}
+@-webkit-keyframes flipintoright {
+    from { -webkit-transform: rotateY(90deg) scale(.9); }
+    to { -webkit-transform: rotateY(0); }
+}
+@keyframes flipintoright {
+    from { transform: rotateY(90deg) scale(.9); }
+    to { transform: rotateY(0); }
+}
+.col-r{
+    padding-right: 10px; padding-bottom: 0px; margin-bottom: 0px;
+}
+.col-l{
+    padding-left: 10px; padding-bottom: 0px; margin-bottom: 0px;
+}
+.org-color{
+    color: #F5603F;
+}
+.top{position:fixed; top:0; left:0; width:100%; height:80px;z-index: 10;}
+.mui-slider-right{
+	width:100%;
+	background-color:#FFFFFF;
+}
+.mp{
+	padding:0px;
+	margin:0px;
+}
+
+    .mui-table-view-cell {position: relative;}
+        .mui-table-view-cell .movehand { background:url("<{$smarty.const.STATIC_PATH}>/image/move_hand.png") 100% 100%  no-repeat; width: 30px; height: 40px; position: absolute;  display: block; top: 50%; left: 10%; margin-top: -20px; z-index: 9999 ;opacity: 0}
+        .mui-table-view-cell .movehand {}
+        .pt-move {
+            -webkit-animation:moveleft 5s 3 linear;
+            animation:moveleft 5s 3 linear;
+        }
+        @keyframes moveleft{
+            0% {left:90%; opacity: 0}
+            20% {left:50%;opacity: 0.3}
+            40% {left:10%;opacity: 0}
+        }
+        @-webkit-keyframes moveleft{
+            0% {left:90%; opacity: 0}
+            20% {left:50%;opacity: 0.3}
+            40% {left:10%;opacity: 0}
+        }
+
+
+
+</style>
+</head>
+<body class="body-bg">
+    <!--合伙人-->
+    <div class="top b-g-p" style="background-size:100% 100%;">
+            <div class="col-xs-3">
+
+            </div>
+            <div class="col-xs-6 text-center" style="margin-top: 10px;">
+                <span class="user_money f-w-b" style="font-size:18px;"><{$info['agent_big_level']}></span>
+                <input id="input-21e" value="<{$info['agent_small_level']}>" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" disabled="disabled">
+            </div>
+            <div class="col-xs-3 pull-right" style="top: 10px;">
+                <div class="row">
+                    <div class="col-xs-12">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-12">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-12">
+                        <a style="text-decoration:underline;" class="user_money f-x-small" data-toggle="modal" data-target="#myModal6">晋级方式</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12" style="padding: 0px;background-color:#727272;top: 10px;">
+                <div style="border-bottom:5px solid #ffde00;width:<{$info['agent_process']}>%;"></div>
+            </div>
+    </div>
+    <{if $info['agent_level'] >= 10}>
+    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h5 class="m-t-none m-b">游戏内消费1元，贡献值+1。</h5>
+                    <h5>每新增下线玩家一人，贡献值+1</h5>
+                    <div class="form-group text-center">
+                        <button class="btn b-p-d-5-40 btn-danger m-t-n-xs b-color user_money b-r-5 b-top" data-dismiss="modal"><strong>确认返回</strong>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <{else}>
+    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h5 class="m-t-none m-b">游戏内消费1元，贡献值+1.</h5>
+                    <h5>每完成一项分享任务，贡献值+1，单日上限+4</h5>
+                    <div class="form-group text-center">
+                        <button class="btn b-p-d-5-40 btn-danger m-t-n-xs b-color user_money b-r-5 b-top" data-dismiss="modal"><strong>确认返回</strong>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <{/if}>
+    <!--合伙人--><!--<div class="col-sm-6 text-center" style="padding: 0px;margin: 0px;">--><!--</div>-->
+
+	<div class="mui-content" style="margin-top: 85px;">
+			<ul id="OA_task_1" class="mui-table-view" style="margin-top: 5px;">
+			        <li class="mui-table-view-cell">
+                    <div class="movehand pt-move"></div>
+			           	<div class="mui-slider-right mui-disabled">
+			            <div class="mui-btn" style="width:100%;">
+			                <div style="width:100%;margin:0 auto;background-color:#FFFFFF;border-radius:8px;">
+			                    <div class="row mp" style="width:100%;">
+			                     	<div class="col-xs-12 mp">
+								        <div class="widget style1 white-bg" style="padding: 0px; margin: 0px;height: 10rem;">
+						                    <div class="row" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+						                        <div class="col-xs-9" style="height: 100px;padding-left: 0px; padding-right: 0px;">
+						                           <ul class="text-center list-inline">
+
+													    <li style="padding: 5px 0px; margin-top: 10px;">
+							                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 40px; height: 40px;"><br />
+							                                <div class="org" style="width：45px;font-size:8px">日分润<br /> +<{$level['next']['pct']}>%</div>
+							                            </li>
+							                                <{if $level['next']['key'] eq '6'}>
+							                                <li style="padding: 5px 0px; margin-top: 10px;">
+							                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启游戏.png" style="width: 40px; height: 40px;"><br />
+							                                <div class="org" style="width：45px;font-size:8px">开启游戏<br />一键完成</div>
+							                            </li>
+							                                <{/if}>
+							                                <{if $level['next']['key'] eq '11'}>
+							                                <li style="padding: 5px 0px; margin-top: 10px;">
+							                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启微信.png" style="width: 40px; height: 40px;"><br />
+							                                <div class="org" style="width：45px;font-size:8px">开启分享一键<br />完成</div>
+							                            </li>
+							                                <{/if}>
+							                                <{if $level['next']['key'] gt '16'}>
+							                                <li style="padding: 5px 0px; margin-top: 10px;">
+							                                <img src="<{$smarty.const.STATIC_PATH}>/image/免手续费提现.png" style="width: 40px; height: 40px;"><br />
+							                                <div class="org" style="width：45px;font-size:8px">免手续费<br />提现卡</div>
+							                            </li>
+							                                <{/if}>
+							                                <{if $level['next']['key'] gt '31'}>
+							                                <li style="padding: 5px 0px; margin-top: 10px;">
+							                                <img src="<{$smarty.const.STATIC_PATH}>/image/赠游戏.png" style="width: 40px; height: 40px;"><br />
+							                                <div class="org" style="width：45px;font-size:8px">赠送游戏<br />一键完成</div>
+							                            </li>
+							                                <{/if}>
+							                                <{if $level['next']['key'] gt '26'}>
+							                                <li style="padding: 5px 0px; margin-top: 10px;">
+							                                <img src="<{$smarty.const.STATIC_PATH}>/image/增分享.png" style="width: 40px; height: 40px;"><br />
+							                                <div class="org" style="width：45px;font-size:8px">增送分享<br />一键完成</div>
+							                            </li>
+						                                <{/if}>
+						                            </ul>
+						                        </div>
+						                        <div class="col-xs-3 text-center" style="height:10rem;background:#f5603f;padding-left: 0px; padding-right: 0px;border-radius:0 5px 5px 0;">
+						                            <p style="margin-top: 20px; margin-bottom: 20px;" class="user_money">下级<br /><{$level['next']['title']}><br />特权</p>
+						                        </div>
+						                    </div>
+						                </div>
+			                     	</div>
+			                    </div>
+			                </div>
+			            </div>
+			        	</div>
+			        <div class="mui-slider-handle" style="border-width: 0px;border-radius:5px;">
+
+			        <div class="widget style1 white-bg" style="padding: 0px;margin: 0px;height: 10rem;">
+			        	<span class="hui" style="height: 20px;position: absolute;width: 80px;top:50%;left:50%;top:0px;margin-left:-40px;">
+			        		当前享受特权
+			        	</span>
+                        	<{if $info['agent_level'] <= 5}>
+                            <ul class="text-center list-inline" style="padding-top: 10px;">
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            </ul>
+                            <{/if}>
+                            <{if $info['agent_level'] > 5 && $info['agent_level'] <= 10}>
+                        	<ul class="text-center list-inline" style="padding-top: 10px;">
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启游戏.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">10%</div>
+                            </li>
+                            </ul>
+                            <{/if}>
+                            <{if $info['agent_level'] > 10 && $info['agent_level'] <= 15}>
+                        	<ul class="text-center list-inline" style="padding-top: 10px;">
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启游戏.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">8%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启微信.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">8%</div>
+                            </li>
+                            </ul>
+                            <{/if}>
+                            	<{if $info['agent_level'] > 15 && $info['agent_level'] <= 20}>
+                        	<ul class="text-center list-inline" style="padding-top: 10px;">
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启游戏.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">6%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启微信.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">6%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/免手续费提现.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">每月1张</div>
+                            </li>
+                            </ul>
+                            <{/if}>
+                            	<{if $info['agent_level'] > 20 && $info['agent_level'] <= 25}>
+                        	<ul class="text-center list-inline" style="padding-top: 10px;">
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启游戏.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">4%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启微信.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">4%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/免手续费提现.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">每月1张</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/赠游戏.png" style="width: 50px; height: 50px;"><br />
+                                <div class="org">任务1张</div>
+                            </li>
+                            </ul>
+                            <{/if}>
+                            		<{if $info['agent_level'] > 25 && $info['agent_level'] <= 30}>
+                        	<ul class="text-center list-inline" style="padding-top: 10px;">
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 40px; height: 40px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启游戏.png" style="width: 40px; height: 40px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">2%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/开启微信.png" style="width: 40px; height: 40px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">2%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/免手续费提现.png" style="width: 40px; height: 40px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">每月1张</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/赠游戏.png" style="width: 40px; height: 40px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">任务1张</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/增分享.png" style="width: 40px; height: 40px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">分享一张</div>
+                            </li>
+                            </ul>
+                            <{/if}>
+                            <!--<li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 20px; height: 20px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 20px; height: 20px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 20px; height: 20px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>
+                            <li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 20px; height: 20px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>-->
+                            <!--<li style="padding-top: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                <img src="<{$smarty.const.STATIC_PATH}>/image/等级.png" style="width: 20px; height: 20px;"><br />
+                                <div class="org" style="width：45px;font-size:8px">日分润 +<{$level['this']['pct']}>%</div>
+                            </li>-->
+<!--                         <span class="hui" style="position: absolute; top: 81px; right: 10px;"><img src="<{$smarty.const.STATIC_PATH}>/image/16_px1.png" style="width: 50px; height: 18px;"/></span>
+ -->                    </div>
+			      </div>
+			  </li>
+	</div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-xs-6 col-r">
+                <div class="widget style1 white-bg">
+                    <div class="row vertical-align text-center">
+
+                        <span class="fa-2x f-w-b org-color"><{$Bonus['days']}></span>天<br />
+                        <span>合伙人入职天数</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-l">
+                <div class="widget style1 white-bg">
+                    <div class="row vertical-align text-center">
+
+                        <span class="fa-2x f-w-b org-color"><{$info['myplayer_num']}></span>人<br />
+                        <span>累计下线玩家</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-r">
+                <div class="widget style1 white-bg">
+                    <div class="row vertical-align text-center">
+                        <!-- 此方法正在优化，暂时屏蔽 -->
+                        <span class="fa-2x f-w-b org-color"><{$tempmoney}></span><br />
+                        <span>累计获得总奖金</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-l">
+                <div class="widget style1 white-bg">
+                    <div class="row vertical-align text-center">
+
+                        <span class="fa-2x f-w-b org-color"><{$info['agent_share_num']}></span>次<br />
+                        <span>累计推广总次数</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <a class="btn btn-default b-color b-w-h fa-1x b-top l-h-38" style="margin-top: 12px; padding-left: 12px; width: 160px; padding-top: 10px;" href="/user/task/TaskStream">每日收益统计</a>
+            </div>
+        </div>
+    </div>
+    <!--<span class="nav-badge">1</span>-->
+    <{assign var="module" value="count"}>
+    <{include file='inc/footer.html'}>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/star-rating.js" type="text/javascript"></script>
+    <!-- Rickshaw -->
+    <!--<script src="<{$smarty.const.STATIC_PATH}>/js/plugins/rickshaw/vendor/d3.v3.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/plugins/rickshaw/rickshaw.min.js"></script>-->
+    <script src="<{$smarty.const.STATIC_PATH}>/js/mui.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+
+            $(".rating-kv").rating();
+
+        });
+    </script>
+    <script>
+$(function(){
+    var eleBack = null, eleFront = null,
+    // 翻转图片
+    eleList = $(".list");
+
+// 确定前面与后面元素
+var funBackOrFront = function() {
+    eleList.each(function() {
+        if ($(this).hasClass("out")) {
+            eleBack = $(this);
+        } else {
+            eleFront = $(this);
+        }
+    });
+};
+funBackOrFront();
+
+
+$("#box").bind("click", function() {
+    eleFront.addClass("out").removeClass("in");
+    setTimeout(function() {
+        eleBack.addClass("in").removeClass("out");
+        // 重新确定正反元素
+        funBackOrFront();
+    },1);
+    return false;
+});
+})
+
+</script>
+</body>
+</html>

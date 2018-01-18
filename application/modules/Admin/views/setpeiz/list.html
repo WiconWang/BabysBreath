@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+
+    <script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+    <style>
+        .bor{
+             border:1px solid red;
+         }
+    </style>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>项目名称</th>
+        <th>参数值</th>
+        <th>操作</th>
+    </tr>
+    <{foreach from=$conment item=item}>
+    <tr>
+        <th><{$item.id}></th>
+        <th><{$item.key}></th>
+        <th><{$item.value}></th>
+        <th><a href='/admin/setpeiz/del?id=<{$item.id}>'>删除</a>|<a href='/admin/setpeiz/update?id=<{$item.id}>'>修改</a></th>
+    </tr>
+    <{/foreach}>
+</table>
+<{include file='inc/pagefile.html'}>
+<script>
+    <!--修改排序-->
+    $(document).ready(function(){
+        $("input").focus(function(){
+            $(this).addClass("bor");
+        });
+        $("input").blur(function(){
+            $(this).removeClass("bor");
+            var i = $(this).val();
+            var d = $(this).attr("id");
+            $.post("/admin/game/listorder",{rid:i,sid:d},function(date){
+
+                if(date){
+                    history.go(0);
+                }else{
+                    alert("修改失败");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

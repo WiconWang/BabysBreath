@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>用户充值 测试</title>
+    <!-- Bootstrap -->
+    <link href="http://agent.doudeqipai.com/static/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <main class="row s" style=" width: 300px;margin: 20px auto; padding: 10px">
+
+        <form class="form-signin" id="loginform">
+            <h2 class="form-signin-heading">用户充值测试</h2>
+            用户uid : <input type="text" id="uid" class="form-control" placeholder="用户uid" value="<{if $uid != ''}><{$uid}><{/if}>" required autofocus><br>
+            用户openid：
+            <input type="text" id="openid" class="form-control" placeholder="请输入Openid"  value="<{$smarty.cookies.DEBUGOPENID}>">
+            以上两项，填其中一项即可<br><br><br>
+            充值金额 : <input type="text" id="price" class="form-control" placeholder="用户price" value="300" required autofocus>
+
+
+            <input type="hidden" id="gid" class="form-control" value="0">
+            <input type="hidden" id="sid" class="form-control" value="0">
+            <br>
+            支付渠道 :
+            <div class="radio">
+                <label>
+                    <input type="radio" name="payways" id="payways1" value="alipay" checked>支付宝
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="payways" id="payways2" value="weipay">微信
+                </label>
+            </div>
+            <div class="radio disabled">
+                <label>
+                    <input type="radio" name="payways" id="payways3" value="visa" disabled>银联
+                </label>
+            </div>
+            <br>
+            <button  id="submitform" class="btn btn-lg btn-primary btn-block" type="button">确定</button>
+
+
+        </form>
+
+<!--
+        <form action="/api/pay/wappay/pay.php" name="form_alipay" id="form_alipay">
+            <input id="WIDout_trade_no" name="WIDout_trade_no"  value="" />
+            <input id="WIDsubject" name="WIDsubject"  value="" />
+            <input id="WIDtotal_amount" name="WIDtotal_amount" value="" />
+            <input id="WIDbody" name="WIDbody"  value="" />
+        </form>
+ -->
+
+    </main>
+    <script src="http://agent.doudeqipai.com/static/js/jquery-2.1.1.min.js"></script>
+    <script src="http://agent.doudeqipai.com/static/js/bootstrap.min.js"></script>
+
+    <!-- Jquery Validate -->
+    <script src="http://agent.doudeqipai.com/static/js/plugins/validate/jquery.validate.min.js"></script>
+
+    <script src="http://agent.doudeqipai.com/static/js/plugins/validate/messages_zh.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#submitform").click(function(){
+                var way =  '';
+                way = $("input[name='payways']:checked").val();
+                if (way == 'alipay') {alert('暂时不支持支付宝测试'); return false;}
+
+                alert('微信测试自动将金额改为1分进行测试');
+
+                window.location.href = "/default/pay/pay?uid="+$('#uid').val()+"&gid="+$('#gid').val()+"&sid="+$('#sid').val()+"&Total_fee=1";
+                // +$('#price').val();
+                // alert('Weixin');
+
+                return false;
+                // alert('这里需要跳转到支付逻辑，然后返回到接收接口，这里先不测，直接认为充值成功');
+                $.ajax({
+                    url: "/user/fund/recharge" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{price:$('#price').val(),uid:$('#uid').val(),openid:$('#openid').val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            console.log(json);
+                            if (json.status) {
+                                alert('请求成功');
+                                str = JSON.stringify(json);
+                                alert(str);
+                            }else{
+                                alert(json.msg);
+                            }
+
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>钱包</title>
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/css/rangeslider.css">
+    <style type="text/css">
+                            /*
+ * 底部导航菜单
+ */
+ .nav-bar-top {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    /*-webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);*/
+    /*box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);*/
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.nav-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);
+    box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.nav-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.nav-bar-tab .nav-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 3.2rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+    text-decoration: none;
+}
+.nav-bar-tab .nav-tab-item.nav-active { color: #E84219;}
+.nav-bar .nav-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.nav-bar-tab .nav-tab-item .nav-icon {
+    /*top: 3px;*/
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.nav-bar-tab .nav-tab-item .nav-icon~.nav-tab-label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+}
+.nav-icon .nav-badge {
+    font-size: .65rem;
+    line-height: 1rem;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    color: #fff;
+    background-color: red;
+    border-radius: 1rem;
+    min-width: .6rem;
+    height: 1rem;
+    text-align: center;
+    padding: 0 .2rem;
+}
+.user_money{color: #FFFFFF;}
+.user_money>b{
+    font-weight: normal;
+    margin-bottom: .4rem;
+    display: inherit;
+    position: relative;
+    line-height: 1.2rem;
+    padding-left: .5rem;
+}
+.body-bg{
+    background-color:#EDEDEC;
+}
+.body-bg1{
+    background-color:#FFFFFF;
+}
+.body-h{
+    min-height:667px;
+}
+.h-color{
+    color:#4F4C4B;
+}
+.container-p-d{
+    padding: 0px;
+}
+.container-m-g{
+    margin: 0px;
+}
+.p-d-t{
+    padding-top:2rem;
+}
+.p-d-t-4{
+    padding-top:4rem;
+}
+.p-d-m{
+    padding-bottom: 0rem;
+}
+.p-d-l-r{
+    padding-left:1rem;
+    padding-right:1rem;
+}
+.p-d1{
+    padding:2rem;
+}
+.p-d1{
+    padding:3rem;
+}
+.orange1{
+    color: #ED6C00;
+    font-size: 1.6rem;
+}
+.orange2{
+    color: #ED6C00;
+    font-size: 1.5rem;
+}
+.jb_keleyi_comd{
+    height: 100%;
+    width:100%;
+    /*margin:0px auto;*/
+    background-image: -moz-linear-gradient(top, #00FF00, #FF0000); /*火狐*/
+    background: -o-linear-gradient(top, #00FF00 0%,red 100%);/*Opera*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(2,#FFF)); /*Chrome*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FF00', endColorstr='#FF0000', GradientType='0'); /*IE*/
+}
+@media (max-width:320px) {
+    .f-t-s{
+        font-size:1rem;
+    }
+}
+@media (min-width:426px) {
+    .pd-t{
+        padding-top: 20px;
+    }
+}
+@media (max-width: 380px) {
+    .f-sm-s{
+        font-size: 1rem;
+    }
+    .f-h{
+        font: "微软雅黑";
+        font-size: 1.4rem;
+        color:#4F4C4B;
+        font-weight: bold;
+    }
+    .f-h1{
+        font: "微软雅黑";
+        font-size: 1.2rem;
+        color:#4F4C4B;
+        font-weight: bold;
+    }
+    .f-h2 {
+        font-size:1.2rem;
+        color: #ED6C00;
+    }
+}
+.f-h{
+    font: "微软雅黑";
+    font-size: 1.4rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h1{
+    font: "微软雅黑";
+    font-size: 1.2rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h2 {
+    font-size:1.2rem;
+    color: #ED6C00;
+}
+.f-h3{
+    color: red;
+}
+.fa-1x{
+    font-size:2rem;
+}
+.f-x-small{
+    font-size:x-small;
+}
+.f-w-b{
+    font-weight:bold;
+}
+.hui{
+    color: #cbcccc;
+}
+.org{
+    color: #F1554E;
+}
+.utom{
+    height:2.5rem;
+}
+.bh{
+    height:7rem;
+}
+.line-h{
+    line-height: 7rem;
+}
+.p-t-s{
+    position:fixed; top:0; left:0; width:100%; background:#FCC;
+}
+
+.cn{margin-top:9rem;}
+.cn2{margin-top:1.5rem;}
+.b-g-p{
+    background-image: url(<{$smarty.const.STATIC_PATH}>/image/小banner.png);
+}
+/*100宽度*/
+.wid{width:100%;}
+.wid-50{width:40%;}
+.wid-74{width:74%;}
+.div-c{ position:absolute; top:74px;width:100%; height:100%;z-index:1;background:rgba(0, 0, 0, 0.5);}
+/*按钮*/
+.b-color{
+    background-color:#f5603f;
+    border: #f5603f;
+}
+.b-w-h{
+    width: 136px;
+    height: 50px;
+    border-radius:10px;
+}
+.b-h{
+    width: 100%;
+    height: 4rem;
+    font-size:2rem;
+    /*border-radius:10px;*/
+}
+/*按钮外边距*/
+.b-top{
+ margin-top: 1rem;
+}
+.b-top-3{
+ margin-top: 3rem;
+}
+.padding-top-big{
+    padding-top:60%;
+}
+.f-l-r{
+    float:right;
+}
+.inp{
+    border-radius: 50px;
+}
+.l-h-51{
+    line-height: 51px;
+}
+.b-r{
+    border-radius:30px;
+}
+.b-r-5{
+    border-radius:5px;
+}
+.b-w-7{
+    width:7.5rem;
+}
+.w-7{
+    width:6.5rem;
+}
+.b-p-d-5-40{
+    padding: 5px 40px;
+}
+.list {
+    /*position: absolute;*/
+    overflow: hidden;
+}
+
+.viewport-flip {
+    -webkit-perspective:100px;
+    perspective: 1000px;
+    position: absolute;
+}
+.flip {
+    -webkit-backface-visibility:hidden;
+    -webkit-transform:translateX(0);
+    backface-visibility:hidden;
+    transform:translateX(0);
+}
+.flip.out {
+    -webkit-transform: rotateY(-90deg) scale(.9);
+    -webkit-animation-name: flipouttoleft;
+    -webkit-animation-duration: 175ms;
+    transform: rotateY(-90deg) scale(.9);
+    animation-name: flipouttoleft;
+    animation-duration: 175ms;
+    display: none;
+}
+.flip.in {
+    -webkit-animation-name: flipintoright;
+    -webkit-animation-duration: 225ms;
+    animation-name: flipintoright;
+    animation-duration: 225ms;
+}
+
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateY(0); }
+    to { -webkit-transform: rotateY(-90deg) scale(.9); }
+}
+@keyframes flipouttoleft {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(-90deg) scale(.9); }
+}
+@-webkit-keyframes flipintoright {
+    from { -webkit-transform: rotateY(90deg) scale(.9); }
+    to { -webkit-transform: rotateY(0); }
+}
+@keyframes flipintoright {
+    from { transform: rotateY(90deg) scale(.9); }
+    to { transform: rotateY(0); }
+}
+.col-r{
+    padding-right: 10px; padding-bottom: 0px; margin-bottom: 0px;
+}
+.col-l{
+    padding-left: 10px; padding-bottom: 0px; margin-bottom: 0px;
+}
+.org-color{
+    color: #F5603F;
+}
+.bgc{
+    background-color:#F5603F;
+}
+.tdh{
+    line-height: 38px;
+}
+select {
+	border: solid 0px #000;
+
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+
+    padding-right: 14px;
+
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+
+}
+
+
+select::-ms-expand { display: none; }
+.form-control{
+	background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+
+}
+.form-control-new{
+ 	background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    }
+    input {
+    outline: none;
+    -webkit-appearance: none; /*去除系统默认的样式*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* 点击高亮的颜色*/
+}
+</style>
+</head>
+<body class="body-bg">
+    <div class="row" style="padding: 0px;margin: 0px;">
+        <div class="col-lg-12 bgc">
+            <div class="row">
+                <div class="col-lg-12" style="line-height:5rem;">
+                    <span class="fa-1x user_money pull-right"><a href="/user/fund/ticketlist" class="user_money" style="text-decoration:none;color:#FFFFFF">我的卡券</a></span>
+                    <span class="user_money">近期晚报进账:<{$yesmoney}>元</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12" style="line-height:5rem;">
+                    <span class="user_money">钱包余额:（元）</span><br />
+                    <span class="user_money" style="font-size:40px;"><{$user['wallet']}></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 30px; margin-right: 30px;">
+        <div class="col-lg-12">
+            <div class="row">
+
+                <div class="col-lg-12" style="padding: 0px; margin: 0px;">
+                    <div style="margin-top:20%;">
+                        <a class="pull-right btn btn-default b-color" style="background:#cbcccc;width:40%;border-radius: 10px;" href="/user/fund/MoneyStream">明细</a>
+                        <{if $withdraw_error == 0}><a class="btn btn-default b-color" style="width:58%;border-radius: 10px;color:#ffffff;" data-toggle="modal" data-target="#myModal4">提现</a><{/if}>
+                        <{if $withdraw_error != 0}><p style = 'font-size: 14px; color: #f00;  clear: both;padding: 20px 0;'>提示：检测到微信拒绝接收提现资金。请检查您的微信号是否已进行了实名认证，并能正常接收转账，否则无法进行提现</p><{/if}>
+
+                        <p style="font-size: 1.6rem; margin-top: 20px;">提现申请提交后三个工作日内，将会发放至您的微信钱包。请注意查收。<{if $user['type'] ==4}>您现在持有<span style="color: red;"><{$ticket}>张</span>“免提现手续费卷”。提现成功后消耗一张。超出次数系统将扣除提现金额的<span style="color: red;">3% （最低1元）</span>作为服务手续费，<{else}>您为VIP<{$gamelevel['level']}>级别，系统将扣除提现金额的<span style="color: red;"><{$gamelevel['info']['chargefee']}>% （最低1元）</span>作为服务手续费，<{/if}>敬请谅解。
+                                                </p>
+                      <!--<p style="font-size: 1.8rem; margin-top: 20px;">-->
+                        <!--<a href="/user/userCenter/question">常见问题</a>-->
+                    <!--</p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal" id="myModal4" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-body">
+
+              <form method="get" class="form-horizontal">
+               <div id="js-example-destroy">
+                <input type="hidden" id="all" value="<{$user['wallet']}>"/>
+                <outputs class="org pull-left" style="font-size:30px;" id="change"><{$user['wallet']}></outputs>
+                <outputs class="fa-3x pull-right" style="margin-top: 15px;">钱包余额:(元)</outputs>
+                <div style="height:50px;"></div>
+                <input type="range" min="0" max="<{$user['wallet']}>" step="1" value="0" data-rangeslider>
+                <outputs class="fa-3x pull-right" style="margin-top: 15px;">申请金额:(元)</outputs>
+                <output class="fa-3x org pull-left" style="font-size:30px;" id="output1"></output>
+                <div style="height:50px;"></div>
+
+
+                <div class="input-group m-b">
+                 <div class="input-group-btn"  style="border 1px solid #ccc;">
+                     <button class="btn btn-white dropdown-toggle" style="border:1px solid #ccc;padding-right: 0px;border 1px solid #ccc;" type="button">转出去向：</button>
+                 </div>
+                 <select class="form-control m-b pull-right" name="account">
+                     <option value="2" name="weixin">微信</option>
+                 </select>
+             </div>
+             <div style="height:20px;"></div>
+             <div class="input-group m-b" style="width: 100%; text-align: right;">
+
+
+             </div>
+             <!--<div style="height:20px;"></div>-->
+
+             <div class="input-group m-b">
+                 <div class="input-group-btn"  style="border 1px solid #ccc;">
+                     <button class="btn btn-white dropdown-toggle" style="border:1px solid #ccc;padding-right: 0px;border 1px solid #ccc;" type="button">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</button>
+                 </div>
+                 <input type="button" id="sendmsg" data-enable='1' value="发送验证码" class="btn btn-primary pull-right" style="width:40%;border-top-left-radius:0px;border-bottom-left-radius:0px;"/>
+                 <input type="text" id="vcode" name="vcode" pattern="\d*" class="form-control-new pull-right" style="width:60%;border-radius:0px;"/>
+             </div>
+
+
+             <div style="height:50px;"></div>
+
+             <!---<div style="width:100%;height:30px;text-align:center;color:red;font-size:10px;">提示:xxxxxxxxxxxxxxxxxxx</div> -->
+             <div class="input-group m-b" style="width:100%;">
+                 <a class="pull-right btn btn-default b-color fa-1x" style="background:#cbcccc;width:40%;border-radius: 10px;" data-toggle="modal" data-target="#myModal4">取消</a>
+                 <button id="hidd" class="btn btn-default b-color fa-1x" style="width:58%;border-radius: 10px;" onclick="btnSubmitForm();return false;">确定提现</button>
+             </div>
+         </div>
+     </form>
+ </div>
+</div>
+</div>
+</div>
+
+<!--<span class="nav-badge">1</span>-->
+<{assign var="module" value="money"}>
+<{include file='inc/footer.html'}>
+<script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+<script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+<script src="<{$smarty.const.STATIC_PATH}>/js/rangeslider.min.js"></script>
+<script>
+
+
+    var wait = 60;
+    function count_time(o) {
+        if(wait == 0) {
+            $('#' + o).attr('data-enable', 1);
+            $('#' + o).val("重发验证码");
+            wait = 60;
+        } else {
+            $('#' + o).attr('data-enable', 0);
+            $('#' + o).val("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function() {
+                count_time(o)
+            },
+            1000)
+        }
+    }
+
+
+
+    $(document).ready(function() {
+        $("#sendmsg").click(function() {
+            if($(this).attr('data-enable') == 0) {
+                return false;
+            }
+            $.ajax({
+                url: "/user/index/GetMobileCode",
+                type: "get",
+                dataType: "json",
+                        //data:$('#yourformid').serialize(),
+                        data: {
+                            mobile: <{$user['mobile']}>
+                        },
+                        async: false,
+                        success: function(json) {
+                            if(json != null) {
+                                if(!json.return_code) {
+                                    count_time('sendmsg');
+                                }
+                                alert(json.message);
+
+                            }
+                        },
+                        error: function() {
+                            console.log("AJAX fail");
+                        }
+                    });
+        });
+    });
+
+
+    function transform(obj){
+     var arr = [];
+     for(var item in obj){
+      arr.push(obj[item]);
+  }
+  return arr;
+}
+$(function() {
+    var $document   = $(document);
+    var selector    = '[data-rangeslider]';
+    var $inputRange = $(selector);
+
+    function valueOutput(element) {
+        var value = element.value;
+        var cha ="";
+        var output = element.parentNode.getElementsByTagName('output')[0];
+        var all = document.getElementById('all').value;
+        output.innerHTML = value;
+        cha = all - output.innerHTML;
+        change.innerHTML = cha.toFixed(2);
+//      change.innerHTML = numyu;
+    }
+    for (var i = $inputRange.length - 1; i >= 0; i--) {
+        valueOutput($inputRange[i]);
+    };
+
+        // Update value output
+        $document.on('input', selector, function(e) {
+            valueOutput(e.target);
+        });
+
+        // Initialize the elements
+        $inputRange.rangeslider({
+            polyfill: false
+        });
+        //滑动事件
+//      $document.on('click', '.rangeslider__handle', function(e) { -->var output1 = document.getElementById('output1').innerHTML; });
+    });
+
+function btnSubmitForm() {
+   var output1 = document.getElementById('output1').innerHTML;
+   if(output1 == '' || output1 == '0' || output1 == null){
+    alert("提现金额不可为“0”且提现金额最小为“2”元");
+    return false;
+}
+if(output1 == '1'){
+    alert("提现金额不可为“1”,且提现金额最小为“2”元");
+    return false;
+}
+
+$.ajax({
+    url: "/default/pay/tixian",
+    type: "post",
+    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{openid:<{$user['openid']}>,price:output1,vcode:$('#vcode').val()},
+                    async: false,
+                    success: function(json){
+                        alert(json.msg);
+                        window.location.href="/user/fund/money";
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+
+			// alert('已提交提现申请'+output1+'元');
+            //window.location.href="login.jsp?backurl="+window.location.href;
+        }
+
+    </script>
+</body>
+</html>

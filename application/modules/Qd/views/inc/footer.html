@@ -1,0 +1,22 @@
+    <nav class="nav-bar nav-bar-tab">
+        <a href="/user/task/index" class="nav-tab-item  <{if $module eq 'home'}> nav-active<{/if}>">
+            <span class="nav-icon"><img src="<{$smarty.const.STATIC_PATH}>/css/plugins/utom/主页<{if $module eq 'home'}>-1<{/if}>.png" class="utom"/></span>
+            <span class="nav-tab-label">首页</span>
+        </a>
+        <a href="/user/userCenter/game" class="nav-tab-item  <{if $module eq 'game'}> nav-active<{/if}>">
+            <span class="nav-icon"><img src="<{$smarty.const.STATIC_PATH}>/css/plugins/utom/游戏<{if $module eq 'game'}>-1<{/if}>.png" class="utom"/></span>
+            <span class="nav-tab-label">游戏</span>
+        </a>
+        <a href="/user/userCenter/count" class="nav-tab-item  <{if $module eq 'count'}> nav-active<{/if}>">
+            <span class="nav-icon"><img src="<{$smarty.const.STATIC_PATH}>/css/plugins/utom/统计<{if $module eq 'count'}>-1<{/if}>.png" class="utom"/></span>
+            <span class="nav-tab-label">统计</span>
+        </a>
+        <a href="/user/fund/money" class="nav-tab-item  <{if $module eq 'money'}> nav-active<{/if}>">
+            <span class="nav-icon"><img src="<{$smarty.const.STATIC_PATH}>/css/plugins/utom/钱包<{if $module eq 'money'}>-1<{/if}>.png" class="utom"/></span>
+            <span class="nav-tab-label">钱包</span>
+        </a>
+        <a href="/user/userCenter/index" class="nav-tab-item <{if $module eq 'my'}> nav-active<{/if}>">
+            <span class="nav-icon"><img src="<{$smarty.const.STATIC_PATH}>/css/plugins/utom/我的<{if $module eq 'my'}>-1<{/if}>.png" class="utom"/></span>
+            <span class="nav-tab-label">我的</span>
+        </a>
+    </nav>

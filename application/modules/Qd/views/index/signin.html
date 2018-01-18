@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>登录，注册</title>
+    <!-- Bootstrap -->
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/css/style.css" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <style type="text/css">
+.user_money{
+	color: #FFFFFF;}
+.user_money>b{
+    font-weight: normal;
+    margin-bottom: .4rem;
+    display: inherit;
+    position: relative;
+    line-height: 1.2rem;
+    padding-left: .5rem;
+}
+.body-bg1{
+    background-color:#FFFFFF;
+	width:100%;
+	height:100%;
+}
+.h-color{
+    color:#4F4C4B;
+}
+.container-p-d{
+    padding: 0px;
+}
+.container-m-g{
+    margin: 0px;
+}
+.p-d-t{
+    padding-top:2rem;
+}
+.p-d-t-4{
+    padding-top:4rem;
+	margin:0px;
+}
+.p-d-m{
+    padding-bottom: 4rem;
+}
+.p-d-l-r{
+    padding-left:1rem;
+    padding-right:1rem;
+}
+.p-d1{
+    padding:2rem;
+}
+.p-d1{
+    padding:3rem;
+}
+.orange1{
+    color: #ED6C00;
+    font-size: 1.6rem;
+}
+.orange2{
+    color: #ED6C00;
+    font-size: 1.5rem;
+}
+.jb_keleyi_comd{
+    height: 100%;
+    width:100%;
+    /*margin:0px auto;*/
+    background-image: -moz-linear-gradient(top, #00FF00, #FF0000); /*火狐*/
+    background: -o-linear-gradient(top, #00FF00 0%,red 100%);/*Opera*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(2,#FFF)); /*Chrome*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FF00', endColorstr='#FF0000', GradientType='0'); /*IE*/
+}
+@media (max-width: 380px) {
+    .f-sm-s{
+        font-size: 1rem;
+    }
+    .f-h{
+        font: "微软雅黑";
+        font-size: 1.4rem;
+        color:#4F4C4B;
+        font-weight: bold;
+    }
+    .f-h1{
+        font: "微软雅黑";
+        font-size: 1.2rem;
+        color:#4F4C4B;
+        font-weight: bold;
+    }
+    .f-h2 {
+        font-size:1.2rem;
+        color: #ED6C00;
+    }
+}
+.f-h{
+    font: "微软雅黑";
+    font-size: 1.4rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h1{
+    font: "微软雅黑";
+    font-size: 1.2rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h2 {
+    font-size:1.2rem;
+    color: #ED6C00;
+}
+.f-h3{
+    color: red;
+}
+.fa-1x{
+    font-size:2rem;
+}
+.f-w-b{
+    font-weight:bold;
+}
+.hui{
+    color: #cbcccc;
+}
+.utom{
+    height:2.5rem;
+}
+.bh{
+    height:7rem;
+}
+.line-h{
+    line-height: 7rem;
+}
+.p-t-s{
+    position:fixed; top:0; left:0; width:100%; background:#FCC;
+}
+
+.cn{margin-top:9rem;}
+.cn2{margin-top:1.5rem;}
+.b-g-p{
+    background-image: url(<{$smarty.const.STATIC_PATH}>/image/小banner.png);
+}
+/*100宽度*/
+.wid{width:100%;}
+.wid-50{width:40%;}
+.wid-74{width:74%;}
+.div-c{ position:absolute; top:74px;width:100%; height:100%;z-index:1;background:rgba(0, 0, 0, 0.5);}
+/*按钮*/
+.b-color{
+    background-color:#f5603f;
+    border: #f5603f;
+}
+.b-w-h{
+    width: 136px;
+    height: 50px;
+    border-radius:10px;
+}
+.b-h{
+    width: 100%;
+    height: 4rem;
+    font-size:2rem;
+    /*border-radius:10px;*/
+}
+/*按钮外边距*/
+.b-top{
+   margin-top: 1rem;
+}
+.b-top-3{
+   margin-top: 3rem;
+}
+.padding-top-big{
+    padding-top:60%;
+}
+.f-l-r{
+    float:right;
+}
+.inp{
+    border-radius: 50px;
+}
+.l-h-51{
+    line-height: 51px;
+}
+.b-r{
+    border-radius:30px;
+}
+.b-r-5{
+    border-radius:5px;
+}
+.b-w-7{
+    width:7.5rem;
+}
+.w-7{
+    width:6.5rem;
+}
+.b-p-d-5-40{
+    padding: 5px 40px;
+}
+/*html, body {
+  height: 100%;
+ min-height: 660px;
+}*/
+.wrapper {
+  min-height: 100%;
+	margin: 0;
+	padding:0;
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  <!-- margin-bottom: -50px; -->
+}
+.footer,
+.push {
+  height: 50px;
+}
+/* DIV背景颜色为蓝色 */
+</style>
+</head>
+<body class="body-bg1" scoll=no>
+	<div class="wrapper">
+    <div id="slidershow" class="carousel slide" data-ride="carousel">
+           <div class="carousel-inner">
+               <div class="item active">
+                <img src="<{$smarty.const.STATIC_PATH}>/image/大banner.png" class="img-responsive wid" alt="Cinque Terre">
+            </div>
+        </div>
+    </div>
+
+    <!--表单-->
+    <div class="row p-d-t-4">
+        <div class="col-xs-1">
+
+        </div>
+        <div class="col-xs-10">
+           <form role="form" id="form"m class="navbar-search">
+            <table class="wid">
+                <tr>
+                    <td class="f-s container-m-g container-p-d w-7" style="display:table-cell; vertical-align:middle;Font-size:100%">手机号码:</td>
+                    <td><input type="text" placeholder="请输入游戏客户端手机号" class="form-control inp" style="-webkit-appearance: none;" name="number" id="inputmobile"></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="f-s container-m-g container-p-d" style="display:table-cell; vertical-align:middle;font-size:100%">游戏密码:</td>
+                    <td><input type="password" placeholder="请输入密码" class="form-control inp" style="-webkit-appearance: none;" name="password" id="inputpassword"></td>
+                </tr>
+            </table>
+            
+			<div class="form-group b-top-3">
+            <button id="formsubmit" class="btn btn-sm btn-block m-t-n-xs b-color b-h user_money" type="button"><strong>登录</strong>
+            </button>
+				</div>
+			</form>
+		</div>
+		<div class="col-xs-1">
+
+		</div>
+	</div>
+<!-- <a data-toggle="modal" class="btn btn-primary" href="<{$smarty.const.STATIC_PATH}>/form_basic.html#modal-form">打开登录窗口</a> -->
+
+	<div id="modal-form" class="modal fade" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<h3 class="m-t-none m-b text-center">用户绑定</h3>
+							<table class="wid">
+								<tr>
+									<td class="f-s container-m-g container-p-d w-7" style="display:table-cell; vertical-align:middle;Font-size:100%">手机号码:</th>
+										<td colspan="4"><input type="text" placeholder="" class="form-control inp" name="number"></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td colspan="4">&nbsp;</td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td class="f-s container-m-g container-p-d" style="display:table-cell; vertical-align:middle;font-size:100%">验&nbsp;&nbsp;证&nbsp;&nbsp;码:</td>
+										<td><input type="password" placeholder="" class="form-control inp" name="password"></td>
+										<td>&nbsp;</td>
+										<td><a class="btn btn-primary inp wid" href="<{$smarty.const.STATIC_PATH}>/">获取验证码</a></td>
+									</tr>
+								</table>
+								<div class="form-group b-top-3 text-center">
+									<button class="btn b-p-d-5-40 btn-danger m-t-n-xs b-color user_money b-r-5" type="submit"><strong>登录</strong>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="push"></div> -->
+		</div>
+		
+		<footer style="position:absolute;width:100%;height:82px;top:100%;" id="toNav">
+                <div class="col-xs-1">
+
+                </div>
+                <div class="col-xs-10">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div style="border-top: .1rem solid #cbcccc;padding-top: 1.7rem;padding-bottom: 2.7rem">
+                                <div class="btn btn-default pull-right b-r b-w-7" type="" style="border-right-width: 0px;"><a href="http://www.doudeqipai.com/share/index.php" style="color:white;">下载APP</a></div>
+                                <span class="hui f-sm-s">&nbsp;本系统为bb合伙人平台 ，如要</span><br />
+                                <span class="hui f-sm-s">&nbsp;参与本系统,请先下载bb并注册</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1">
+
+                </div>
+		</footer>
+<script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+<script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+
+<!-- Jquery Validate -->
+<script src="<{$smarty.const.STATIC_PATH}>/js/plugins/validate/jquery.validate.min.js"></script>
+
+<script src="<{$smarty.const.STATIC_PATH}>/js/plugins/validate/messages_zh.min.js"></script>
+<script>
+	window.onresize = function () {
+	 var h = $(window).height();
+	 //console.log(h+','+window.screen.availHeight)
+	 var u = navigator.userAgent;
+	 if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+	 if(h <= window.screen.availHeight/2){
+	  $('#toNav').css({'position':'absolute',"margin-top":"100%",'display':'none'});
+	 }else{
+	  $('#toNav').css({'position':'absolute','display':'block'});
+	 }
+	 }
+	}
+	$('input').focus(function(){
+		$('#toNav').css({'position':'absolute','display':'none'});
+	})
+	$('input').blur(function(){
+		$('#toNav').css({'position':'absolute','display':'block'});
+	})
+//	$('input').on('focus',function(){
+//	 $('#toNav').hide();
+//	})
+//	$('input').on('blur',function(){
+//	 $('#toNav').show();
+//	})
+	
+    $(document).ready(function () {
+        $("#form").validate({
+            rules: {
+                password: {
+                    required: true,
+                    rangelength:"[3,16]"
+                },
+                number: {
+                    required: true,
+                    rangelength:"[10,13]",
+                    number: true
+                }
+            }
+        });
+
+
+        $("#formsubmit").click(function(){
+            if (! $("#form").valid()) {
+                return;
+            }
+            $.ajax({
+                url: "/user/index/signin" ,
+                type: "get",
+                dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{mobile:$('#inputmobile').val(),password:$('#inputpassword').val(),web:3},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                window.location.href="/user/task/index";
+                                // console.log(json);
+                            }else{
+                                alert(json.message);
+                            }
+
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+        });
+    });
+</script>
+</body>
+</html>

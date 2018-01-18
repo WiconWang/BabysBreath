@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>配置管理</title>
+</head>
+<body>
+<form action="/admin/setpeiz/update" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<{$id}>">
+    配置名称：<input type="text" name="key" value="<{$key}>"><br>
+    参数值：<input type="text" name="val" value="<{$value}>">
+    <input type="submit" name="dosubmit" value="修改">
+</form>
+</body>
+</html>

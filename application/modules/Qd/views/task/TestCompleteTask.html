@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>绑定手机</title>
+    <!-- Bootstrap -->
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/css/style.css" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <style type="text/css">
+        body,main::before{
+            background: url(<{$smarty.const.STATIC_PATH}>/image/green.jpg) 0 / cover fixed;
+        }
+        main {
+            position: relative;
+            background: hsla(0,0%,100%,.3);
+            overflow: hidden;
+        }
+/*main::before{
+    content: '';
+    position: absolute;
+    filter: blur(30px);
+    margin: -30px;
+}*/
+.s{
+    /*position: absolute;
+    top:15%;
+    border-radius:20px;
+    margin: auto;
+    display: block;
+    width: 250px;
+    left:50%;
+    margin-left:-125px;*/
+    position: absolute;
+    top:15%;
+    border-radius:20px;
+    /*margin: auto;*/
+    /*display: block;*/
+    /*left:50%;
+    width: 250px;
+    margin-left:-125px;*/
+    left: 50%;
+    width: 40%;
+    margin-left: -20%;
+}
+.ins{
+    width: 87%;
+    height: 12%;
+    border-radius: 30px;
+}
+.in{
+    width: 87%;
+    height: 12%;
+}
+.is{
+    border-radius: 50px;
+}
+.border-left-width{
+    border: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+}
+.col-center-block {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.inl{
+    width: 87%;
+}
+.inh{
+    background: #FFF;
+}
+.pad{
+    padding: 0px;
+}
+.bth-img{
+    background:url(<{$smarty.const.STATIC_PATH}>/image/true.png);
+    margin: auto;
+}
+.theLink{
+    display:block;
+    width:63%;
+    height:40px;
+    margin:0 auto;
+    background:url(<{$smarty.const.STATIC_PATH}>/image/true.png) no-repeat;
+    background-size:100% 100%;
+    margin-bottom: 10px;
+}
+
+.theLink:hover{ display:block;
+    width:63%;
+    height:40px;
+    margin:0 auto;
+    background:url(<{$smarty.const.STATIC_PATH}>/image/true.png) no-repeat;
+    background-size:100% 100%;
+    margin-bottom: 10px;
+}
+.f-b{
+    position: absolute;
+    color: transparent;
+    -webkit-text-stroke: 1px #874900;
+    font-size:35px;
+    font-weight: bold;
+    color:#E7D7AC;
+}
+/* CSS部分 */
+#a { position:absolute; top:0; right:0; z-index:4;width:30px;height:30px;}
+.m-b-t{
+    margin-bottom: 5px;
+}
+.m-b-t2{
+    margin-bottom: 10px;
+}
+.b-color-green{
+    color: #6BAB16;
+}
+.bb{
+    margin-top: -20px;
+    position:fixed!important;
+    z-index:3;
+    left: 50%;
+    width: 980px;
+    margin-left: -490px;
+}
+.dss{
+    disabled:disabled;
+}
+</style>
+</head>
+<body>
+    <main class="row s">
+        <!--<div class="row">-->
+        <div class="f-b text-center bb">完成指定任务测试</div>
+        <a href="ccjs://close" id="a"><img src="<{$smarty.const.STATIC_PATH}>/image/close.png" style="width:30px;height:30px;"/></a><br /><br />
+        <form  id="GuestToUser" name="GuestToUser">
+            <div class="col-sm-12 col-center-block inl" style="margin: 10px;">
+                            <select style="border: 0px;" id="filshed">
+                                <option value="2" >特殊类-升级</option>
+                                <option value="3"  selected="selected">玩了1局游戏</option>
+                                <option value="4" >赢了1局</option>
+                                <option value="5" >分享朋友圈</option>
+                                <option value="6" >分享QQ群</option>
+                                <option value="7" >分享QQ空间</option>
+                                <option value="8" >分享微博</option>
+                            </select>
+                <a class="theLink btn" id="submitform"></a>
+            </div>
+        </form>
+        <!--</div>-->
+    </main>
+
+
+
+    <input type="hidden" id='guid'  name="guid" value="<{$smarty.cookies.guid}>">
+
+
+    <script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+
+    <!-- Jquery Validate -->
+    <script src="<{$smarty.const.STATIC_PATH}>/js/plugins/validate/jquery.validate.min.js"></script>
+
+    <script src="<{$smarty.const.STATIC_PATH}>/js/plugins/validate/messages_zh.min.js"></script>
+
+    <script>
+
+        $(document).ready(function(){
+
+
+            $("#submitform").click(function(){
+
+                $.ajax({
+                    url: "/user/task/CompleteTask" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{uid:<{$uid}>,taskid:$('#filshed').val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                alert('任务完成成功，请回页面测试');
+                                // window.location.href="/user/index/signinweb";
+                            }else{
+                                alert(json.message);
+                            }
+
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>后台</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="<{$smarty.const.STATIC_PATH}>/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="<{$smarty.const.STATIC_PATH}>/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/admin.css">
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/app.css">
+    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/echarts.min.js"></script>
+    <style>
+    .tpl-echarts {min-height: 300px; }
+    @media only screen and (min-width: 641px){
+        [class*=am-u-] {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+    }
+</style>
+</head>
+
+<body data-type="index" class="homepage">
+    <!--开始头部-->
+    <!-- <{assign var="module" value="my"}> -->
+    <{include file='inc/top.html'}>
+    <!--头部结束-->
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+        <!-- <{assign var="module" value="my"}> -->
+        <{include file='inc/left.html'}>
+        <!--头部结束-->
+
+        <div class="tpl-content-wrapper">
+            <ol class="am-breadcrumb">
+                <li>当前位置:<a href="#">首页</a></li>
+                <li class="am-active">内容</li>
+            </ol>
+            <div class="row boxcir"  >
+                <div class="bax">
+                    <div class="cir">
+                        <div class="c" >
+                            <p ><{$count['all']['allcounts']}></p>
+                        </div>
+                        <div class='c2'><p>总用户数量</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c">
+                            <p ><{$count['all']['all_agent']}></p>
+                        </div>
+                        <div class='c2'><p>总代理商数量</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c">
+                            <p ><{$count['all']['all_guest']}></p>
+                        </div>
+                        <div class='c2'><p>游客数量</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c">
+                            <p ><{$count['all']['login_1day']}></p>
+                        </div>
+                        <div class='c2'><p>昨日登录数</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c">
+                            <p ><{$count['all']['login_7day']}></p>
+                        </div>
+                        <div class='c2'><p>7日内登录数</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c">
+                            <p ><{$count['all']['login_30day']}></p>
+                        </div>
+                        <div class='c2'><p>30日内登录数</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c">
+                            <p ><{$day1rande}></p>
+                        </div>
+                        <div class='c2'><p>昨日留存率</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c">
+                            <p ><{$day7rande}></p>
+                        </div>
+                        <div class='c2'><p>7日留存率</p></div>
+                    </div>
+                    <div class="cir">
+                        <div class="c" >
+                            <p ><{$day30rande}></p>
+                        </div>
+                        <div class='c2'><p>30日留存率</p></div>
+                    </div>
+                    <div class="cir">
+                      <div class="c" >
+                         <p ><{$withdraw_waiting['total']}></p>
+                     </div>
+                     <div class='c2'><p>待审核提现</p></div>
+                 </div>
+             </div>
+         </div>
+
+         <div class="row">
+
+            <div class="am-u-md-4 am-u-sm-6 row-mb">
+                <div class="tpl-portlet">
+                    <div class="tpl-portlet-title">
+                        <div class="tpl-caption font-green ">
+                            <i class="am-icon-cloud-download"></i>
+                            <span>用户分布</span>
+                        </div>
+                <!-- <div class="actions">
+                    <ul class="actions-btn">
+                        <li class="red-on">昨天</li>
+                        <li class="green">前天</li>
+                        <li class="blue">本周</li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <div class="tpl-echarts" id="tpl-echarts-user">
+
+            </div>
+        </div>
+    </div>
+
+
+            <div class="am-u-md-4 am-u-sm-6 row-mb">
+                <div class="tpl-portlet">
+                    <div class="tpl-portlet-title">
+                        <div class="tpl-caption font-green ">
+                            <i class="am-icon-cloud-download"></i>
+                            <span>每日新增加用户分布</span>
+                        </div>
+                <!-- <div class="actions">
+                    <ul class="actions-btn">
+                        <li class="red-on">昨天</li>
+                        <li class="green">前天</li>
+                        <li class="blue">本周</li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <div class="tpl-echarts" id="tpl-echarts-newuser">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-md-4 am-u-sm-6 row-mb">
+        <div class="tpl-portlet">
+            <div class="tpl-portlet-title">
+                <div class="tpl-caption font-green ">
+                    <i class="am-icon-cloud-download"></i>
+                    <span>每日登录数</span>
+                </div>
+                <!-- <div class="actions">
+                    <ul class="actions-btn">
+                        <li class="red-on">昨天</li>
+                        <li class="green">前天</li>
+                        <li class="blue">本周</li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <div class="tpl-echarts" id="tpl-echarts-activeuser">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-md-4 am-u-sm-6 row-mb">
+        <div class="tpl-portlet">
+            <div class="tpl-portlet-title">
+                <div class="tpl-caption font-green ">
+                    <i class="am-icon-cloud-download"></i>
+                    <span>所有代理商数量累计</span>
+                </div>
+                <!-- <div class="actions">
+                    <ul class="actions-btn">
+                        <li class="red-on">昨天</li>
+                        <li class="green">前天</li>
+                        <li class="blue">本周</li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <!--此部分数据请在 js文件夹下中的 app.js 中的 “百度图表A” 处修改数据 插件使用的是 百度echarts-->
+            <div class="tpl-echarts" id="tpl-echarts-agent">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-md-4 am-u-sm-6 row-mb">
+        <div class="tpl-portlet">
+            <div class="tpl-portlet-title">
+                <div class="tpl-caption font-green ">
+                    <i class="am-icon-cloud-download"></i>
+                    <span>所有充值总额累计</span>
+                </div><!--
+                <div class="actions">
+                    <ul class="actions-btn">
+                        <li class="red-on">昨天</li>
+                        <li class="green">前天</li>
+                        <li class="blue">本周</li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <div class="tpl-echarts" id="tpl-echarts-pay">
+
+            </div>
+        </div>
+    </div>
+    <div class="am-u-md-4 am-u-sm-6 row-mb">
+
+        <div class="tpl-portlet">
+            <div class="tpl-portlet-title">
+                <div class="tpl-caption font-green ">
+                    <i class="am-icon-cloud-download"></i>
+                    <span>每日充值次数</span>
+                </div><!--
+                <div class="actions">
+                    <ul class="actions-btn">
+                        <li class="red-on">昨天</li>
+                        <li class="green">前天</li>
+                        <li class="blue">本周</li>
+                    </ul>
+                </div> -->
+            </div>
+
+            <div class="tpl-echarts" id="tpl-echarts-daypay">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="am-u-md-6 am-u-sm-12 row-mb">
+        <div class="tpl-portlet">
+            <div class="tpl-portlet-title">
+                <div class="tpl-caption font-red ">
+                    <i class="am-icon-bar-chart"></i>
+                    <span>代理商排行榜</span>
+                </div>
+            </div>
+            <div class="tpl-scrollable">
+                <table class="am-table tpl-table">
+                    <thead>
+                        <tr>
+                            <th>排行</th>
+                            <th>用户</th>
+                            <th>游戏</th>
+                            <th>奖金池</th>
+                            <th>线下玩家数</th>
+                            <th>分红所得</th>
+                            <th>线下总充值</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <{assign var="i" value="1"}>
+                        <{foreach from=$agenttop item=item key=key}>
+                        <{if $i<= 10 }>
+                        <tr>
+                            <td><{$i}></td>
+                            <td><a href="/admin/user/userdetail?uid=<{$item.uid}>"><{$item.nickname}></a></td>
+                            <td><{$game[$item.gid]['game_name']}></td>
+                            <td class="font-green bold">￥<{$item.pool|string_format:"%.2f"}></td>
+                            <td><{$item.myplayer_num}></td>
+                            <td><{$item.count_down_divide}></td>
+                            <td><{$item.count_down_money}></td>
+                        </tr>
+                        <{/if}>
+                        <{assign var="i" value=$i+1}>
+                        <{/foreach}>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="am-u-md-6 am-u-sm-12 row-mb">
+        <div class="tpl-portlet">
+            <div class="tpl-portlet-title">
+                <div class="tpl-caption font-green ">
+                    <span>提现申请</span>
+                </div>
+
+            </div>
+
+            <div class="am-tabs tpl-index-tabs" data-am-tabs>
+                <ul class="am-tabs-nav am-nav am-nav-tabs">
+                    <li class="am-active"><a href="#tab1">进行中</a></li>
+                    <li><a href="#tab2">已完成</a></li>
+                </ul>
+
+                <div class="am-tabs-bd">
+                    <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                        <div id="wrapperA" class="wrapper">
+                            <div id="scroller" class="scroller">
+                                <table class="am-table tpl-table">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>昵称</th>
+                                            <th>手机</th>
+                                            <th>时间</th>
+                                            <th>申请金额</th>
+                                            <th>到账金额</th>
+                                            <th>状态</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <{foreach from=$withdraw_waiting['data'] item=item key=key}>
+                                        <tr>
+                                            <td><{$key+1}></td>
+                                            <td><a href="/admin/user/userdetail?uid=<{$item.uid}>"><{$item.tixuser}></a></td>
+                                            <td><{$item.mobile}></td>
+                                            <td><{$item.create_time}></td>
+                                            <td class="font-green bold">￥<{$item.orgin_money|string_format:"%.2f"}></td>
+                                            <td class="font-green bold">￥<{$item.money|string_format:"%.2f"}></td>
+                                            <td><a href="/admin/pay/select">等待审核</a></td>
+                                        </tr>
+                                        <{/foreach}>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-tab-panel am-fade" id="tab2">
+                        <div id="wrapperB" class="wrapper">
+                            <div id="scroller" class="scroller">
+                                <table class="am-table tpl-table">
+                                    <thead>
+                                     <tr>
+                                        <th>序号</th>
+                                        <th>昵称</th>
+                                        <th>手机</th>
+                                        <th>时间</th>
+                                        <th>申请金额</th>
+                                        <th>到账金额</th>
+                                        <th>状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <{foreach from=$withdraw_finished['data'] item=item key=key}>
+                                    <tr>
+                                        <td><{$key+1}></td>
+                                        <td><a href="/admin/user/userdetail?uid=<{$item.uid}>"><{$item.tixuser}></a></td>
+                                        <td><{$item.mobile}></td>
+                                        <td><{$item.create_time}></td>
+                                        <td class="font-green bold">￥<{$item.orgin_money|string_format:"%.2f"}></td>
+                                        <td class="font-green bold">￥<{$item.money|string_format:"%.2f"}></td>
+                                        <td>完成</td>
+                                    </tr>
+                                    <{/foreach}>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<!-- <div class="row">
+    <div class="am-u-md-4 am-u-sm-6 row-mb">
+        <div class="tpl-portlet">
+            <div class="tpl-portlet-title">
+                <div class="tpl-caption font-green ">
+                    <span>热门商品</span>
+                </div>
+
+            </div>
+            <div id="wrapper" class="wrapper">
+                <div id="scroller" class="scroller">
+<table class="am-table tpl-table">
+<thead>
+<tr>
+<th>商品名</th>
+<th>游戏</th>
+<th>金额</th>
+<th>七天购买量</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                   <tr>
+                      <td>zht</td>
+                      <td>斗地主</td>
+                      <td class="font-green bold">1300</td>
+                      <td>50</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div> -->
+<script src="<{$smarty.const.STATIC_PATH}>/assets/js/jquery.min.js"></script>
+<script src="<{$smarty.const.STATIC_PATH}>/assets/js/amazeui.min.js"></script>
+<script>
+    $(function() {
+
+
+        var echartsA = echarts.init(document.getElementById('tpl-echarts-pay'));
+        option = {
+
+            tooltip: {
+                trigger: 'axis',
+            },
+            // legend: {
+            //     data: ['邮件', '媒体', '资源']
+            // },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                data: [<{$countday}>]
+            }],
+
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [
+            <{foreach from=$game item=item key=key}>
+            {
+                name: '<{$item.game_name}>',
+                type: 'line',
+                data: [<{$daycount.$key.all_charge_money}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(333333,999999)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            }<{if $smarty.section.childs.last!="1"}>,<{/if}>
+            <{/foreach}>
+
+
+            ]
+        };
+        echartsA.setOption(option);
+
+
+        var echartsuser = echarts.init(document.getElementById('tpl-echarts-user'));
+        option2 = {
+
+            tooltip: {
+                trigger: 'axis',
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                data: [<{$countday}>]
+            }],
+            legend: {
+                data:['游客','已绑手机','已绑邀请码','代理商']
+            },
+
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [
+            // 只显示斗地主游戏的图
+            {
+                name: '游客',
+                type: 'line',
+                stack: '总量',
+                areaStyle: { normal: {} },
+                data: [<{$daycount.3.all_guest}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(100000,400000)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            },{
+                name: '已绑手机',
+                type: 'line',
+                stack: '总量',
+                areaStyle: { normal: {} },
+                data: [<{$daycount.3.all_user}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(400000,600000)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            },{
+                name: '已绑邀请码',
+                type: 'line',
+                stack: '总量',
+                areaStyle: { normal: {} },
+                data: [<{$daycount.3.all_t_user}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(600000,800000)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            },{
+                name: '代理商',
+                type: 'line',
+                stack: '总量',
+                areaStyle: { normal: {} },
+                data: [<{$daycount.3.all_agent}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(333333,999999)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            }
+
+
+            ]
+        };
+        echartsuser.setOption(option2);
+
+
+
+        var echartsuser = echarts.init(document.getElementById('tpl-echarts-newuser'));
+        option2 = {
+
+            tooltip: {
+                trigger: 'axis',
+            },
+            legend: {
+                data:['游客','已绑手机','已绑邀请码','代理商']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                data: [<{$countday}>]
+            }],
+
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [
+            // 只显示斗地主游戏的图
+            {
+                name: '游客',
+                type: 'line',
+                data: [<{$daycount.3.new_guest}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(100000,400000)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            },{
+                name: '已绑手机',
+                type: 'line',
+                data: [<{$daycount.3.new_user}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(400000,600000)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            },{
+                name: '已绑邀请码',
+                type: 'line',
+                data: [<{$daycount.3.new_t_user}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(600000,999999)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            },{
+                name: '代理商',
+                type: 'line',
+                data: [<{$daycount.3.new_agent}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(100000,999999)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            }
+            ]
+        };
+        echartsuser.setOption(option2);
+
+
+        var echartsagent = echarts.init(document.getElementById('tpl-echarts-agent'));
+        option3 = {
+
+            tooltip: {
+                trigger: 'axis',
+            },
+            legend: {
+                data: ['代理商']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: true,
+                data: [<{$countday}>]
+            }],
+
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [
+            <{foreach from=$game item=item key=key}>
+            {
+                name: '<{$item.game_name}>',
+                type: 'bar',
+                stack: '总量',
+                data: [<{$daycount.$key.all_agent}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(333333,999999)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            }<{if $smarty.section.childs.last!="1"}>,<{/if}>
+            <{/foreach}>
+
+
+            ]
+        };
+        echartsagent.setOption(option3);
+
+
+        var echartsagent = echarts.init(document.getElementById('tpl-echarts-daypay'));
+        option4 = {
+
+            tooltip: {
+                trigger: 'axis',
+            },
+            legend: {
+                data: ['邮件', '媒体', '资源']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                data: [<{$countday}>]
+            }],
+
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [
+            <{foreach from=$game item=item key=key}>
+            {
+                name: '<{$item.game_name}>',
+                type: 'line',
+                stack: '总量',
+                data: [<{$daycount.$key.new_charge_num}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(333333,999999)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            }<{if $smarty.section.childs.last!="1"}>,<{/if}>
+            <{/foreach}>
+
+
+            ]
+        };
+        echartsagent.setOption(option4);
+
+        //activeuser 每日登录量
+
+        var echartsuser = echarts.init(document.getElementById('tpl-echarts-activeuser'));
+        option2 = {
+
+            tooltip: {
+                trigger: 'axis',
+            },
+            legend: {
+                data: ['邮件', '媒体', '资源']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                data: [<{$countday}>]
+            }],
+
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [
+            <{foreach from=$game item=item key=key}>
+            {
+                name: '<{$item.game_name}>',
+                type: 'line',
+                stack: '总量',
+                data: [<{$daycount.$key.login_1day}>],
+                itemStyle: {
+                    normal: {
+                        color: '#<{math equation=rand(333333,999999)}>'
+                    },
+                    emphasis: {
+
+                    }
+                }
+            }<{if $smarty.section.childs.last!="1"}>,<{/if}>
+            <{/foreach}>
+
+
+            ]
+        };
+        echartsuser.setOption(option2);
+
+
+    });
+</script>
+<script src="<{$smarty.const.STATIC_PATH}>/assets/js/iscroll.js"></script>
+<script src="<{$smarty.const.STATIC_PATH}>/assets/js/app.js"></script>
+</body>
+
+</html>

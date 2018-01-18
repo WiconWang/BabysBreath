@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>代理商后台页面</title>
+
+    <!-- Bootstrap -->
+    <link href="<{$smarty.const.STATIC_PATH}>/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/css/mui.min.css">
+    <script type="text/JavaScript" src="<{$smarty.const.STATIC_PATH}>/js/toucher.js"></script>
+    <style type="text/css">
+            /*
+* 底部导航菜单
+*/
+
+.nav-bar-top {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    /*-webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);*/
+    /*box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);*/
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.nav-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, .85);
+    box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.nav-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+
+.nav-bar-tab .nav-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 3.2rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+    text-decoration: none;
+}
+
+.nav-bar-tab .nav-tab-item.nav-active {
+    color: #E84219;
+}
+
+.nav-bar .nav-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.nav-bar-tab .nav-tab-item .nav-icon {
+    /*top: 3px;*/
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-bar-tab .nav-tab-item .nav-icon~.nav-tab-label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+}
+
+.nav-icon .nav-badge {
+    font-size: .65rem;
+    line-height: 1rem;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    color: #fff;
+    background-color: red;
+    border-radius: 1rem;
+    min-width: .6rem;
+    height: 1rem;
+    text-align: center;
+    padding: 0 .2rem;
+}
+
+.user_money {
+    color: #FFFFFF;
+}
+
+.user_money>b {
+    font-weight: normal;
+    margin-bottom: .4rem;
+    display: inherit;
+    position: relative;
+    line-height: 1.2rem;
+    padding-left: .5rem;
+}
+
+.body-bg {
+    background-color: #EDEDEC;
+}
+
+.body-bg1 {
+    background-color: #FFFFFF;
+}
+
+.body-h {
+    min-height: 667px;
+}
+
+.h-color {
+    color: #4F4C4B;
+}
+
+.bg .h-color {
+    color: #34A739;
+}
+
+.container-p-d {
+    padding: 0px;
+}
+
+.container-m-g {
+    margin: 0px;
+}
+
+.p-d-t {
+    padding-top: 2rem;
+}
+
+.p-d-t-4 {
+    padding-top: 4rem;
+}
+
+.p-d-m {
+    padding-bottom: 0rem;
+}
+
+.p-d-l-r {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.p-d1 {
+    padding: 2rem;
+}
+
+.p-d1 {
+    padding: 3rem;
+}
+
+.orange1 {
+    color: #ED6C00;
+    font-size: 25px;
+}
+
+.orange2 {
+    color: #ED6C00;
+    font-size: 15px;
+}
+
+.jb_keleyi_comd {
+    height: 100%;
+    width: 100%;
+    /*margin:0px auto;*/
+    background-image: -moz-linear-gradient(top, #00FF00, #FF0000);
+    /*火狐*/
+    background: -o-linear-gradient(top, #00FF00 0%, red 100%);
+    /*Opera*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(2, #FFF));
+    /*Chrome*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FF00', endColorstr='#FF0000', GradientType='0');
+    /*IE*/
+}
+
+.f-h {
+    font: "微软雅黑";
+    font-size: 20px;
+    color: #4F4C4B;
+    font-weight: bold;
+}
+
+.f-h1 {
+    font: "微软雅黑";
+    font-size: 18px;
+    color: #4F4C4B;
+    font-weight: bold;
+}
+
+.f-h2 {
+    font-size: 12px;
+    <!-- color: #ED6C00;
+    -->
+}
+
+.f-h3 {
+    color: red;
+}
+
+.fa-1x {
+    font-size: 2rem;
+}
+
+.f-w-b {
+    font-weight: bold;
+}
+
+.hui {
+    color: #cbcccc;
+}
+
+.utom {
+    height: 2.5rem;
+}
+
+.bh {
+    height: 7rem;
+}
+
+.line-h {
+    line-height: 7rem;
+}
+
+.p-t-s {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #FCC;
+}
+
+.cn {
+    margin-top: 9rem;
+}
+
+.cn2 {
+    margin-top: 1.5rem;
+}
+
+.b-g-p {
+    background-image: url(image/小banner.png);
+}
+/*100宽度*/
+
+.wid {
+    width: 100%;
+}
+
+.wid-50 {
+    width: 40%;
+}
+
+.wid-74 {
+    width: 74%;
+}
+
+.div-c {
+    position: absolute;
+    top: 74px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+}
+/*按钮*/
+
+.b-color {
+    background-color: #f5603f;
+    border: #f5603f;
+}
+
+.b-w-h {
+    width: 136px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.b-h {
+    width: 100%;
+    height: 4rem;
+    font-size: 2rem;
+    /*border-radius:10px;*/
+}
+/*按钮外边距*/
+
+.b-top {
+    margin-top: 1rem;
+}
+
+.b-top-3 {
+    margin-top: 3rem;
+}
+
+.padding-top-big {
+    padding-top: 60%;
+}
+
+.f-l-r {
+    float: right;
+}
+
+.inp {
+    border-radius: 50px;
+}
+
+.l-h-51 {
+    line-height: 51px;
+}
+
+.b-r {
+    border-radius: 30px;
+}
+
+.b-r-5 {
+    border-radius: 5px;
+}
+
+.b-w-7 {
+    width: 7.5rem;
+}
+
+.w-7 {
+    width: 6.5rem;
+}
+
+.b-p-d-5-40 {
+    padding: 5px 40px;
+}
+
+.mui-table-view-cell {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.mui-slider-handle {
+    margin-left: 10px;
+    margin-right: 10px;
+    <!-- width: 100%;
+    -->margin: 0 auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.mui-slider-right {
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.mp {
+    padding: 0px;
+    margin: 0px;
+}
+
+.mp.bg {
+    color: #34A739;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+    margin-bottom: -50px;
+}
+
+.footer,
+.push {
+    height: 50px;
+}
+
+.main {
+    width: 100%;
+    background-color: white;
+    margin-top: 5px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 2px #ddd;
+    word-wrap: break-word;
+    padding: 10px;
+    border-radius: 3px
+}
+.mui-table-view-cell {position: relative;}
+.mui-table-view-cell .movehand { background:url("<{$smarty.const.STATIC_PATH}>/image/move_hand.png") 100% 100%  no-repeat; width: 30px; height: 40px; position: absolute;  display: block; top: 50%; left: 10%; margin-top: -20px; z-index: 9999 ;opacity: 0}
+.mui-table-view-cell .movehand {}
+.pt-move {
+    -webkit-animation:moveleft 5s 3 linear;
+    animation:moveleft 5s 3 linear;
+}
+@keyframes moveleft{
+    0% {left:90%; opacity: 0}
+    20% {left:50%;opacity: 0.4}
+    40% {left:10%;opacity: 0}
+}
+@-webkit-keyframes moveleft{
+    0% {left:90%; opacity: 0}
+    20% {left:50%;opacity: 0.4}
+    40% {left:10%;opacity: 0}
+}
+</style>
+</head>
+
+<body class="body-bg">
+    <!--轮播图container-fluid container-p-d-->
+    <div class="wrapper">
+
+        <div id="carousel-example-generic" class="carousel slide both" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <{foreach from=$adv key=key item=item}>
+                <div class="item <{if $key == 0}> active <{/if}>">
+                    <a href="<{$item.link}>"><img src="/<{$item.banner}>" alt="<{$item.name}>"></a>
+                    <div class="carousel-caption">
+                    </div>
+                </div>
+                <{/foreach}>
+                <!-- Controls -->
+                <a id="carleft" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <!-- <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>  -->
+                    <!-- <span class="sr-only">Previous</span>  -->
+                </a>
+                <a id="carright" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <!-- <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  -->
+                    <!-- <span class="sr-only">Next</span>  -->
+                </a>
+            </div>
+        </div>
+
+        <!--end-->
+        <!--用户资料金额-->
+        <div class="main">
+            <div>
+                <p class="text-left f-h">奖金池金额 : &nbsp;&nbsp;<b class="orange1"><{if $userinfo['type'] == 4 }><{$bonus['money']}><{else}><{$bonus['vip_money']}><{/if}>元</b></p>
+            </div>
+            <div>
+                <p class="text-left f-h1">今日将获得奖金池总金额的 : &nbsp;&nbsp;<b class="orange1"><{if $Process['showcount'] > 100 }>100 <{else}><{$Process['showcount']}><{/if}>%</b></p>
+            </div>
+            <div id="all-time-item">
+                <p class="text-left f-h2">距离结算时间还剩 : <span class="djs"></span>&nbsp;&nbsp;
+                    <{$Process_text}>
+                </p>
+            </div>
+        </div>
+
+        <div class="mui-content">
+
+            <ul id="OA_task_1" class="mui-table-view" style="margin-top: 5px;">
+                <li class="mui-table-view-cell">
+                    <div class="movehand m1"></div>
+                    <div class="mui-slider-right mui-disabled">
+                        <div class="mui-btn" style="width:100%;">
+                            <div style="width:100%;margin:0 auto;background-color:#FFFFFF;border-radius:8px;">
+                                <div class="row mp" style="width:100%;">
+                                    <div class="col-xs-12 mp" style="height: 66px;">
+                                        <{if $userinfo['type'] < 4 ||  $autonum[2]>=5 || $autogameprice <=0 || ($Process[ 'rows'][3][ 'next_pct']==0 && $Process[ 'rows'][4][ 'next_pct']==0 )}>
+                                        <div class="widget style1 white-bg" style="padding: 0px; margin: 0px;height: 10rem;">
+                                            <div class="row" style="height: 66px; margin-left: 0px; margin-right: 0px;">
+                                                <div class="col-xs-12" style="height: 66px;padding-left: 0px; padding-right: 0px;">
+                                                    <p style="padding-top: 2rem;"><{if $userinfo['type'] < 4}>成为代理商后可开启一键完成<{else}>请升级到中级合伙人后可开启一键完成<{/if}></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <{else}>
+                                        <{if $ticket[ 'count'][2]>0 }>
+                                        <!-- 当存在有效的一键完成券时 -->
+                                        <div class="widget style1 white-bg" style="padding: 0px; margin: 0px;">
+                                            <div class="row" style="height: 66px; margin-left: 0px; margin-right: 0px;">
+                                                <div class="col-xs-9" style="height: 66px;padding-left: 0px; padding-right: 0px;">
+                                                    <p style="padding-top: .3rem;">一键完成券</p>
+                                                    <div style="height:5px;"></div>
+                                                    <p style="padding-bottom: .3rem;">本月剩余使用次数 <{5-$autonum[1]}>次。</p>
+                                                </div>
+                                                <div class="col-xs-3 text-center" style="height:6rem;background:#f5603f;padding-left: 0px; padding-right: 0px;border-radius:0 5px 5px 0;">
+                                                    <p class="user_money">
+                                                        <a style="color:white;line-height:66px;" href="javascript:void(0)" onclick="autotask(2,1)">一键完成</a>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- 当存在有效的一键完成券时 -->
+                                        <{else}>
+                                        <div class="widget style1 white-bg" style="padding: 0px; margin: 0px;">
+                                            <div class="row" style="height: 66px; margin-left: 0px; margin-right: 0px;">
+                                                <div class="col-xs-9" style="height: 66px;padding-left: 0px; padding-right: 0px;">
+                                                    <p style="padding-top: .3rem;">您将消耗奖金池的 <{$autogameprice}>元</p>
+                                                    <p>来完成此条任务</p>
+                                                    <p style="padding-bottom: .3rem;">本月剩余使用次数 <{5-$autonum[2]}>次</p>
+                                                </div>
+                                                <div class="col-xs-3 text-center" style="height:6rem;background:#f5603f;padding-left: 0px; padding-right: 0px;border-radius:0 5px 5px 0;">
+                                                    <p class="user_money">
+                                                        <a style="color:white;line-height:66px;" href="javascript:void(0)" onclick="autotask(2,2)">一键完成</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <{/if}>
+                                        <{/if}>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--拉过来部分完毕-->
+                    <div class="mui-slider-handle" style="border-width: 0px;">
+                        <div class="row mp <{if $Process['rows'][3]['next_pct'] == 0 }>bg<{/if}>" style="padding-top: 1rem;">
+                            <div class="col-xs-7 h-color">
+                                <span class="fa fa-<{if $Process['rows'][3]['next_pct'] == 0 }>check-<{/if}>circle-o"></span>&nbsp;<span>今日玩够 <{$Process['rows'][3]['complete_num']}><{if $Process['rows'][3]['next_pct'] != 0 }>/<{$Process['rows'][3]['next_limit']}><{/if}></span>
+                            </div>
+                            <div class="col-xs-5 text-right">
+                                <span class="h-color" style="font-size:13px;"><{$Process['rows'][3]['unlock_pct']}>%</span>
+                                <{if $Process[ 'rows'][3][ 'next_pct'] !=0 }>
+                                <span style="font-size:10px;">></span><span class="orange2"><{$Process['rows'][3]['next_pct']}>%</span>
+                                <{/if}>
+                            </div>
+                        </div>
+                        <div style="height:5px;"></div>
+                        <div class="row mp <{if $Process['rows'][4]['next_pct'] == 0 }>bg<{/if}>" style="padding-bottom: 1rem;">
+                            <div class="col-xs-7 h-color">
+                                <span class="fa fa-<{if $Process['rows'][4]['next_pct'] == 0 }>check-<{/if}>circle-o"></span>&nbsp;<span>今日赢够 <{$Process['rows'][4]['complete_num']}><{if $Process['rows'][4]['next_pct'] != 0 }>/<{$Process['rows'][4]['next_limit']}><{/if}></span>
+                            </div>
+                            <div class="col-xs-5 text-right">
+                                <span class="h-color" style="font-size:13px;"><{$Process['rows'][4]['unlock_pct']}>%</span>
+                                <{if $Process[ 'rows'][4][ 'next_pct'] !=0 }>
+                                <span style="font-size:10px;">></span><span class="orange2"><{$Process['rows'][4]['next_pct']}>%</span>
+                                <{/if}>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!--分享部分-->
+                <li class="mui-table-view-cell" style="margin-top:1rem;">
+                    <div class="movehand m2"></div>
+                    <div class="mui-slider-right mui-disabled">
+                        <div class="mui-btn" style="width:100%;">
+                            <div style="width:100%;margin:0 auto;background-color:#FFFFFF;border-radius:8px;">
+                                <div class="row mp" style="width:100%;">
+                                    <div class="col-xs-12 mp">
+                                        <{if $userinfo['type']< 4 || $autonum[1]>=5 || $autoshareprice <=0 || ($Process[ 'rows'][5][ 'next_pct']==0 && $Process[ 'rows'][6][ 'next_pct']==0 && $Process[ 'rows'][7][ 'next_pct']==0 )}>
+                                        <div class="widget style1 white-bg" style="padding: 0px; margin: 0px;height: 10rem;">
+                                            <div class="row" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+                                                <div class="col-xs-12" style="height: 100px;padding-left: 0px; padding-right: 0px;">
+                                                    <p style="padding-top: 4rem;"><{if $userinfo['type'] < 4}>成为代理商后可开启一键完成<{else}>请升级到高级合伙人后可开启一键完成<{/if}></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <{else}>
+                                        <{if $ticket[ 'count'][1]>0 }>
+                                        <!--当存在有效的一键完成券时 -->
+
+                                        <div class="widget style1 white-bg" style="padding: 0px; margin: 0px;height: 10rem;">
+                                            <div class="row" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+                                                <div class="col-xs-9" style="height: 100px;padding-left: 0px; padding-right: 0px;">
+                                                    <p style="padding-top: 2rem;">一键完成券</p>
+                                                    <div style="height:5px;"></div>
+                                                    <p style="padding-bottom: 2rem;">本月剩余使用次数
+                                                        <{5-$autonum[1]}>次。</p>
+                                                    </div>
+                                                    <div class="col-xs-3 text-center" style="height:10rem;background:#f5603f;padding-left: 0px; padding-right: 0px;border-radius:0 5px 5px 0;">
+                                                        <p class="user_money">
+                                                            <a style="color:white;line-height:98px;" href="javascript:void(0)" onclick="autotask(1,1)">一键完成</a>
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <{else}>
+                                            <div class="widget style1 white-bg" style="padding: 0px; margin: 0px;height: 10rem;">
+                                                <div class="row" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+                                                    <div class="col-xs-9" style="height: 100px;padding-left: 0px; padding-right: 0px;">
+                                                        <p style="padding-top: 2rem;">您将消耗奖金池的
+                                                            <{$autogameprice}>元</p>
+                                                            <p>来完成此条任务</p>
+                                                            <p style="padding-bottom: 2rem;">本月剩余使用次数
+                                                                <{5-$autonum[1]}>次</p>
+                                                            </div>
+                                                            <div class="col-xs-3 text-center" style="height:10rem;background:#f5603f;padding-left: 0px; padding-right: 0px;border-radius:0 5px 5px 0;">
+                                                                <p class="user_money">
+                                                                    <a style="color:white;line-height:98px;" href="javascript:void(0)" onclick="autotask(1,2)">一键完成</a>
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <{/if}>
+                                                    <{/if}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--拉过来部分完毕-->
+                                <div class="mui-slider-handle" style="border-width: 0px;">
+                                    <div class="row mp <{if $Process['rows'][5]['next_pct'] == 0 }>bg<{/if}>" style="padding-top:8px;">
+                                        <div class="col-xs-7">
+                                            <span class="fa fa-<{if $Process['rows'][5]['next_pct'] == 0 }>check-<{/if}>circle-o"></span>&nbsp;<span><span onclick="weixinShareTimeline();">分享朋友圈 <{$Process[ 'rows'][5][ 'complete_num']}>/3</span>
+                                            <{if $Process['rows'][5]['up_end'] == 0 &&  $Process['rows'][5]['lock'] != 0}>
+                                            <span><small class="f-s" id="weixin-time-item">(<span class="djs"></span>后开启 )</small></span>
+                                            <{/if}>
+                                        </div>
+                                        <div class="col-xs-5 text-right">
+                                            <span style="font-size:13px;"><{$Process['rows'][5]['unlock_pct']}>%</span>
+                                            <{if $Process[ 'rows'][5][ 'next_pct'] !=0 }>
+                                            <span style="font-size:10px;">></span><span class="orange2"><{$Process['rows'][5]['next_pct']}>%</span>
+                                            <{/if}>
+                                        </div>
+                                    </div>
+                                    <div style="height:5px;"></div>
+                                    <div class="row mp <{if $Process['rows'][7]['next_pct'] == 0 }>bg<{/if}>">
+                                        <div class="col-xs-7 h-color">
+                                            <span class="fa fa-<{if $Process['rows'][8]['next_pct'] == 0 }>check-<{/if}>circle-o"></span>&nbsp;<span>分享QQ空间<{$Process['rows'][7]['complete_num']}>/2</span>
+                                            <{if $Process['rows'][7]['up_end'] == 0 &&  $Process['rows'][7]['lock'] != 0}>
+                                            <span><small class="f-s" id="qzone-time-item">(<span class="djs"></span>后开启 )</small></span>
+                                            <{/if}>
+                                        </div>
+                                        <div class="col-xs-5 text-right">
+                                            <span style="font-size:13px;"><{$Process['rows'][7]['unlock_pct']}>%</span>
+                                            <{if $Process[ 'rows'][7][ 'next_pct'] !=0 }>
+                                            <span style="font-size:10px;">></span><span class="orange2"><{$Process['rows'][7]['next_pct']}>%</span>
+                                            <{/if}>
+                                        </div>
+                                    </div>
+                                    <div style="height:5px;"></div>
+                                    <div class="row mp <{if $Process['rows'][6]['next_pct'] == 0 }>bg<{/if}>">
+                                        <div class="col-xs-7">
+                                            <span class="fa fa-<{if $Process['rows'][6]['next_pct'] == 0 }>check-<{/if}>circle-o"></span>&nbsp;<span>分享任意QQ群<{$Process['rows'][6]['complete_num']}>/2</span>
+                                            <{if $Process['rows'][6]['up_end'] == 0 &&  $Process['rows'][6]['lock'] != 0}>
+                                            <span><small class="f-s" id="qq-time-item">(<span class="djs"></span>后开启 )</small></span>
+                                            <{/if}>
+                                        </div>
+                                        <div class="col-xs-5 text-right">
+                                            <span style="font-size:13px;"><{$Process['rows'][6]['unlock_pct']}>%</span>
+                                            <{if $Process[ 'rows'][6][ 'next_pct'] !=0 }>
+                                            <span style="font-size:10px;">></span><span class="orange2"><{$Process['rows'][6]['next_pct']}>%</span>
+                                            <{/if}>
+                                        </div>
+                                    </div>
+                                    <div style="height:5px;"></div>
+                                    <div class="row mp <{if $Process['rows'][8]['next_pct'] == 0 }>bg<{/if}>" style="padding-bottom: .5rem;">
+                                        <div class="col-xs-7">
+                                            <span class="fa fa-<{if $Process['rows'][8]['next_pct'] == 0 }>check-<{/if}>circle-o"></span>&nbsp;<span>分享至微博<{$Process['rows'][8]['complete_num']}>/2</span>
+                                            <{if $Process['rows'][8]['up_end'] == 0 &&  $Process['rows'][8]['lock'] != 0}>
+                                            <span><small class="f-s" id="weibo-time-item">(<span class="djs"></span>后开启 )</small></span>
+                                            <{/if}>
+                                        </div>
+                                        <div class="col-xs-5 text-right">
+                                            <span style="font-size:13px;"><{$Process['rows'][8]['unlock_pct']}>%</span>
+                                            <{if $Process[ 'rows'][8][ 'next_pct'] !=0 }>
+                                            <span style="font-size:10px;">></span><span class="orange2"><{$Process['rows'][8]['next_pct']}>%</span>
+                                            <{/if}>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="push"></div>
+                </div>
+                <footer style="position:relative;width:100%;height:82px;">
+                    <!-- 通知页底当前模块 -->
+                    <{assign var="module" value="home" }>
+                    <{include file='inc/footer.html' }>
+                </footer>
+                <!--<script src="<{$smarty.const.STATIC_PATH}>/https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>-->
+                <script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+                <script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+                <script src="<{$smarty.const.STATIC_PATH}>/js/mui.min.js"></script>
+                <script type="text/javascript">
+                    function timer(obj, intDiff) {
+                        if(intDiff < 0) {
+                            if(obj == 'all-time-item') {
+                                intDiff  = intDiff+ 60*60*24;
+                        // $('#' + obj).html('今日已结算完成，请明日再来');
+                    } else {
+                        $('#' + obj).html('');
+                        return false;
+                    }
+                }
+                if(isNaN(intDiff)) {
+                    $('#' + obj).html('');
+                    return false;
+                }
+                window.setInterval(function() {
+                    var day = 0,
+                    hour = 0,
+                    minute = 0,
+                    second = 0;
+                    if(intDiff > 0) {
+                        day = Math.floor(intDiff / (60 * 60 * 24));
+                        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                    }
+
+                    if (intDiff <= 0) {
+                      window.location.reload();
+                  }
+                  if(minute <= 9)
+                    minute = '0' + minute;
+                if(second <= 9)
+                    second = '0' + second;
+                var html = '<s id="h"></s>' + hour + '小时' + '<s></s>' + minute + '分钟' + '<s></s>' + second + '秒';
+                $('#' + obj + ' .djs').html(html);
+                intDiff--;
+            }, 1000);
+            }
+            function addmove(obj) {
+                $(obj).addClass('pt-move');
+            }
+
+            $(function() {
+                //一秒后显示小手
+                <{if $userinfo['agent_score'] > 30}>
+                setTimeout("addmove('.movehand.m1')",1000);
+                <{/if}>
+                <{if $userinfo['agent_score'] > 100}>
+                setTimeout("addmove('.movehand.m2')",3000);
+                <{/if}>
+
+                //系统倒计时
+                var now_stamp = parseInt(new Date(new Date()).getTime()/1000);
+                var night_stamp = parseInt((new Date(new Date().toLocaleDateString()).getTime()) / 1000) + 79200;
+                timer('all-time-item', night_stamp - now_stamp);
+
+                //微信倒计时
+                <{if $Process['rows'][5]['up_end'] == 0 &&  $Process['rows'][5]['lock'] != 0}>
+                timer('weixin-time-item',parseInt(<{$Process['rows'][5]['lock']}>) - now_stamp);
+                <{/if}>
+
+                //QQ空间倒计时
+                <{if $Process['rows'][7]['up_end'] == 0 &&  $Process['rows'][7]['lock'] != 0}>
+                timer('qzone-time-item',parseInt(<{$Process['rows'][7]['lock']}>) - now_stamp);
+                <{/if}>
+                <{if $Process['rows'][6]['up_end'] == 0 &&  $Process['rows'][6]['lock'] != 0}>
+                timer('qq-time-item',parseInt(<{$Process['rows'][6]['lock']}>) - now_stamp);
+                <{/if}>
+                <{if $Process['rows'][8]['up_end'] == 0 &&  $Process['rows'][8]['lock'] != 0}>
+                timer('weibo-time-item',parseInt(<{$Process['rows'][8]['lock']}>) - now_stamp);
+                <{/if}>
+
+            });
+        </script>
+
+        <script>
+            // 一键完成，参数为完成ID,和完成方式1用券2用钱
+            function autotask(task, way) {
+                var url = "/user/task/CompleteTaskByTicketAndMoney";
+                $.ajax({
+                    url: url,
+                    type: "get",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data: {
+                        task: task,
+                        way: way
+                    },
+                    async: false,
+                    success: function(json) {
+                        if(json != null) {
+                            if(!json.return_code) {
+                                alert('完成成功');
+                                window.location.reload();
+                            } else {
+                                alert(json.message);
+                            }
+                        }
+                    },
+                    error: function() {
+                        console.log("AJAX fail");
+                    }
+                });
+            }
+        </script>
+        <script>
+            var myTouch = util.toucher(document.getElementById('carousel-example-generic'));
+            myTouch.on('swipeLeft', function(e) {
+                $('#carright').click();
+            }).on('swipeRight', function(e) {
+                $('#carleft').click();
+            });
+        </script>
+
+    </body>
+
+    </html>

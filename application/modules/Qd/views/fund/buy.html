@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Document</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script src='/static/js/jquery-2.0.3.min.js'></script>
+    <script src='/static/js/bootstrap.min.js'></script>
+    <style>.form-signin {    max-width: 330px;    padding: 15px;    margin: 0 auto;}  .btn,input {margin: 5px;}</style>
+</head>
+<body>
+    <div class="container">
+
+        <form class="form-signin" id="loginform">
+            <h2 class="form-signin-heading">买商品</h2>
+            用户id : <input type="uid" id="inputuid" class="form-control" placeholder="用户uid号" value="6" required autofocus>
+            游戏id : <input type="gid" id="inputgid" class="form-control" placeholder="请输入游戏号" value="3" required autofocus>
+            商品id : <input type="sid" id="inputsid" class="form-control" value="7" placeholder="请输入商品号" required autofocus>
+            数量 : <input type="num" id="inputnum" class="form-control" value="1" placeholder="请输入数量" required autofocus>
+            <button  id="submitform" class="btn btn-lg btn-primary btn-block" type="button">确定</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#submitform").click(function(){
+                $.ajax({
+                    url: "/user/fund/buy" ,
+                    type: "post",
+                    dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{gid:$('#inputgid').val(),uid:$('#inputuid').val(),num:$('#inputnum').val(),sid:$('#inputsid').val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            console.log(json);
+                            if (json.status) {
+                                alert('请求成功，返回结果请看控制台');
+                            }else{
+                                alert(json.msg);
+                            }
+
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+</html>

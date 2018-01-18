@@ -1,0 +1,133 @@
+
+<style type="text/css">
+		/*分页*/
+#page{ width:100%;padding:4px 0px;/*background-image: url("image/20120418A.png");*/background-repeat: repeat-x;display:inline-block;}
+#page .pagin{ margin:0px; padding:0px 10px; width:auto; _display:inline;float: right;}
+*+html #page .pagin{ margin:0px; padding:0px 10px; width:auto; display:inline}
+
+#page div{ display:inline-block}
+#page .pagin  .text{ background:none;}
+
+.pagin a, .pagin span { border: 1px solid #dfdfdf; border-radius:0px; float: left;
+    font-family: arial; font-size: 12px;/* height: 30px; */line-height: 22px; margin-left: 2px;  overflow: hidden;  padding: 3px 10px;
+}
+.pagin .text, .pagin .current {    border: medium none;    padding: 4px 11px;}
+.pagin a:link, .pagin a:visited {    color: #666;}
+.pagin a:hover, .pagin a:active {    background: none repeat scroll 0 0 #005AA0;
+    color: #FFFFFF;    text-decoration: none;}
+.pagin .current, .pagin .current:link, .pagin .current:visited {
+    color: #fff;    font-weight: bold; background:#FF6600;}
+.pagin b {
+    background-image: url("../image/bg_hotsale.gif");
+    background-repeat: no-repeat;
+    height: 9px;    overflow: hidden;    position: absolute;    top:6px;    width: 5px;}
+.pagin .prev, .pagin .next, .pagin .prev-disabled, .pagin .next-disabled { position: relative; z-index:1}
+.pagin .prev-disabled, .pagin .next-disabled { color: #CCCCCC; cursor: default;}
+.pagin .prev, .pagin .prev-disabled { padding-left: 12px;}
+.pagin .prev b {  background-position: -68px -608px;  left: 3px;}
+.pagin .prev-disabled b { background-position: -80px -608px; left: 3px;}
+.pagin .next, .pagin .next-disabled { padding-right: 12px;}
+.pagin .next b { background-position: -62px -608px; right: 3px;}
+.pagin .next-disabled b { background-position: -74px -608px;    right: 3px;}
+.pagin-m a, .pagin-m span { font-size: 12px; height: 14px;    line-height: 14px;}
+.pagin-m b {    top: 5px;}
+.pagin-m .prev, .pagin-m .next, .pagin-m .prev-disabled, .pagin-m .next-disabled {
+    height: 14px;    line-height: 14px;    padding-top: 3px;}
+.page_sech{ line-height:25px; padding-left:10px; display:inline!important;}
+.page_sech .w80{ width:50px; border:1px solid #dfdfdf; margin:0px 5px;}
+.page_sech  .page_qure{ border:1px solid #dfdfdf; background:#fff; width:46px; text-align:center; height:28px;}
+#page .pagin a, .pagin span{ background:#f9f9f9;}
+.pagin .text {background:none;}
+#page .pagin  .current{background: none repeat scroll 0 0 #dc473f;    color: #FFFFFF;    font-weight: bold;}
+#page .pagin a:hover, .pagin a:active {    background: none repeat scroll 0 0 #ee473f;
+    color: #FFFFFF;    text-decoration: none;}
+.foolt{ display:inline-block}
+#amount{ padding-right:5px }
+</style>
+
+
+<{literal}>
+<!-- 分页组件
+	$pageProviderUrl  正常页码的链接
+	$amount 页码总数
+	$currentIndex  当前页码
+	$sectionId  刷新区域
+	$pageSizeShow  显示单位页码数
+
+	如果需要post参数那么只需要在js中设定 postParams = {'arg1':'',...}为post参数对象即可
+	配置tpl为
+	{include file="../frame/pagefile.tpl" sectionId="{$sectionId}" amount="{$amount}" currentIndex = "{$currentIndex}" pageProviderUrl="{$pageProviderUrl}"}
+
+ -->
+<{/literal}>
+
+
+<!-- 基于 上一页  下一页的有效判断 -->
+<{$upUseful = ''}>
+<{$downUseful = ''}>
+<{if $currentIndex == 1}>
+	<{$upUseful = 'prev-disabled'}>
+<{/if}>
+<{if $currentIndex == $amount}>
+	<{$downUseful = 'next-disabled'}>
+<{/if}>
+
+<{if isset($pageSizeShow) == FALSE}>
+	<{$pageSizeShow = 8}>
+<{/if}>
+
+
+<{if isset($type) }>
+	<{if $amount != 0}>
+		<input type="button" name="" value="首页" id=""  class="firstPage" data-url="<{$pageProviderUrl}>"  data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"/>
+        <input type="button" name="" value="上一页"  class="prePage" data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"/>
+        <span id="<{$currentIndex}>"><{$currentIndex}></span>/<span id="amount"><{$amount}></span>
+        <input type="button" name="" value="下一页" id="" class="nextPage" data-url="{$pageProviderUrl}" data-sectionId="{$sectionId}" data-currentPageId="<{$currentIndex}>" data-amountId="amount"/>
+        <input type="button" name="" value="末页" id=""  class="endPage" data-url="{$pageProviderUrl}" data-sectionId="{$sectionId}" data-currentPageId="<{$currentIndex}>" data-amountId="amount"/>
+        &nbsp;&nbsp;跳转到<input name="" type="text" id="go" class="validation_num w50 margin_r10 margin_l10"  data-min="1" data-max="{$amount}"  />页
+        <input type="button" name="" value="确定" id="" class="pageGo" data-bindInput="go" data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"/>
+    <{/if}>
+ <{/if}>
+
+<!--分页-->
+
+
+
+<div id="page">
+<div class="pagin r">
+<a href="javascript:void(0)" class="<{$upUseful}> prePage" data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"  >上一页</a>
+<{if $currentIndex-$pageSizeShow<0}>
+		<{$start = 0}>
+	<{else}>
+		<{$start = $currentIndex-$pageSizeShow}>
+	<{/if}>
+	<{$loop = 0}>
+	<{section name="i" start=$start loop=$amount}>
+		<{if $loop== $pageSizeShow + 1}>
+			<{break}>
+		<{/if}>
+		<{$loop = $loop + 1}>
+		<{if $smarty.section.i.index- $currentIndex <$pageSizeShow}>
+			<{if $smarty.section.i.index == $currentIndex-1}>
+				<a href="javascript:void(0)" class="current pageUnit" data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"><{$smarty.section.i.index+1}></a>
+			<{else}>
+				<a href="javascript:void(0)" class="pageUnit" data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"><{$smarty.section.i.index+1}></a>
+			<{/if}>
+
+		<{else}>
+			<span class="text">...</span>
+			<a href="javascript:void(0)" class="pageUnit" data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"><{$amount}></a>
+			<{break}>
+		<{/if}>
+	<{/section}>
+<a href="javascript:void(0)" class="<{$downUseful}> nextPage"  data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"  >下一页</a>
+<div class="page_sech">
+<span id="<{$currentIndex}>" style="display:none"><{$currentIndex}></span>
+共<i id="amount"><{$amount}></i>页
+ 到第<input name="" type="text" id="go" class="validation_num w80"  data-min="1" data-max="<{$amount}>"  />页
+<input type="button" name="" value="确定" id="" class="pageGo page_qure margin_l10" data-bindInput="go" data-url="<{$pageProviderUrl}>" data-sectionId="<{$sectionId}>" data-currentPageId="<{$currentIndex}>" data-amountId="amount"/>
+</div>
+</div>
+</div>
+
+<script type="text/javascript" src="/static/js/Pagination.js"></script>

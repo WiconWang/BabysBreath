@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title><{$title}></title>
+</head>
+<body>
+
+    <!--这个是加载其它view的例子-->
+    <{include file="inc/top.html"}>
+
+
+    <hr>
+
+    <!-- 这个是用来显示参数的例子 -->
+    这里是<{$content}>
+
+
+    <!-- 这个是用来循环的例子 -->
+    <table border="1">
+        <{foreach from=$table_data item=item}>
+        <tr>
+            <td><{$item.id}></td>
+            <td><{$item.nickname}></td>
+            <td><a href='?mobile=<{$item.id}>'>删除</a></td>
+        </tr>
+        <{/foreach}>
+    </table>
+</body>
+</html>

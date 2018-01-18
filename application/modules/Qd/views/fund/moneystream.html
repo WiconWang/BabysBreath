@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>明细</title>
+    <!-- Bootstrap -->
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+                            /*
+ * 底部导航菜单
+ */
+.nav-bar-top {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    /*-webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);*/
+    /*box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);*/
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+ .nav-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);
+    box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.nav-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.nav-bar-tab1 {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    /*height: 60px;*/
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.nav-bar-tab .nav-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 3.2rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+    text-decoration: none;
+}
+.nav-bar-tab .nav-tab-item.nav-active { color: #E84219;}
+.nav-bar .nav-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.nav-bar-tab .nav-tab-item .nav-icon {
+    /*top: 3px;*/
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.nav-bar-tab .nav-tab-item .nav-icon~.nav-tab-label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+}
+.nav-icon .nav-badge {
+    font-size: .65rem;
+    line-height: 1rem;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    color: #fff;
+    background-color: red;
+    border-radius: 1rem;
+    min-width: .6rem;
+    height: 1rem;
+    text-align: center;
+    padding: 0 .2rem;
+}
+.user_money{color: #FFFFFF;}
+.user_money>b{
+    font-weight: normal;
+    margin-bottom: .4rem;
+    display: inherit;
+    position: relative;
+    line-height: 1.2rem;
+    padding-left: .5rem;
+}
+.body-bg{
+    background-color:#FFFFFF;
+}
+.body-bg1{
+    background-color:#FFFFFF;
+}
+.body-h{
+    min-height:667px;
+}
+.h-color{
+    color:#4F4C4B;
+}
+.container-p-d{
+    padding: 0px;
+}
+.container-m-g{
+    margin: 0px;
+}
+.p-d-t{
+    padding-top:2rem;
+}
+.p-d-t-4{
+    padding-top:4rem;
+}
+.p-d-m{
+    padding-bottom: 0rem;
+}
+.p-d-l-r{
+    padding-left:1rem;
+    padding-right:1rem;
+}
+.p-d1{
+    padding:2rem;
+}
+.p-d1{
+    padding:3rem;
+}
+.orange1{
+    color: #ED6C00;
+    font-size: 1.6rem;
+}
+.orange2{
+    color: #ED6C00;
+    font-size: 1.5rem;
+}
+.jb_keleyi_comd{
+height: 100%;
+width:100%;
+/*margin:0px auto;*/
+background-image: -moz-linear-gradient(top, #00FF00, #FF0000); /*火狐*/
+background: -o-linear-gradient(top, #00FF00 0%,red 100%);/*Opera*/
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(2,#FFF)); /*Chrome*/
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FF00', endColorstr='#FF0000', GradientType='0'); /*IE*/
+}
+@media (max-width:320px) {
+.f-t-s{
+    font-size:1rem;
+}
+}
+@media (min-width:426px) {
+.pd-t{
+    padding-top: 20px;
+}
+}
+@media (max-width: 380px) {
+.f-sm-s{
+    font-size: 1rem;
+}
+.f-h{
+    font: "微软雅黑";
+    font-size: 1.4rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h1{
+    font: "微软雅黑";
+    font-size: 1.2rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h2 {
+    font-size:1.2rem;
+    color: #ED6C00;
+}
+}
+.f-h{
+    font: "微软雅黑";
+    font-size: 1.4rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h1{
+    font: "微软雅黑";
+    font-size: 1.2rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h2 {
+    font-size:1.2rem;
+    color: #ED6C00;
+}
+.f-h3{
+    color: red;
+}
+.fa-1x{
+    font-size:2rem;
+}
+.f-x-small{
+    font-size:x-small;
+}
+.f-w-b{
+    font-weight:bold;
+}
+.hui{
+    color: #cbcccc;
+}
+.org{
+    color: #F1554E;
+}
+.utom{
+    height:2.5rem;
+}
+.bh{
+    height:7rem;
+}
+.line-h{
+    line-height: 7rem;
+}
+.p-t-s{
+    position:fixed; top:0; left:0; width:100%; background:#FCC;
+}
+
+.cn{margin-top:9rem;}
+.cn2{margin-top:1.5rem;}
+.b-g-p{
+    background-image: url(<{$smarty.const.STATIC_PATH}>/image/小banner.png);
+}
+/*100宽度*/
+.wid{width:100%;}
+.wid-50{width:40%;}
+.wid-74{width:74%;}
+.div-c{ position:absolute; top:74px;width:100%; height:100%;z-index:1;background:rgba(0, 0, 0, 0.5);}
+/*按钮*/
+.b-color{
+    background-color:#f5603f;
+    border: #f5603f;
+}
+.b-w-h{
+    width: 136px;
+    height: 50px;
+    border-radius:10px;
+}
+.b-h{
+    width: 100%;
+    height: 4rem;
+    font-size:2rem;
+    /*border-radius:10px;*/
+}
+/*按钮外边距*/
+.b-top{
+     margin-top: 1rem;
+}
+.b-top-3{
+     margin-top: 3rem;
+}
+.padding-top-big{
+    padding-top:60%;
+}
+.f-l-r{
+    float:right;
+}
+.inp{
+    border-radius: 50px;
+}
+.l-h-51{
+    line-height: 51px;
+}
+.b-r{
+    border-radius:30px;
+}
+.b-r-5{
+    border-radius:5px;
+}
+.b-w-7{
+    width:7.5rem;
+}
+.w-7{
+    width:6.5rem;
+}
+.b-p-d-5-40{
+    padding: 5px 40px;
+}
+.list {
+    /*position: absolute;*/
+    overflow: hidden;
+}
+
+.viewport-flip {
+    -webkit-perspective:100px;
+    perspective: 1000px;
+    position: absolute;
+}
+.flip {
+    -webkit-backface-visibility:hidden;
+    -webkit-transform:translateX(0);
+    backface-visibility:hidden;
+    transform:translateX(0);
+}
+.flip.out {
+    -webkit-transform: rotateY(-90deg) scale(.9);
+    -webkit-animation-name: flipouttoleft;
+    -webkit-animation-duration: 175ms;
+    transform: rotateY(-90deg) scale(.9);
+    animation-name: flipouttoleft;
+    animation-duration: 175ms;
+    display: none;
+}
+.flip.in {
+    -webkit-animation-name: flipintoright;
+    -webkit-animation-duration: 225ms;
+    animation-name: flipintoright;
+    animation-duration: 225ms;
+}
+
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateY(0); }
+    to { -webkit-transform: rotateY(-90deg) scale(.9); }
+}
+@keyframes flipouttoleft {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(-90deg) scale(.9); }
+}
+@-webkit-keyframes flipintoright {
+    from { -webkit-transform: rotateY(90deg) scale(.9); }
+    to { -webkit-transform: rotateY(0); }
+}
+@keyframes flipintoright {
+    from { transform: rotateY(90deg) scale(.9); }
+    to { transform: rotateY(0); }
+}
+.col-r{
+    padding-right: 10px; padding-bottom: 0px; margin-bottom: 0px;
+}
+.col-l{
+    padding-left: 10px; padding-bottom: 0px; margin-bottom: 0px;
+}
+.org-color{
+    color: #F5603F;
+}
+.bgc{
+    background-color:#F5603F;
+}
+.tdh{
+    line-height: 38px;
+}
+.top{position:fixed; top:0; left:0;width:100%;z-index:20;background-color:#FCC;}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    vertical-align: top;
+	width:20%;
+	text-align:center;
+}
+.table tr.gray { color: #ccc }
+    </style>
+  </head>
+  <body class="body-bg body-h">
+    <div class="row" style="padding: 0px;margin: 0px;">
+    <div class="col-lg-12" style="padding: 0px;margin: 0px;">
+	<div class="top b-g-p" style="background-size:100% 100%;">
+									<div class="pull-left" style="padding: 8px;text-align:center;line-height:41px;width:20%;color:white;">时间</div>
+                                    <div class="pull-left" style="padding: 8px;text-align:center;line-height:41px;width:20%;color:white;">金额</div>
+                                    <div class="pull-left" style="padding: 8px;text-align:center;line-height:41px;width:20%;color:white;">摘要</div>
+                                    <div class="pull-left" style="padding: 8px;text-align:center;line-height:41px;width:20%;color:white;">余额</div>
+                                    <div class="pull-left" style="padding: 8px;text-align:center;line-height:41px;width:20%;color:white;">状态</div>
+			</div>
+        <div class="ibox float-e-margins">
+                            <div class="ibox-content f-t-s" style="padding: 0px; border-top-width: 0px; border-bottom-width: 0px;">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" style="margin-top: 57px;margin-bottom: 57px;">
+											<tbody>
+											<{foreach from=$stream item=item}>
+											<tr <{if $item.status == 2 }> class=' gray'<{/if}>>
+											<td><{$item.time}></td>
+											<td><{$item.orgin_price}></td>
+											<td><{$item.way}></td>
+											<td><{$item.money}></td>
+                                            <td><{$item.statuse}></td>
+											</tr>
+											<{/foreach}>
+											</tbody>
+											</table>
+											</div>
+
+											</div>
+        </div>
+    </div>
+    </div>
+    <{assign var="module" value="money"}>
+     <{include file='inc/footer.html'}>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+  </body>
+</html>

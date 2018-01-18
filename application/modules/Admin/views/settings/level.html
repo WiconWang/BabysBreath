@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>bb后台 - <{$crumb['page']['text']}></title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="<{$smarty.const.STATIC_PATH}>/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="<{$smarty.const.STATIC_PATH}>/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/admin.css">
+    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/app.css">
+</head>
+
+<body data-type="index">
+    <!--开始头部-->
+    <!-- <{assign var="module" value="my"}> -->
+    <{include file='inc/top.html'}>
+    <!--头部结束-->
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+        <!-- <{assign var="module" value="my"}> -->
+        <{include file='inc/left.html'}>
+        <!--头部结束-->
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                <{$crumb['page']['text']}>
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="<{$crumb['home']['url']}>" class="am-icon-home"><{$crumb['home']['text']}></a></li>
+                <li><a href="<{$crumb['category']['url']}>"><{$crumb['category']['text']}></a></li>
+                <li class="am-active"><{$crumb['page']['text']}></li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span>  <{$crumb['page']['text']}>
+                    </div>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="portlet-input input-small input-inline">
+                            <div class="input-icon right">
+                                <i class="am-icon-search"></i>
+                                <input type="text" class="form-control form-control-solid" placeholder="搜索..."> </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="tpl-block ">
+
+                        <div class="am-g tpl-amazeui-form">
+
+
+                            <div class="am-u-sm-12 am-u-md-9">
+                                <form class="am-form am-form-horizontal" action="/admin/settings/Level" method="post">
+                                 <div class="am-form-group" style="border-bottom: #ccc 1px solid">
+                                    <label  class="am-u-sm-3 " style="text-align: right;">等级</label>
+                                    <div class="am-u-sm-9">晋升到此级所需分值</div>
+                                </div>
+                                <{foreach from=$config['AgentLevel'] item=item key=key }>
+                                <div class="am-form-group">
+                                    <label for="level" class="am-u-sm-3 am-form-label"><{if $key >30 }>顶级<{else}>第<{$key}>级<{/if}></label>
+                                    <div class="am-u-sm-9">
+                                        <input type="text" name="level[<{$key}>]" placeholder="用户名" value="<{$item}>">
+                                    </div>
+                                </div>
+                                <{/foreach}>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <button id="submit" type="submit" class="am-btn am-btn-primary">保存修改</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/jquery.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/amazeui.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/iscroll.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/app.js"></script>
+</body>
+
+</html>

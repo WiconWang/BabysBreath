@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>绑定手机</title>
+    <!-- Bootstrap -->
+    <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<{$smarty.const.STATIC_PATH}>/css/style.css" rel="stylesheet">
+    <link href="<{$smarty.const.STATIC_PATH}>/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+        <style type="text/css">
+body,main::before{
+    background: url(<{$smarty.const.STATIC_PATH}>/image/green.jpg) 0 / cover fixed;
+}
+main {
+    position: relative;
+    background: hsla(0,0%,100%,.3);
+    overflow: hidden;
+}
+/*main::before{
+    content: '';
+    position: absolute;
+    filter: blur(30px);
+    margin: -30px;
+}*/
+.s{
+    /*position: absolute;
+    top:15%;
+    border-radius:20px;
+    margin: auto;
+    display: block;
+    width: 250px;
+    left:50%;
+    margin-left:-125px;*/
+    position: absolute;
+    top:15%;
+    border-radius:20px;
+    /*margin: auto;*/
+    /*display: block;*/
+    /*left:50%;
+    width: 250px;
+    margin-left:-125px;*/
+    left: 50%;
+    width: 40%;
+    margin-left: -20%;
+}
+.ins{
+    width: 87%;
+    height: 12%;
+    border-radius: 30px;
+}
+.in{
+    width: 87%;
+    height: 12%;
+}
+.is{
+    border-radius: 50px;
+}
+.border-left-width{
+    border: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+}
+.col-center-block {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.inl{
+    width: 87%;
+}
+.inh{
+    background: #FFF;
+}
+.pad{
+    padding: 0px;
+}
+.bth-img{
+    background:url(<{$smarty.const.STATIC_PATH}>/image/true.png);
+    margin: auto;
+}
+.theLink{
+display:block;
+width:63%;
+height:40px;
+margin:0 auto;
+background:url(<{$smarty.const.STATIC_PATH}>/image/true.png) no-repeat;
+background-size:100% 100%;
+margin-bottom: 10px;
+}
+
+.theLink:hover{ display:block;
+width:63%;
+height:40px;
+margin:0 auto;
+background:url(<{$smarty.const.STATIC_PATH}>/image/true.png) no-repeat;
+background-size:100% 100%;
+margin-bottom: 10px;
+}
+.f-b{
+position: absolute;
+color: transparent;
+-webkit-text-stroke: 1px #874900;
+font-size:35px;
+font-weight: bold;
+color:#E7D7AC;
+}
+/* CSS部分 */
+#a { position:absolute; top:0; right:0; z-index:4;width:30px;height:30px;}
+.m-b-t{
+    margin-bottom: 5px;
+}
+.m-b-t2{
+    margin-bottom: 10px;
+}
+.b-color-green{
+    color: #6BAB16;
+}
+.bb{
+    margin-top: -20px;
+    position:fixed!important;
+    z-index:3;
+    left: 50%;
+    width: 980px;
+    margin-left: -490px;
+}
+.dss{
+    disabled:disabled;
+}
+</style>
+</head>
+<body>
+
+        <main class="row s" style="padding: 10px">
+
+        <form class="form-signin" id="loginform">
+            <h2 class="form-signin-heading">用户首次进入游戏</h2>
+            用户openid : <input type="text" id="openid" class="form-control" placeholder="用户openid" value="" required autofocus>
+            游戏号gid : <input type="text" id="gid" class="form-control" placeholder="用户gid" value="3" required autofocus>
+            <button  id="submitform" class="btn btn-lg btn-primary btn-block" type="button">确定</button>
+        </form>
+
+</main>
+<script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+<script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+
+<!-- Jquery Validate -->
+<script src="<{$smarty.const.STATIC_PATH}>/js/plugins/validate/jquery.validate.min.js"></script>
+
+<script src="<{$smarty.const.STATIC_PATH}>/js/plugins/validate/messages_zh.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#submitform").click(function(){
+
+            $.ajax({
+                url: "/user/index/ActiveGames" ,
+                type: "get",
+                dataType: "json",
+                    //data:$('#yourformid').serialize(),
+                    data:{gid:$('#gid').val(),openid:$('#openid').val()},
+                    async: false,
+                    success: function(json){
+                        if(json != null){
+                            if (!json.return_code) {
+                                str = JSON.stringify(json);
+                                alert(str);
+                                console.log(json);
+                            }else{
+                                alert(json.message);
+                            }
+
+                        }
+                    },
+                    error: function(){
+                        console.log( "AJAX fail");
+                    }
+                });
+        });
+    });
+
+
+</script>
+</body>
+</html>

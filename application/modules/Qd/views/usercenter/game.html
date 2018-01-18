@@ -1,0 +1,496 @@
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+        <title>游戏</title>
+        <!-- Bootstrap -->
+        <link href="<{$smarty.const.STATIC_PATH}>/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<{$smarty.const.STATIC_PATH}>/css/style.css" rel="stylesheet">
+        <link href="<{$smarty.const.STATIC_PATH}>/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+        <style type="text/css">
+                            /*
+ * 底部导航菜单
+ */
+.nav-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 1rem rgba(0,0,0,.85);
+    box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.nav-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.nav-bar-tab .nav-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 3.2rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+    text-decoration: none;
+}
+.nav-bar-tab .nav-tab-item.nav-active { color: #E84219;}
+.nav-bar .nav-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.nav-bar-tab .nav-tab-item .nav-icon {
+    /*top: 3px;*/
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.nav-bar-tab .nav-tab-item .nav-icon~.nav-tab-label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+}
+.nav-icon .nav-badge {
+    font-size: .65rem;
+    line-height: 1rem;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    color: #fff;
+    background-color: red;
+    border-radius: 1rem;
+    min-width: .6rem;
+    height: 1rem;
+    text-align: center;
+    padding: 0 .2rem;
+}
+.user_money{color: #FFFFFF;}
+.user_money>b{
+    font-weight: normal;
+    margin-bottom: .4rem;
+    display: inherit;
+    position: relative;
+    line-height: 1.2rem;
+    padding-left: .5rem;
+}
+.body-bg{
+    background-color:#EDEDEC;
+}
+.body-bg1{
+    background-color:#FFFFFF;
+}
+.body-h{
+    min-height:667px;
+}
+.h-color{
+    color:#4F4C4B;
+}
+.container-p-d{
+    padding: 0px;
+}
+.container-m-g{
+    margin: 0px;
+}
+.p-d-t{
+    padding-top:2rem;
+}
+.p-d-t-4{
+    padding-top:4rem;
+}
+.p-d-m{
+    padding-bottom: 0rem;
+}
+.p-d-l-r{
+    padding-left:1rem;
+    padding-right:1rem;
+}
+.p-d1{
+    padding:2rem;
+}
+.p-d1{
+    padding:3rem;
+}
+.orange1{
+    color: #ED6C00;
+    font-size: 1.6rem;
+}
+.orange2{
+    color: #ED6C00;
+    font-size: 1.5rem;
+}
+.jb_keleyi_comd{
+    height: 100%;
+    width:100%;
+    /*margin:0px auto;*/
+    background-image: -moz-linear-gradient(top, #00FF00, #FF0000); /*火狐*/
+    background: -o-linear-gradient(top, #00FF00 0%,red 100%);/*Opera*/
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ddd), color-stop(2,#FFF)); /*Chrome*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00FF00', endColorstr='#FF0000', GradientType='0'); /*IE*/
+}
+@media (max-width: 380px) {
+    .f-sm-s{
+        font-size: 1rem;
+    }
+    .f-h{
+        font: "微软雅黑";
+        font-size: 1.4rem;
+        color:#4F4C4B;
+        font-weight: bold;
+    }
+    .f-h1{
+        font: "微软雅黑";
+        font-size: 1.2rem;
+        color:#4F4C4B;
+        font-weight: bold;
+    }
+    .f-h2 {
+        font-size:1.2rem;
+        color: #ED6C00;
+    }
+}
+.f-h{
+    font: "微软雅黑";
+    font-size: 1.4rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h1{
+    font: "微软雅黑";
+    font-size: 1.2rem;
+    color:#4F4C4B;
+    font-weight: bold;
+}
+.f-h2 {
+    font-size:1.2rem;
+    color: #ED6C00;
+}
+.f-h3{
+    color: red;
+}
+.fa-1x{
+    font-size:2rem;
+}
+.f-w-b{
+    font-weight:bold;
+}
+.hui{
+    color: #cbcccc;
+}
+.utom{
+    height:2.5rem;
+}
+.bh{
+    height:7rem;
+}
+.line-h{
+    line-height: 7rem;
+}
+.p-t-s{
+    position:fixed; top:0; left:0; width:100%; background:#FCC;
+}
+
+.cn{margin-top:9rem;}
+.cn2{margin-top:1.5rem;}
+.b-g-p{
+    background-image: url(<{$smarty.const.STATIC_PATH}>/image/小banner.png);
+}
+/*100宽度*/
+.wid{width:100%;}
+.wid-50{width:40%;}
+.wid-74{width:74%;}
+.div-c{ position:absolute; top:74px;width:100%; height:100%;z-index:1;background:rgba(0, 0, 0, 0.5);}
+/*按钮*/
+.b-color{
+    background-color:#f5603f;
+    border: #f5603f;
+}
+.b-w-h{
+    width: 136px;
+    height: 50px;
+    border-radius:10px;
+}
+.b-h{
+    width: 100%;
+    height: 4rem;
+    font-size:2rem;
+    /*border-radius:10px;*/
+}
+/*按钮外边距*/
+.b-top{
+   margin-top: 1rem;
+}
+.b-top-3{
+   margin-top: 3rem;
+}
+.padding-top-big{
+    padding-top:60%;
+}
+.f-l-r{
+    float:right;
+}
+.inp{
+    border-radius: 50px;
+}
+.l-h-51{
+    line-height: 51px;
+}
+.b-r{
+    border-radius:30px;
+}
+.b-r-5{
+    border-radius:5px;
+}
+.b-w-7{
+    width:7.5rem;
+}
+.w-7{
+    width:6.5rem;
+}
+.b-p-d-5-40{
+    padding: 5px 40px;
+}
+.fa-2x { font-size: 1.4em }
+.top{position:fixed; top:0; left:0; width:100%; height:70px;z-index: 10;}
+.caret{
+	border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px dashed;
+}
+</style>
+</head>
+<body class="body-bg body-h">
+	<div class="top b-g-p" style="background-size:100% 100%;">
+            <div class="col-xs-4">
+
+            </div>
+            <div class="col-xs-4 text-center line-h">
+                <span class="fa-2x user_money f-w-b"><{$ThisGame.game_name}></span>
+            </div>
+            <div class="col-xs-4 text-center line-h">
+                <div class="dropdown">
+                    <a class="caret dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <{foreach from=$game item=item}>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="?gid=<{$item.gid}>"><{$item.game_name}></a>
+                        </li>
+                        <{/foreach}>
+                    </ul>
+                </div>
+            </div>
+	</div>
+
+    <{if $ThisBonus['is_buy'] != 1}>
+    <div class="div-c">
+        <div class="row" style="padding: 0px;margin:0px;position:absolute;top:50%;width:100%;text-align:center;display:block;height:auto">
+            <div class="col-xs-12 text-center">
+                <span class="fa-1x user_money f-w-b">游戏代理权售价:<{$ThisGame['price']}>元</span>
+                <br />
+                <a data-toggle="modal" class="btn btn-danger b-color b-w-h fa-1x b-top" href="<{$smarty.const.STATIC_PATH}>/form_basic.html#modal-form">点击购买</a>
+            </div>
+        </div>
+    </div>
+
+    <{/if}>
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="m-t-none m-b f-w-b">支付<{$ThisGame['price']}>元购买此游戏代理权后<br />您的玩家充值金额会计入您的奖金池</h4>
+                            <form action="/user/userCenter/BuyAgentOnline" method="post">
+                                <div class="col-sm-10  text-center">
+                                    <input type="hidden" value="<{$ThisGame['gid']}>" name="gid" id="gid">
+                                    <input type="hidden" value="<{$ThisGame['price']}>" name="total_fee" id="total_fee">
+                                    <!-- <div class="radio">
+                                    <label><input type="radio" checked="" value="option1" id="payway1" name="payway">使用钱包余额&nbsp;&nbsp;&nbsp;</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" checked="" value="option1" id="payway1" name="payway">使用支付宝支付</label>
+                                    </div> -->
+                                    <div class="radio">
+                                    <label><input type="radio" value="wxpay" id="payway2" name="payway" checked="checked">使用微信支付</label>
+                                    </div>
+                                </div>
+                                <div class="form-group b-top- text-center">
+                                    <button class="btn b-p-d-5-40 btn-danger m-t-n-xs b-color user_money b-r-5 b-top" type="submit"><strong>确定</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid container-p-d">
+
+        <{if $ThisBonus['is_buy'] == 1}>
+        <!--用户资料金额-->
+
+        <div class="col-lg-12 cn" >
+            <div class="widget style1 white-bg">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h3 class="text-left f-h">我的玩家人数 : &nbsp;&nbsp;<b class="orange1"><{$user['myplayer_num']}>人</b></h3>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h3 class="text-left f-h">我已提现总金额 : &nbsp;&nbsp;<b class="orange1"><{$draw}>元</b></h3>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h3 class="text-left f-h">我的玩家今日充值已达 : &nbsp;&nbsp;<b class="orange1"><{$today_divide}>元</b></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="clearfix" style="margin-top: 20px; padding-bottom: 20px; background: #fff">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>我的玩家人数和充值金额</h5>
+                </div>
+                <div class="ibox-content" style="margin: 0; padding: 0">
+                    <div class="echarts" id="echarts-line-chart"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <{else}>
+        <!--第二版-->
+        <div class="col-lg-12 cn">
+            <div class="widget style1 white-bg">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h3 class="text-left f-h">我的玩家已有 : &nbsp;&nbsp;<b class="orange1"><{$user['myplayer_num']}>人</b></h3>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-11">
+                        <h3 class="text-left f-h">我的玩家今日已充值 : &nbsp;&nbsp;<b class="orange1"><{$today_divide}>元</b></h3>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 f-h3">
+                        <small>购买代理权后将计入奖金池参与分拥</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <{/if}>
+    </div>
+    <!--底部导航栏-->
+    <!--<span class="nav-badge">1</span>-->
+    <{assign var="module" value="game"}>
+    <{include file='inc/footer.html'}>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/jquery-2.1.1.min.js"></script>
+    <script src="<{$smarty.const.STATIC_PATH}>/js/bootstrap.min.js"></script>
+    <!-- ECharts -->
+    <script src="<{$smarty.const.STATIC_PATH}>/js/plugins/echarts/echarts-all.js"></script>
+
+    <script>
+        $(function () {
+            var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
+            lineoption = {
+                legend: {
+                        orient: 'horizontal', // 'vertical'
+                        x: 'right', // 'center' | 'left' | {number},
+                        y: 'bottom', // 'center' | 'bottom' | {number}
+                        // backgroundColor: '#eee',
+                        // borderColor: 'rgba(178,34,34,0.8)',
+                        borderWidth: 0,
+                        padding: 0,    // [5, 10, 15, 20]
+                        itemGap: 20,
+                        // textStyle: {color: 'red'},
+                        // selected: {
+                        //     '降111水量' : false
+                        // },
+                        data: [
+                        '玩家充值','玩家人数', '总计'
+                        ]
+                    },
+                    grid:{
+                        x:40,
+                        y:20,
+                        x2:40,
+                        y2:60
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    xAxis :{
+                        data : [<{$settle['date']}>]
+                    },
+                    yAxis : [
+                    {
+                        type : 'value',
+                        axisLabel : {
+                            formatter: '{value}人'
+                        }
+                    },
+                    {
+                        type : 'value',
+                        axisLabel : {
+                            formatter: '{value}元'
+                        },
+                        splitLine : {show : false}
+                    }
+                    ],
+                    series : [
+                    {
+                        name:'玩家人数',
+                        type:'line',
+                        data:[<{$settle['daycount']}>]
+                    },
+                    {
+                        name:'玩家充值',
+                        type:'line',
+                        yAxisIndex: 1,
+                        data:[<{$settle['daymoney']}>]
+                    }
+                    ]
+                };
+
+                lineChart.setOption(lineoption);
+
+
+            });
+        </script>
+    </body>
+    </html>

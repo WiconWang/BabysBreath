@@ -1,14 +1,14 @@
 <?php
 /**
- * 557 Bussiness model for Table : dd_admin_user
+ * 557 Bussiness model for Table : dd_admin_operation_log
  * 
  * @author WiconWang@gmail.com
- * @copyright 2018-01-19  16:10:00
- * @file User.php
+ * @copyright 2018-01-19  11:30:00
+ * @file Log.php
  */
 
  
-class Bussiness_Default_Admin_UserModel
+class Bussiness_Admin_Operation_LogModel
 {
     private $_obj = null;
 
@@ -30,7 +30,7 @@ class Bussiness_Default_Admin_UserModel
      */
     public function getObj() {
         if (!isset($this->_obj) || empty($this->_obj)) {
-            $this->_obj = Mod_Default_Admin_UserModel::instance();
+            $this->_obj = Mod_Default_Admin_Operation_LogModel::instance();
         }
         return $this->_obj;
     }
@@ -123,17 +123,13 @@ class Bussiness_Default_Admin_UserModel
 
         // 字段规则 
         
-        if (isset($data["username"])){$SaveDate["username"] = htmlspecialchars($data["username"], ENT_QUOTES);}
-        if (isset($data["password"])){$SaveDate["password"] = htmlspecialchars($data["password"], ENT_QUOTES);}
-        if (isset($data["salt"])){$SaveDate["salt"] = htmlspecialchars($data["salt"], ENT_QUOTES);}
-        if (isset($data["usergroup"])){$SaveDate["usergroup"] = intval($data["usergroup"]);}
-        if (isset($data["status"])){$SaveDate["status"] = intval($data["status"]);}
-        if (isset($data["create_time"])){$SaveDate["create_time"] = htmlspecialchars($data["create_time"], ENT_QUOTES);}
-        if (isset($data["create_ip"])){$SaveDate["create_ip"] = htmlspecialchars($data["create_ip"], ENT_QUOTES);}
-        if (isset($data["update_time"])){$SaveDate["update_time"] = htmlspecialchars($data["update_time"], ENT_QUOTES);}
-        if (isset($data["update_ip"])){$SaveDate["update_ip"] = htmlspecialchars($data["update_ip"], ENT_QUOTES);}
-        if (isset($data["login_time"])){$SaveDate["login_time"] = htmlspecialchars($data["login_time"], ENT_QUOTES);}
-        if (isset($data["login_ip"])){$SaveDate["login_ip"] = htmlspecialchars($data["login_ip"], ENT_QUOTES);}
+        if (isset($data["admin_name"])){$SaveDate["admin_name"] = htmlspecialchars($data["admin_name"], ENT_QUOTES);}
+        if (isset($data["row_id"])){$SaveDate["row_id"] = intval($data["row_id"]);}
+        if (isset($data["log_type"])){$SaveDate["log_type"] = intval($data["log_type"]);}
+        if (isset($data["path"])){$SaveDate["path"] = htmlspecialchars($data["path"], ENT_QUOTES);}
+        if (isset($data["ip"])){$SaveDate["ip"] = htmlspecialchars($data["ip"], ENT_QUOTES);}
+        if (isset($data["operation"])){$SaveDate["operation"] = htmlspecialchars($data["operation"], ENT_QUOTES);}
+        if (isset($data["created_at"])){$SaveDate["created_at"] = htmlspecialchars($data["created_at"], ENT_QUOTES);}
 
 
         if (empty($SaveDate)) {

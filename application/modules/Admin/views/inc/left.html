@@ -1,7 +1,43 @@
 <div class="tpl-left-nav tpl-left-nav-hover">
-            <div class="tpl-left-nav-title">
-                DOUDE 列表
-            </div>
+    <ul class="am-list admin-sidebar-list" id="collapase-nav-1">
+        <li  class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1'}" href="#/"><i class="am-icon-home am-margin-left-sm"></i> 首页</a>
+        </li>
+
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}">
+                <i class="am-icon-users am-margin-left-sm"></i> 管理员和权限 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="user-nav">
+                <li><a href="/admin/manager/userlist"><i class="am-icon-user-secret am-margin-left-sm"></i> 管理员列表 </a></li>
+                <li><a href="/admin/manager/grouplist"><i class="am-icon-group am-margin-left-sm"></i> 管理组列表 </a></li>
+                <li><a href="/admin/manager/rolelist"><i class="am-icon-cogs am-margin-left-sm"></i> 权限列表 </a></li>
+            </ul>
+        </li>
+
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#company-nav'}">
+                <i class="am-icon-cubes am-margin-left-sm"></i> 日志管理 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="company-nav">
+                <li><a href="/admin/logs/index?type=1"><span class="am-icon-ge am-margin-left-sm"></span> 登陆日志 </a></li>
+                <li><a href="/admin/logs/index?type=2"><span class="am-icon-connectdevelop am-margin-left-sm"></span> 操作日志 </a></li>
+            </ul>
+        </li>
+
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#role-nav'}">
+                <i class="am-icon-server am-margin-left-sm"></i> 系统参数配置 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="role-nav">
+                <li><a href="/admin/server/list?type=1"><span class="am-icon-cog am-margin-left-sm"></span> 配置1 </a></li>
+                <li><a href="/admin/server/list?type=2"><span class="am-icon-cogs am-margin-left-sm"></span> 配置2 </a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+
             <div class="tpl-left-nav-list" id="wrapper">
                 <ul class="tpl-left-nav-menu">
                     <li class="tpl-left-nav-item">

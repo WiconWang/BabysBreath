@@ -14,7 +14,7 @@ abstract class Abstract_M {
     protected $_tbl_name;
     protected $_tbl_alis_name = null;
     //数据库配置信息
-    protected $dbConfig = 'db';
+    protected $dbConfig = 'default';
 
     var $ar_select              = array();
     var $ar_distinct            = FALSE;

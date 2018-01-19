@@ -1,9 +1,4 @@
 <?php
-/**
- * description: 数据库日志类
- * author: lilong3@staff.sina.com.cn
- * createTime: 2016/6/12 09:39
- */
 
 class Comm_Log {
 
@@ -29,7 +24,7 @@ class Comm_Log {
      * @param integer $log_type   操作类型  1为管理员登录，2为后台操作
      * @param string  $operation  操作细节
      */
-    public static function Log($admin_name,$row_id = 0, $log_type=1, $operation='') {
+    public static function adminLog($admin_name,$row_id = 0, $log_type=1, $operation='') {
         //write log
         $info['log_type'] = $log_type;
         $info['admin_name'] = empty($admin_name)?'未知':$admin_name;
@@ -38,9 +33,7 @@ class Comm_Log {
         $info['ip'] = Comm_Ip::getClientIp();
         $info['operation'] = $operation;
         $info['created_at'] = date('Y-m-d H:i:s',time());
-
-        $logModel = Mod_Manage_OperationLogModel::instance();
-        return $logModel->insert($info);
+        return (new Bussiness_Admin_Operation_LogModel())->insert($info);
     }
     /**
      * 文件日志
@@ -48,22 +41,29 @@ class Comm_Log {
      * @param int $errno
      * @return int
      */
-    public static function fileLog($error, $errno = 0) {
+    public static function fileLog($content,$category = '', $ext = 0) {
+
+        // 检测是否已经是array
+        if (is_array($content)) {
+            $content = json_encode($content);
+        }
+        $categoryPath=empty($category)?'':$category.'/';
+
         $prefix = self::getLogPrefix();
-        if ($_SERVER['SINASRV_CACHE_DIR']) {
-            $logPath = $_SERVER['SINASRV_CACHE_DIR'].'/log/'.$prefix;
+        if ($_SERVER['SERVER_CACHE_DIR']) {
+            $logPath = $_SERVER['SERVER_CACHE_DIR'].'/log/'.$categoryPath.$prefix;
         } else {
-            $logPath = APPLICATION_PATH.'/log/'.$prefix;
+            $logPath = APPLICATION_PATH.'/log/'.$categoryPath.$prefix;
         }
         if (!is_dir($logPath)) {
-            @mkdir($logPath,0777,true);
+            @mkdir($logPath,0755,true);
         }
         $logPath .= '/'.$prefix.'_log_'.date('Ymd').'.log';
         $ip = Comm_Ip::getClientIp();
-        $logstr = "st[%s] ip[%s] msg[%s] ext[%s] \r\n";
-        $logstr  = sprintf($logstr,date('Y-m-d H:i:s'), $ip, $error, $errno);
+        $logInfo = "st[%s] ip[%s] msg[%s] ext[%s] \r\n";
+        $logInfo  = sprintf($logInfo,date('Y-m-d H:i:s'), $ip, $content, $ext);
 
-        return file_put_contents($logPath, $logstr, FILE_APPEND);
+        return file_put_contents($logPath, $logInfo, FILE_APPEND);
     }
 
     /**

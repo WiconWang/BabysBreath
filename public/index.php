@@ -23,12 +23,12 @@ if(Extension_Loaded("zlib")){
 define("APPLICATION_PATH",  dirname(dirname(__FILE__)));
 //smarty.class.php所在目录
 define('SMARTY_DIR', APPLICATION_PATH . '/thirdpart/Smarty/');
-//定义缓存前缀
-define('CACHE_KEY_PREFIX',$_SERVER['CACHE_KEY_PREFIX']);
 //定义主域名
 define('SERVER_NAME','http://' . $_SERVER['HTTP_HOST']);
 //定义静态资源目录
 define('STATIC_PATH',SERVER_NAME . '/static');
+//定义上场目录
+define('LOG_PATH',APPLICATION_PATH . '/log/');
 
 if (!extension_loaded("yaf")) {
     //如果没有安装Yaf扩展，使用原生PHP实现替代

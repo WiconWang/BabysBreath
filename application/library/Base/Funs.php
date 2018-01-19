@@ -139,6 +139,7 @@ class ' . $classname . ' extends Abstract_M{
             echo '表不存在';
             return false;
         }
+
         $str ="\n";
         $path = APPLICATION_PATH."/application/models/Bussiness/".ucwords($configDB)."/";
         if(empty($table)){
@@ -152,7 +153,7 @@ class ' . $classname . ' extends Abstract_M{
             $tmp4[$key] = ucfirst($val);
         }
         $modname = "Mod_" . ucwords($configDB) ."_" . implode('_', $tmp4) . "Model";
-        $businessClassName = "Business_" . ucwords($configDB) ."_" . implode('_', $tmp4) . "Model";
+        $businessClassName = "Bussiness_" . ucwords($configDB) ."_" . implode('_', $tmp4) . "Model";
         $filename =  end($tmp4);
         array_pop ( $tmp4 );
         $path .=implode('/', $tmp4);
@@ -173,7 +174,22 @@ class ' . $classname . ' extends Abstract_M{
         $now = date('Y-m-d  H:i:s',time());
 
         //字段验证规则
-        $fieldCheck = '';
+        //拼接字段过滤机制
+        $fieldFiter = '';
+        foreach ($info as $m=>$n) {
+            if(strpos('..'.$n['Extra'], 'auto_increment')){ continue;}
+            if(strpos('..'.$n['Type'], 'int')){
+                $fieldFiter .= '
+        if (isset($data["'.$n['Field'].'"])){$SaveDate["'.$n['Field'].'"] = intval($data["'.$n['Field'].'"]);}';
+            }elseif(strpos('..'.$n['Type'], 'float') || strpos('..'.$n['Type'], 'double')){
+                $fieldFiter .= '
+        if (isset($data["'.$n['Field'].'"])){$SaveDate["'.$n['Field'].'"] = floatval($data["'.$n['Field'].'"]);}';
+            }else{
+                $fieldFiter .= '
+        if (isset($data["'.$n['Field'].'"])){$SaveDate["'.$n['Field'].'"] = htmlspecialchars($data["'.$n['Field'].'"], ENT_QUOTES);}';
+            }
+        }
+
         $fileContent = '<?php
 /**
  * 557 <{{MARK_INFO}}>
@@ -297,10 +313,7 @@ class <{{MODEL_NAME}}>
         $res = array("code" => 1, "msg" => "" );
         $SaveDate = array();
 
-        // 字段规则
-        // if (isset($data["gid"])){$SaveDate["gid"] = intval($data["gid"]);}
-        // if (isset($data["reason"])){$SaveDate["reason"] = trim(htmlspecialchars($data["reason"], ENT_QUOTES));}
-        // if (isset($data["order_id"])){$SaveDate["order_id"] = trim($data["order_id"]);}
+        // 字段规则 
         <{{FIELD_CHECK}}>
 
 
@@ -358,8 +371,8 @@ class <{{MODEL_NAME}}>
         $fileContent = str_replace('<{{MARK_TIME}}>',$now, $fileContent);
         $fileContent = str_replace('<{{MARK_FILENAME}}>',$filename, $fileContent);
         $fileContent = str_replace('<{{MODEL_CLASS}}>',$modname, $fileContent);
-        $fileContent = str_replace('<{{FIELD_CHECK}}>',$fieldCheck, $fileContent);
         $fileContent = str_replace('<{{MODEL_NAME}}>',$businessClassName, $fileContent);
+        $fileContent = str_replace('<{{FIELD_CHECK}}>',$fieldFiter, $fileContent);
 
         $modelFile = fopen($filename . ".php", "w") or die("Unable to open file!");
         fwrite($modelFile, $fileContent);

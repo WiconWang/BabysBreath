@@ -11,7 +11,7 @@ class LogsController extends Abstract_C {
 
     public function init()
     {
-        $this->LogsModel =  new Business_AdminLogs_LogsModel();
+        $this->LogsModel =  new Bussiness_Admin_Operation_LogModel();
         // 初始化此用户的ID
         $this->id = Yaf_Session::getInstance()->__get( "MANAGE_ID");
         // if (!$this->uid) {die('已开启登录验证，请先登录');}

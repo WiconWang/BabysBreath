@@ -50,6 +50,15 @@ class RouterPlugin extends Yaf_Plugin_Abstract {
             $config = Comm_Config::getConfig('config');
 
             //放行1   配置文件的非需要登录模块中，不进行拦截
+
+            //检验一次 COOKIE，如果不存在cookie则直接404掉。
+            if (!isset($_COOKIE['adminuser']) || $_COOKIE['adminuser'] !='BabysBreath') {
+                @header('HTTP/1.1 404 Not Found');
+                @header("status: 404 Not Found");
+                include("error/404.html");
+                exit;
+            }
+
             if (in_array($action, $config['nologin'][strtolower($modules)])) {
                 $interrupt=false;
                 return $interrupt;
@@ -59,13 +68,6 @@ class RouterPlugin extends Yaf_Plugin_Abstract {
                 }
             }
 
-            //检验一次 COOKIE，如果不存在cookie则直接404掉。
-            if (!isset($_COOKIE['adminuser']) || $_COOKIE['adminuser'] !='BabysBreath') {
-                @header('HTTP/1.1 404 Not Found');
-                @header("status: 404 Not Found");
-                include("error/404.html");
-                exit;
-            }
 
             //放行2   同时存在登陆ID，登陆信息，不进行拦截
             $MANAGE_ID = intval(@Yaf_Session::getInstance()->__get( "MANAGE_ID"));

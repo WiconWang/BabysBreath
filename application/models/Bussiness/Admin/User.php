@@ -3,26 +3,73 @@
  * 557 Bussiness model for Table : dd_admin_user
  * 
  * @author WiconWang@gmail.com
- * @copyright 2018-01-19  16:10:00
+ * @copyright 2018-01-19  11:30:00
  * @file User.php
  */
 
  
-class Bussiness_Default_Admin_UserModel
+class Bussiness_Admin_UserModel
 {
     private $_obj = null;
 
-    /*
-     **********************
-     *
-     *
-     *
-     * Add your codes here
-     *
-     *
-     *
-     **********************
+
+    /**
+     * 验证用户帐号密码
+     * @param $checkinfo
+     * @return bool
      */
+    public function CheckUserPass($checkinfo)
+    {
+        $data=$this->Data_Check($checkinfo);
+        $res = $this->Info(array('username' => $data['username'], ));
+        if (empty($res)) {
+            return false;
+        }
+
+        $password = Comm_Tools::EncryptPassword($data['password'],$res[0]['salt']);
+
+        if ($password != $res[0]['password']) {
+            return false;
+        }
+        return $res[0]['id'];
+    }
+
+    /**
+     * 取指定用户的详细资料和权限
+     * @param $id
+     * @return mixed
+     */
+    public function getUserDetailByID($id)
+    {
+
+// if (Comm_Redis::get('dd_manage_uid_'.$id)) {
+//     return json_decode(Comm_Redis::get('dd_manage_uid_'.$id),true);
+// }else{
+        $GroupModel =  new Bussiness_Admin_GroupModel();
+        $RoleModel =  new Bussiness_Admin_RoleModel();
+
+        $info = $this->InfoByID($id);
+        $groupList = $GroupModel->getNames();
+        $roleList = $RoleModel->getNames();
+        $userRole = $groupList[$info['usergroup']]['roles'];
+        $urls = array();
+        if (!empty($userRole)) {
+            foreach ($userRole as  $v) {
+                if (!empty($roleList[$v]['urls'])) {
+                    foreach ($roleList[$v]['urls'] as  $m) {
+                        array_push($urls, $m);
+                    }
+                }
+
+            }
+        }
+        $info['roles']=array_flip(array_flip($urls));
+        unset($info['salt']);
+
+        return $info;
+// }
+    }
+
 
     /**
      * 初始化Mod层

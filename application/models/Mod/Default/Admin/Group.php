@@ -3,7 +3,7 @@
  * 557 Model for database tables
  * 
  * @author WiconWang@gmail.com
- * @copyright 2018-01-18  18:33:55
+ * @copyright 2018-01-19  11:22:14
  * @file Group.php
  */
 class Mod_Default_Admin_GroupModel extends Abstract_M{

@@ -3,12 +3,12 @@
  * 557 Bussiness model for Table : dd_admin_operation_log
  * 
  * @author WiconWang@gmail.com
- * @copyright 2018-01-18  18:33:55
+ * @copyright 2018-01-19  16:10:00
  * @file Log.php
  */
 
  
-class Business_Default_Admin_Operation_LogModel
+class Bussiness_Default_Admin_Operation_LogModel
 {
     private $_obj = null;
 
@@ -121,11 +121,15 @@ class Business_Default_Admin_Operation_LogModel
         $res = array("code" => 1, "msg" => "" );
         $SaveDate = array();
 
-        // 字段规则
-        // if (isset($data["gid"])){$SaveDate["gid"] = intval($data["gid"]);}
-        // if (isset($data["reason"])){$SaveDate["reason"] = trim(htmlspecialchars($data["reason"], ENT_QUOTES));}
-        // if (isset($data["order_id"])){$SaveDate["order_id"] = trim($data["order_id"]);}
+        // 字段规则 
         
+        if (isset($data["admin_name"])){$SaveDate["admin_name"] = htmlspecialchars($data["admin_name"], ENT_QUOTES);}
+        if (isset($data["row_id"])){$SaveDate["row_id"] = intval($data["row_id"]);}
+        if (isset($data["log_type"])){$SaveDate["log_type"] = intval($data["log_type"]);}
+        if (isset($data["path"])){$SaveDate["path"] = htmlspecialchars($data["path"], ENT_QUOTES);}
+        if (isset($data["ip"])){$SaveDate["ip"] = htmlspecialchars($data["ip"], ENT_QUOTES);}
+        if (isset($data["operation"])){$SaveDate["operation"] = htmlspecialchars($data["operation"], ENT_QUOTES);}
+        if (isset($data["created_at"])){$SaveDate["created_at"] = htmlspecialchars($data["created_at"], ENT_QUOTES);}
 
 
         if (empty($SaveDate)) {

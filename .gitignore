@@ -1,1 +1,6 @@
-.idea/*
+*.log
+.idea/
+log
+.user.ini
+compile_c
+conf/config.ini

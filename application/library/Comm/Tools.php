@@ -2282,6 +2282,17 @@ class Comm_Tools
 
     }
 
+    /**
+     * 取得缓存前缀列表
+     * @return array
+     */
+    public static function getCachePrefix($prefix = '')
+    {
+        $cache = Comm_Config::getConf('config.'.DEVELOPMENT.'.prefix');
+        return $_SERVER['CACHE_KEY_PREFIX'].$cache[$prefix];
+    }
+
+
 
 
 

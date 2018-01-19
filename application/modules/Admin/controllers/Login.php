@@ -18,17 +18,17 @@ class LoginController extends Abstract_C {
             if (empty($username) || empty($password)) {
                 $this->jsonResponse(0,'用户名和密码不能为空');
             }
-            $UserModel =  new Business_AdminManage_UserModel();
-            $userid = $UserModel->CheckUserPass(array('username' => $username,'password' => $password, ));
-            if ($userid) {
-                $info = $UserModel->getUserDetailByID($userid);
+            $UserModel =  new Bussiness_Admin_UserModel();
+            $userID = $UserModel->CheckUserPass(array('username' => $username,'password' => $password, ));
+            if ($userID) {
+                $info = $UserModel->getUserDetailByID($userID);
                 if (!empty($info['status'])) {
                     $this->jsonResponse(0,'用户名已经被禁用');
                 }
                 $_SESSION['MANAGE_INFO'] = $info;
                 $_SESSION['MANAGE_NAME'] = $info['username'];
-                $_SESSION['MANAGE_ID'] = $userid;
-                Comm_Log::Log($info['username'],0, 1, $info['username'].'登录了后台');
+                $_SESSION['MANAGE_ID'] = $userID;
+                Comm_Log::adminLog($info['username'],0, 1, $info['username'].'登录了后台');
                 setcookie("username",$info['username'], time()+3600*24,'/');
                 setcookie("groupname",$info['groupname'], time()+3600*24,'/');
                 setcookie("userid",$info['id'], time()+3600*24,'/');
@@ -39,6 +39,7 @@ class LoginController extends Abstract_C {
         }
         $this->layout('login/login.html');
     }
+
 	public function make_password( $length = 6 ){
 		// 密码字符集，可任意添加你需要的字符
 		$chars = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 

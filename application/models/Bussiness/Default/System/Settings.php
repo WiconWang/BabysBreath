@@ -3,12 +3,12 @@
  * 557 Bussiness model for Table : dd_system_settings
  * 
  * @author WiconWang@gmail.com
- * @copyright 2018-01-18  18:33:55
+ * @copyright 2018-01-19  16:10:00
  * @file Settings.php
  */
 
  
-class Business_Default_System_SettingsModel
+class Bussiness_Default_System_SettingsModel
 {
     private $_obj = null;
 
@@ -121,11 +121,14 @@ class Business_Default_System_SettingsModel
         $res = array("code" => 1, "msg" => "" );
         $SaveDate = array();
 
-        // 字段规则
-        // if (isset($data["gid"])){$SaveDate["gid"] = intval($data["gid"]);}
-        // if (isset($data["reason"])){$SaveDate["reason"] = trim(htmlspecialchars($data["reason"], ENT_QUOTES));}
-        // if (isset($data["order_id"])){$SaveDate["order_id"] = trim($data["order_id"]);}
+        // 字段规则 
         
+        if (isset($data["key"])){$SaveDate["key"] = htmlspecialchars($data["key"], ENT_QUOTES);}
+        if (isset($data["value"])){$SaveDate["value"] = htmlspecialchars($data["value"], ENT_QUOTES);}
+        if (isset($data["update_time"])){$SaveDate["update_time"] = htmlspecialchars($data["update_time"], ENT_QUOTES);}
+        if (isset($data["description"])){$SaveDate["description"] = htmlspecialchars($data["description"], ENT_QUOTES);}
+        if (isset($data["order"])){$SaveDate["order"] = intval($data["order"]);}
+        if (isset($data["type"])){$SaveDate["type"] = intval($data["type"]);}
 
 
         if (empty($SaveDate)) {

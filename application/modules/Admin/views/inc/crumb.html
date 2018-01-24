@@ -1,0 +1,7 @@
+<{if $crumb['crumb']|@count neq 0 }>
+<ol class="am-breadcrumb">
+    <{foreach from=$crumb['crumb'] item=item key=key name=crumb}>
+    <li><a href="<{$item['url']}>" <{if $smarty.foreach.crumb.first == 1}> class="am-icon-home"<{/if}>><{$item['title']}></a></li>
+    <{/foreach}>
+</ol>
+<{/if}>

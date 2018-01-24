@@ -14,17 +14,17 @@ class ManagerController extends Abstract_C {
 
     public function init()
     {
-        $this->UserModel =  new Business_AdminManage_UserModel();
-        $this->GroupModel =  new Business_AdminManage_GroupModel();
-        $this->RoleModel =  new Business_AdminManage_RoleModel();
+        $this->UserModel =  new Bussiness_Admin_UserModel();
+        $this->GroupModel =  new Bussiness_Admin_GroupModel();
+        $this->RoleModel =  new Bussiness_Admin_RoleModel();
         // 初始化此用户的ID
         $this->id = Yaf_Session::getInstance()->__get( "MANAGE_ID");
-        // if (!$this->uid) {die('已开启登录验证，请先登录');}
-        $this->LayoutData['crumb'] = array(
-            'home' => array('text' => '首页','url' => '/admin', ),
-            'category' => array('text' => '管理员和权限','url' => '', ),
-            'page' => array('text' => '','url' => '', ),
-            );
+        $this->ControllerTitle = '管理员和权限';
+    }
+
+    public function indexAction(){
+        $route = Comm_AppAdapter::getModules();
+        header('Location:  /'.$route['module'].'/'.$route['controller'].'/UserList');
     }
 
     /**
@@ -33,11 +33,10 @@ class ManagerController extends Abstract_C {
     public function UserListAction()
     {
         $where = array();
-        if ($this->get('ugroup')){$where['ugroup'] = intval($this->get('ugroup'));}
+        if ($this->get('usergroup')){$where['usergroup'] = intval($this->get('usergroup'));}
         $this->LayoutData['list'] = $this->UserModel->Info($where);
-        $this->LayoutData['crumb']['category']['url'] = '/admin/manager/userlist';
-        $this->LayoutData['crumb']['page']['text'] = '管理用户配置';
         $this->LayoutData['group'] = $this->GroupModel->getNames();
+        $this->LayoutData['crumb'] = Comm_Tools::getCrumbByArray(['manager|'.$this->ControllerTitle,'manager/userlist|管理员列表']);
         $this->layout('manager/user_list.html',$this->LayoutData);
     }
 
@@ -79,9 +78,18 @@ class ManagerController extends Abstract_C {
         $this->LayoutData['info'] = $this->UserModel->InfoByID($id);
         if (empty($this->LayoutData['info'])) {$this->LayoutData['info'] = $this->UserModel->EmptyData();}
         $this->LayoutData['group'] = $this->GroupModel->getNames();
-        $this->LayoutData['crumb']['category']['url'] = '/admin/manager/userlist';
-        $this->LayoutData['crumb']['page']['text'] = '管理用户配置';
+        $this->LayoutData['crumb'] = Comm_Tools::getCrumbByArray(['manager|'.$this->ControllerTitle,'manager/userlist|管理员配置']);
         $this->layout('manager/user_edit.html',$this->LayoutData);
+    }
+    /**
+     * 角色删除
+     */
+    public function UserDelAction(){
+        if (!intval($this->get('id'))){
+            $this->jsonResponse(0,'删除目标不存在');
+        }
+        $res = $this->UserModel->del(intval($this->get('id')));
+        $this->jsonResponse(1,'删除成功',$res);
     }
 
 
@@ -111,8 +119,8 @@ class ManagerController extends Abstract_C {
             $this->response(count($list),$list,1 );
         }
         $this->LayoutData['list'] = $list;
-        $this->LayoutData['crumb']['category']['url'] = '/admin/manager/grouplist';
-        $this->LayoutData['crumb']['page']['text'] = '用户组配置';
+
+        $this->LayoutData['crumb'] = Comm_Tools::getCrumbByArray(['manager|'.$this->ControllerTitle,'manager/grouplist|用户组配置']);
         $this->layout('manager/group_list.html',$this->LayoutData);
     }
 
@@ -142,12 +150,21 @@ class ManagerController extends Abstract_C {
         $this->LayoutData['info'] = $this->GroupModel->InfoByID($id);
         if (empty($this->LayoutData['info'])) {$this->LayoutData['info'] = $this->GroupModel->EmptyData();}
         $this->LayoutData['roles'] = $this->RoleModel->getNames();
-        $this->LayoutData['crumb']['category']['url'] = '/admin/manager/grouplist';
-        $this->LayoutData['crumb']['page']['text'] = '用户组配置';
+        $this->LayoutData['crumb'] = Comm_Tools::getCrumbByArray(['manager|'.$this->ControllerTitle,'manager/grouplist|用户组配置']);
 
         $this->layout('manager/group_edit.html',$this->LayoutData);
     }
 
+    /**
+     * 角色删除
+     */
+    public function GroupDelAction(){
+        if (!intval($this->get('id'))){
+            $this->jsonResponse(0,'删除目标不存在');
+        }
+        $res = $this->GroupModel->del(intval($this->get('id')));
+        $this->jsonResponse(1,'删除成功',$res);
+    }
 
 
 
@@ -156,6 +173,7 @@ class ManagerController extends Abstract_C {
      */
     public function RoleListAction()
     {
+
 
         $where = array();
         if ($this->get('group')){$where['group'] = intval($this->get('group'));}
@@ -169,9 +187,8 @@ class ManagerController extends Abstract_C {
                 $list[$k]['urls'] = explode(',', $v['urls']);
             }
         }
-        $this->LayoutData['crumb']['category']['url'] = '/admin/manager/rolelist';
-        $this->LayoutData['crumb']['page']['text'] = '权限配置';
         $this->LayoutData['list'] = $list;
+        $this->LayoutData['crumb'] = Comm_Tools::getCrumbByArray(['manager|'.$this->ControllerTitle,'manager/rolelist|权限配置']);
         $this->layout('manager/role_list.html',$this->LayoutData);
     }
 
@@ -205,9 +222,19 @@ class ManagerController extends Abstract_C {
         }
         $this->LayoutData['info'] = $this->RoleModel->InfoByID($id);
         if (empty($this->LayoutData['info'])) {$this->LayoutData['info'] = $this->RoleModel->EmptyData();}
-        $this->LayoutData['crumb']['category']['url'] = '/admin/manager/rolelist';
-        $this->LayoutData['crumb']['page']['text'] = '权限配置';
+        $this->LayoutData['crumb'] = Comm_Tools::getCrumbByArray(['manager|'.$this->ControllerTitle,'manager/rolelist|权限配置']);
         $this->layout('manager/role_edit.html',$this->LayoutData);
+    }
+
+    /**
+     * 角色删除
+     */
+    public function RoleDelAction(){
+        if (!intval($this->get('id'))){
+            $this->jsonResponse(0,'删除目标不存在');
+        }
+        $res = $this->RoleModel->del(intval($this->get('id')));
+        $this->jsonResponse(1,'删除成功',$res);
     }
 
 }

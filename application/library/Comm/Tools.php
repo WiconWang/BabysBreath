@@ -2226,8 +2226,6 @@ class Comm_Tools
     }
 
 
-
-
     public static function timestampToTime($stamp, $day)
     {
         return date('Y-m-d H:i:s', strtotime($day) + $stamp);
@@ -2288,13 +2286,71 @@ class Comm_Tools
      */
     public static function getCachePrefix($prefix = '')
     {
-        $cache = Comm_Config::getConf('config.'.DEVELOPMENT.'.prefix');
-        return $_SERVER['CACHE_KEY_PREFIX'].$cache[$prefix];
+        $cache = Comm_Config::getConf('config.' . DEVELOPMENT . '.prefix');
+        return $_SERVER['CACHE_KEY_PREFIX'] . $cache[$prefix];
     }
 
+    /**
+     * 拼接面包屑数组 此方法最好与inc/crumb.html组合使用
+     * @param string $controllTitle controll层标题
+     * @param string $actionTitle Action层标题
+     * @param array $extArr 扩展其它数组，key为url value 为标题
+     * @return array  url=>title
+     */
+    public static function getCrumb($controllTitle = '', $actionTitle = '', $extArr = array())
+    {
+        $url_temp = array();
+        $crumb = array();
+        $i = 0;
 
+        $route = Comm_AppAdapter::getModules();
 
+        if (!empty($route)) {
+            foreach ($route as $k => $v) {
+                array_push($url_temp, $v);
+                switch ($i) {
+                    case 0:
+                        $crumb[implode('/', $url_temp)] = '首页';
+                        break;
+                    case 1:
+                        $crumb[implode('/', $url_temp)] = $controllTitle;
+                        break;
+                    case 2:
+                        $crumb[implode('/', $url_temp)] = $actionTitle;
+                        break;
+                    default:
 
+                }
+                $i++;
+            }
+        }
+        if (!empty($extArr)) {
+            foreach ($extArr as $k => $v) {
+                array_push($crumb, $v);
+            }
+        }
+        return $crumb;
+    }
+
+    /**
+     * 把数组重新整理成面包屑
+     * @param $array
+     * @return mixed
+     */
+    public static function getCrumbByArray($array)
+    {
+        $route = Comm_AppAdapter::getModules();
+        $Modules = '/'.$route['module'];
+        $res = array();
+        $res[0] = array('url' => $Modules,'title'=>'首页');
+        foreach ($array as $index => $item) {
+            $temp = null;
+            $temp = explode('|',$item);
+            $res[$index+1] = array('url'=>$Modules.'/'.$temp[0],'title'=>$temp[1]);
+        }
+        $rev = array_reverse($res);
+        return array('title' => $rev[0]['title'],'crumb' => $res,);
+    }
 
 
 }

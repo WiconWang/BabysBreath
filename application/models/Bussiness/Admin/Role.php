@@ -52,6 +52,12 @@ class Bussiness_Admin_RoleModel
         );
     }
 
+    public function ClearCache(){
+        Comm_Redis::remove($this->roleCache);
+        Comm_Redis::remove($this->rolenameCache);
+        return true;
+    }
+
     /**
      * 初始化Mod层
      * @return object
@@ -170,8 +176,6 @@ class Bussiness_Admin_RoleModel
         if (isset($data["name"])){$SaveDate["name"] = htmlspecialchars($data["name"], ENT_QUOTES);}
         if (isset($data["urls"])){$SaveDate["urls"] = htmlspecialchars($data["urls"], ENT_QUOTES);}
         if (isset($data["status"])){$SaveDate["status"] = intval($data["status"]);}
-        if (isset($data["create_time"])){$SaveDate["create_time"] = htmlspecialchars($data["create_time"], ENT_QUOTES);}
-        if (isset($data["create_ip"])){$SaveDate["create_ip"] = htmlspecialchars($data["create_ip"], ENT_QUOTES);}
         if (isset($data["update_time"])){$SaveDate["update_time"] = htmlspecialchars($data["update_time"], ENT_QUOTES);}
         if (isset($data["update_ip"])){$SaveDate["update_ip"] = htmlspecialchars($data["update_ip"], ENT_QUOTES);}
 
@@ -190,13 +194,12 @@ class Bussiness_Admin_RoleModel
      */
     private function _save($data,$id)
     {
-        Comm_Redis::remove($this->roleCache);
-        Comm_Redis::remove($this->rolenameCache);
         //把角色id号拼接成字符串
         if (!empty($data['urls']) && is_array($data['urls'])) {
             $data['urls'] = implode(',', $data['urls']);
         }
 
+        $this->ClearCache();
         if (empty($id)) {
             $data['create_time']=date('Y-m-d H:i:s',time());
             $data['create_ip'] = $_SERVER["REMOTE_ADDR"];
@@ -215,7 +218,9 @@ class Bussiness_Admin_RoleModel
      */
     public function update($data,$id)
     {
-        return $this->getObj()->update($data,array("id"=>$id),false);
+        $res = $this->getObj()->update($data,array("id"=>$id),false);
+        $this->ClearCache();
+        return $res;
     }
 
     /**
@@ -226,7 +231,22 @@ class Bussiness_Admin_RoleModel
      */
     public function insert($data)
     {
-        return $this->getObj()->insert($data);
+        $res = $this->getObj()->insert($data);
+        $this->ClearCache();
+        return $res;
+    }
+
+    /**
+     * 删除记录
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function del($id)
+    {
+        $res = $this->getObj()->delete(array('id'=>$id));
+        $this->ClearCache();
+        return $res;
     }
 
 

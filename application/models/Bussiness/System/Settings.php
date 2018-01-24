@@ -174,6 +174,16 @@ class Bussiness_System_SettingsModel
     {
         return $this->getObj()->insert($data);
     }
+    /**
+     * 删除记录
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function del($id)
+    {
+        return $this->getObj()->delete(array('id'=>$id));
+    }
 
 
 }

@@ -323,6 +323,17 @@ class <{{MODEL_NAME}}>
         return $SaveDate;
     }
     /**
+     * 删除记录
+     * 
+     * @param $id
+     * @return mixed
+     */
+    public function del($id)
+    {
+        return $this->getObj()->delete(array("id"=>$id));
+    }
+    
+    /**
      * 内部方法，数据记录的添加和修改 uid存在则更新，否则为新建
      *
      * @param  array  $data 完整数据

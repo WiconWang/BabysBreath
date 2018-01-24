@@ -17,6 +17,7 @@ class Bussiness_Admin_GroupModel
         // 初始化缓存的前缀表
         $this->prefix = Comm_Tools::getCachePrefix('admin');
         $this->groupCache = $this->prefix.'group_arr';
+        $this->groupnameCache = $this->prefix.'group_name';
 
 
     }
@@ -49,6 +50,12 @@ class Bussiness_Admin_GroupModel
             'roles'  => array()  ,
             'status'  => 0    ,
         );
+    }
+
+    public function ClearCache(){
+        Comm_Redis::remove($this->groupCache);
+        Comm_Redis::remove($this->groupnameCache);
+        return true;
     }
 
 
@@ -117,11 +124,11 @@ class Bussiness_Admin_GroupModel
     {
         // 如果取的是全部记录，检索缓存 ，没有则生成一份缓存
         if (empty($where)) {
-            if (Comm_Redis::get('dd_manage_group')) {
-                return json_decode(Comm_Redis::get('dd_manage_group'),true);
+            if (Comm_Redis::get($this->groupnameCache)) {
+                return json_decode(Comm_Redis::get($this->groupnameCache),true);
             }else{
                 $info = $this->getObj()->field()-> where($where)-> findAll();
-                Comm_Redis::set('dd_manage_group',json_encode($info));
+                Comm_Redis::set($this->groupnameCache,json_encode($info));
             }
         }else{
             $info = $this->getObj()->field()-> where($where)-> findAll();
@@ -170,8 +177,6 @@ class Bussiness_Admin_GroupModel
         if (isset($data["name"])){$SaveDate["name"] = htmlspecialchars($data["name"], ENT_QUOTES);}
         if (isset($data["roles"])){$SaveDate["roles"] = htmlspecialchars($data["roles"], ENT_QUOTES);}
         if (isset($data["status"])){$SaveDate["status"] = intval($data["status"]);}
-        if (isset($data["create_time"])){$SaveDate["create_time"] = htmlspecialchars($data["create_time"], ENT_QUOTES);}
-        if (isset($data["create_ip"])){$SaveDate["create_ip"] = htmlspecialchars($data["create_ip"], ENT_QUOTES);}
         if (isset($data["update_time"])){$SaveDate["update_time"] = htmlspecialchars($data["update_time"], ENT_QUOTES);}
         if (isset($data["update_ip"])){$SaveDate["update_ip"] = htmlspecialchars($data["update_ip"], ENT_QUOTES);}
 
@@ -190,7 +195,10 @@ class Bussiness_Admin_GroupModel
      */
     private function _save($data,$id)
     {
+        $this->ClearCache();
         if (empty($this->InfoByID($id))) {
+            $data['create_time']=date('Y-m-d H:i:s',time());
+            $data['create_ip'] = $_SERVER["REMOTE_ADDR"];
             return $this->getObj()->insert($data);
         }else{
             return $this->getObj()->update($data,array("id"=>$id),false);
@@ -206,7 +214,9 @@ class Bussiness_Admin_GroupModel
      */
     public function update($data,$id)
     {
-        return $this->getObj()->update($data,array("id"=>$id),false);
+        $res = $this->getObj()->update($data,array("id"=>$id),false);
+        $this->ClearCache();
+        return $res;
     }
 
     /**
@@ -217,8 +227,22 @@ class Bussiness_Admin_GroupModel
      */
     public function insert($data)
     {
-        return $this->getObj()->insert($data);
+        $res = $this->getObj()->insert($data);
+        $this->ClearCache();
+        return $res;
     }
 
+    /**
+     * 删除记录
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function del($id)
+    {
+        $res = $this->getObj()->delete(array('id'=>$id));
+        $this->ClearCache();
+        return $res;
+    }
 
 }

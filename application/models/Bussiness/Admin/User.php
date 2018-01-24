@@ -14,6 +14,19 @@ class Bussiness_Admin_UserModel
 
 
     /**
+     * 返回一个空的结构
+     */
+    public function EmptyData()
+    {
+        return array(
+            'username'  => ''  ,
+            'password'  => ''  ,
+            'ugroup'  => 0     ,
+            'status'  => 0    ,
+        );
+    }
+
+    /**
      * 验证用户帐号密码
      * @param $checkinfo
      * @return bool
@@ -172,11 +185,19 @@ class Bussiness_Admin_UserModel
         
         if (isset($data["username"])){$SaveDate["username"] = htmlspecialchars($data["username"], ENT_QUOTES);}
         if (isset($data["password"])){$SaveDate["password"] = htmlspecialchars($data["password"], ENT_QUOTES);}
-        if (isset($data["salt"])){$SaveDate["salt"] = htmlspecialchars($data["salt"], ENT_QUOTES);}
+        // 当同时带有未加密的pass和salt时，进行验证和加密
+        if (isset($data['orgin_password']) && isset($data['salt'])) {
+            $isPasswd = Helper_Validate::isPasswd($data['orgin_password']);
+            if (!$isPasswd) {
+                return array('code' => 0, 'msg' => '密码应该是6~20个字母和数字组成' );
+            }
+            $SaveDate['password'] = Comm_Tools::EncryptPassword($data['orgin_password'],$data['salt']);
+            $SaveDate['salt'] = $data['salt'];
+        }
+
+
         if (isset($data["usergroup"])){$SaveDate["usergroup"] = intval($data["usergroup"]);}
         if (isset($data["status"])){$SaveDate["status"] = intval($data["status"]);}
-        if (isset($data["create_time"])){$SaveDate["create_time"] = htmlspecialchars($data["create_time"], ENT_QUOTES);}
-        if (isset($data["create_ip"])){$SaveDate["create_ip"] = htmlspecialchars($data["create_ip"], ENT_QUOTES);}
         if (isset($data["update_time"])){$SaveDate["update_time"] = htmlspecialchars($data["update_time"], ENT_QUOTES);}
         if (isset($data["update_ip"])){$SaveDate["update_ip"] = htmlspecialchars($data["update_ip"], ENT_QUOTES);}
         if (isset($data["login_time"])){$SaveDate["login_time"] = htmlspecialchars($data["login_time"], ENT_QUOTES);}
@@ -198,6 +219,8 @@ class Bussiness_Admin_UserModel
     private function _save($data,$id)
     {
         if (empty($this->InfoByID($id))) {
+            $data['create_time']=date('Y-m-d H:i:s',time());
+            $data['create_ip'] = $_SERVER["REMOTE_ADDR"];
             return $this->getObj()->insert($data);
         }else{
             return $this->getObj()->update($data,array("id"=>$id),false);
@@ -226,6 +249,15 @@ class Bussiness_Admin_UserModel
     {
         return $this->getObj()->insert($data);
     }
-
+    /**
+     * 删除记录
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function del($id)
+    {
+        return $this->getObj()->delete(array('id'=>$id));
+    }
 
 }

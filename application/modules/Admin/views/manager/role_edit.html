@@ -1,28 +1,10 @@
 <!doctype html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>bb后台 - <{$crumb['page']['text']}></title>
-    <meta name="description" content="这是一个 index 页面">
-    <meta name="keywords" content="index">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="<{$smarty.const.STATIC_PATH}>/assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="<{$smarty.const.STATIC_PATH}>/assets/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/amazeui.min.css" />
-    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/admin.css">
-    <link rel="stylesheet" href="<{$smarty.const.STATIC_PATH}>/assets/css/app.css">
+    <{include file='inc/head.html'}>
 </head>
-
 <body data-type="index">
-    <!--开始头部-->
-    <!-- <{assign var="module" value="my"}> -->
-    <{include file='inc/top.html'}>
-    <!--头部结束-->
+<{include file='inc/top.html'}>
     <div class="tpl-page-container tpl-page-header-fixed">
 
         <!-- <{assign var="module" value="my"}> -->
@@ -32,26 +14,15 @@
 
         <div class="tpl-content-wrapper">
             <div class="tpl-content-page-title">
-                <{$crumb['page']['text']}>
+                <{$crumb['title']}>
             </div>
-            <ol class="am-breadcrumb">
-                <li><a href="<{$crumb['home']['url']}>" class="am-icon-home"><{$crumb['home']['text']}></a></li>
-                <li><a href="<{$crumb['category']['url']}>"><{$crumb['category']['text']}></a></li>
-                <li class="am-active"><{$crumb['page']['text']}></li>
-            </ol>
+
+            <{include file='inc/crumb.html'}>
             <div class="tpl-portlet-components">
                 <div class="portlet-title">
                     <div class="caption font-green bold">
-                        <span class="am-icon-code"></span> <{if $info['id'] }> 修改<{else}> 添加<{/if}><{$crumb['page']['text']}>
+                        <span class="am-icon-code"></span> <{if $info['id'] }> 修改<{else}> 添加<{/if}><{$crumb['title']}>
                     </div>
-                    <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                                <i class="am-icon-search"></i>
-                                <input type="text" class="form-control form-control-solid" placeholder="搜索..."> </div>
-                            </div>
-                        </div>
-
 
                     </div>
                     <div class="tpl-block ">
@@ -111,7 +82,8 @@
 
         </div>
     </div>
-    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/jquery.min.js"></script>
+
+<{include file='inc/footer.html'}>
     <script>
         $(document).ready(function(){
             $("#submit").click(function(){
@@ -136,9 +108,5 @@
         });
 
     </script>
-    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/amazeui.min.js"></script>
-    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/iscroll.js"></script>
-    <script src="<{$smarty.const.STATIC_PATH}>/assets/js/app.js"></script>
 </body>
-
 </html>

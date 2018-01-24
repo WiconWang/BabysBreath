@@ -32,8 +32,8 @@ $config = array(
             'default' =>
                 array(
                     'modules' => 'Admin',
-                    'controller' => 'Login',
-                    'action' => 'login',
+                    'controller' => 'index',
+                    'action' => 'index',
                 ),
         ),
     //定义不需要认证的模块

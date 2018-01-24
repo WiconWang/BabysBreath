@@ -27,6 +27,7 @@ class LogsController extends Abstract_C {
      * @return layout
      */
     public function indexAction() {
+
         $where = array();
         $page =intval($this->get('page'));
         $pagesize = $this->get('pagesize')?intval($this->get('pagesize')):20;
